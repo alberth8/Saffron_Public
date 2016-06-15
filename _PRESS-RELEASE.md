@@ -17,19 +17,19 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Name ##
-  > Jasmine
+  > Saffron
 
 ## Market and Benefit ##
   > People who enjoy cooking and are looking for new combinations of ingredients.
 
 ## Summary ##
-  > Jasmine helps cooks find new and interesting combinations of ingredients to spice up their dinner routines.
+  > Saffron helps cooks find new and interesting combinations of ingredients to spice up their dinner routines.
 
 ## Problem ##
   > Discovering creative new combinations of ingredients to inspire your meals can be challenging.
 
 ## Solution ##
-  > Jasmine scours the most trusted recipe sources on the web to find those ingredients that work best in combination.
+  > Saffron scours the most trusted recipe sources on the web to find those ingredients that work best in combination.
 
 ## Quote from You ##
   > "Creative cuisine for your tired routine!"
@@ -38,7 +38,7 @@ Once the project moves into development, the press release can be used as a touc
   > Just start entering ingredients, and we'll show you the possibilities.
 
 ## Customer Quote ##
-  > "Before Jasmine I didn't know how to cook. Now I'm the head chef at The French Laundry! Eat your heart out, Thomas Keller!"
+  > "Before Saffron I didn't know how to cook. Now I'm the head chef at The French Laundry! Eat your heart out, Thomas Keller!"
 
 ## Closing and Call to Action ##
-  > So, if you're ready to try something new, head to jasmine-not-js.com and start.
+  > So, if you're ready to cook something new, head to saffon.com and sign up!
