@@ -1,11 +1,27 @@
-//Use this file as a starting point for the project's .eslintrc.js
-module.exports = {
-  extends: 'airbnb',
-  rules: {
-    'react/jsx-no-bind': [2, {
-      ignoreRefs: true,
-      allowArrowFunctions: true,
-      allowBind: true,
-    }],
-  }
+{
+  "settings": {
+    "react": {
+      "pragma": "React",  // Pragma to use, default to "React"
+      "version": "15.0" // React version, default to the latest React stable release
+    }
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "quotes": [2, "single"],
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "no-multiple-empty-lines": [1, { "max": 2, "maxEOF": 1 }]
+  },
+  "plugins": [
+    "react"
+  ]
 }
