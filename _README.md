@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+> Jasmine helps cooks find new and interesting combinations of ingredients to spice up their dinner routines.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Albert Han
+  - __Scrum Master__: Shane Hubbell
+  - __Development Team Members__: Daniel Rabinovich, Aezed Raza, Albert Han, Shane Hubbell
 
 ## Table of Contents
 

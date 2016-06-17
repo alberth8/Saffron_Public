@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
+
 require('./config/middleware.js')(app, express);
 
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/../client/public/'));
 
 // setup API routes
 app.route('/')
 	.get((req, res) => {
-		res.send('Hello World!')
+		res.end();
+		//res.sendFile(__dirname + '/../client/public/index.html');
 	})
 
 app.route('/user/')
