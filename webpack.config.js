@@ -5,7 +5,8 @@ const path = require('path');
 module.exports = {
  context: path.join(__dirname, ''),
  devtool: debug ? 'inline-sourcemap' : null,
- entry: ['webpack-hot-middleware/client', './client/app.js'],
+ historyApiFallback: true,
+ entry: ['webpack-hot-middleware/client', './client'],
  module: {
    preLoaders: [
      {
@@ -29,17 +30,15 @@ module.exports = {
    path: `${__dirname}/client/public`,
    filename: 'webpack.min.js',
  },
+ devServer: {
+  context:'./',
+  historyApiFallback: true,
+  hot: true,
+  inline: true
+},
  eslint: {
    failOnWarning: false,
    failOnError: true,
  },
- plugins: debug ? [
-   new webpack.optimize.OccurrenceOrderPlugin(),
-   new webpack.HotModuleReplacementPlugin(),
-   new webpack.NoErrorsPlugin(),
- ] : [
-   new webpack.optimize.DedupePlugin(),
-   new webpack.optimize.OccurenceOrderPlugin(),
-   new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
- ],
+
 };
