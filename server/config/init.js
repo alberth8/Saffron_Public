@@ -13,8 +13,8 @@ module.exports = function (app, express) {
    // app.use(webpackDevMiddleware(compiler))
 	app.use(morgan('dev'));
 	app.use(bodyParser.urlencoded({extended: true}));
-	app.use(bodyParser.json());
+	app.use(bodyParser.json()); 
 
-	// MAY NEED TO EDIT THE STATIC FILE ADDRESS
-	// app.use(express.static(__dirname + '/../../client/public'))
+  // serve static files
+  app.use(express.static(__dirname + '/../client/public/'));
 }
