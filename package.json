@@ -40,7 +40,10 @@
     "redux-thunk": "^2.1.0",
     "require": "^2.4.20",
     "underscore": "^1.8.3",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
   },
   "repository": {
     "type": "git",
