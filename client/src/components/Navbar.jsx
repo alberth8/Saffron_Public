@@ -1,10 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router';
+import AuthAction from '../redux/actions/AuthAction.js';
 
 class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+	
+	onLogout() {
+		
+	}
+
+	authCheck() {
+		if (this.props.authenticated) {
+			return <Link to="/" onClick="" >Logout</Link>
+		} else {
+           	return <Link to="login">Login</Link>
+		}
 	}
 
 	render() {
@@ -20,12 +33,19 @@ class Navbar extends React.Component {
            <li class="nav-item">
              <a class="nav-link" href="#">Recipes</a>
            </li>
+           {this.props.authenticated ? 
            <li class="nav-item">
-           	 <Link to="login">Login</Link>
+           	 <Link to="profile">Profile</Link>
+           </li>           
+           : null}
+           <li class="nav-item">
+           	 { this.authCheck() }
            </li>
+           {!	this.props.authenticated ? 
            <li class="nav-item">
            	 <Link to="signup">Signup</Link>
-           </li>           
+           </li>
+           : null}           
           </ul>
         </nav>
 	  )
@@ -34,7 +54,7 @@ class Navbar extends React.Component {
 
 const mapStateToProps = function(state, ownProps) {
 	return {
-
+		authenticated: state.authenticated
 	};
 }
 

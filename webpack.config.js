@@ -6,7 +6,7 @@ module.exports = {
  context: path.join(__dirname, ''),
  devtool: debug ? 'inline-sourcemap' : null,
  historyApiFallback: true,
- entry: ['webpack-hot-middleware/client', './client'],
+ entry: [ './client/app.js'],
  module: {
    preLoaders: [
      {
@@ -21,7 +21,7 @@ module.exports = {
        exclude: /(node_modules|bower_components)/,
        loader: 'babel-loader',
        query: {
-         presets: ['react', 'es2015'],
+         presets: ['react', 'es2015', 'stage-1'],
        },
      },
    ],
