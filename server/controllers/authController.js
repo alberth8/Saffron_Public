@@ -6,7 +6,7 @@ const Promise = require('bluebird');
 
 // TODO: will complete when OAuth is implemented
 
-export default {
+module.exports = {
   createUser: function (req, res) {
     let userInfo = {
       email: req.body.username,
