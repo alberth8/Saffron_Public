@@ -1,12 +1,24 @@
 import axios from 'axios';
 
-const api = {
-  getIngredients(event, ingredient) {
-    return axios.get('http://localhost:3000/api/ingredients');
-  },
+axios.defaults.baseURL = 'http://localhost:3000/api/'; 
 
-  getLoginStatus() {
-    return axios.get('http://localhost:3000/checklogin');
+const api = {
+  getIngredients(event, ingredients) {
+    if (event === null) {
+      // event === null means no changed to user data input,
+      // only that the ingredient page is re-rendering
+      return axios.get('ingredients')
+    } else {
+      return axios.post('ingredients', {
+          ingredients: ingredients,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   },
 };
 
