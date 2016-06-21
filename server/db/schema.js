@@ -12,6 +12,9 @@ const knex = require('knex')({
 // create connection
 const db = require('bookshelf')(knex);
 
+// crucial: handles circular dependencies of the join tables
+db.plugin('registry');
+
 // Define schema below. Relationships described in models.
 db.knex.schema.hasTable('users').then( (exists) => {
   if (!exists) {

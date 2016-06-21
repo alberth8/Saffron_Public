@@ -1,0 +1,16 @@
+saved set:
+- foreign key: userid
+- foreign key: ingredientid
+
+favorited table:
+- foreign key: userid
+- foreign key: recipeid
+
+recipe_ingredient table:
+- foreign key: recipeid
+- foreign key: ingredientid
+
+=> 
+user : [ingredients, recipe]
+recipe: [ingredients, user]
+ingredients: [recipe, user]

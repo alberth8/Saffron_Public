@@ -1,7 +1,10 @@
 const db = require('../db/schema');
+// don't need to assign the following two requires to variables
+require('./recipe');
+require('./ingredient');
+// for OAuth:
 // const bcrypt = require('bcrypt-nodejs');
-const Promise = require('bluebird');
-const Recipe = require('./recipe');
+// const Promise = require('bluebird');
 
 const User = db.Model.extend({
 
@@ -26,9 +29,13 @@ const User = db.Model.extend({
   //     });
   // },
 
-  recipes: () => {
-    this.belongsToMany(Recipe);
+  recipe: () => {
+    this.belongsToMany('Recipe');
+  },
+
+  ingredient: () => {
+    this.belongsToMany('Ingredient');
   }
 });
 
-module.exports = User;
+module.exports = db.model('User', User);
