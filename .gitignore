@@ -1,11 +1,18 @@
 # MacOS Stores
 .DS_Store
 
+# Node and Bower
 node_modules/
 bower_components/
 *.log
 
+# 
 build/
 dist/
+
+# Webpack
 client/public/webpack*
 client/public/*.hot*
+
+# Environment Configuration
+env/dev.env

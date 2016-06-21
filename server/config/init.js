@@ -5,10 +5,8 @@ const morgan = require('morgan');
 // const webpackConfig = require('../../webpack.config.js');
 // const webpack = require('webpack');
 // const compiler = webpack(webpackConfig);
-// const webpackHotMiddleware = require('webpack-hot-middleware');
-// const webpackDevMiddleware = require('webpack-dev-middleware');
 
-module.exports = (app) => {
+module.exports = (app, express) => {
   // app.use(webpackDevMiddleware(compiler, {
   // noInfo: true, publicPath: webpackConfig.output.publicPath}))
   // app.use(webpackDevMiddleware(compiler))
@@ -17,4 +15,7 @@ module.exports = (app) => {
   app.use(bodyParser.json());
 
   // serve static files
+  app.use(express.static(__dirname + '/../client/public/'));
+
+  // app.use(express.static(__dirname + '../../client/public/'));
 };

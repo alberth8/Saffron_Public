@@ -1,3 +1,5 @@
+require('dotenv').config({ path: './env/development.env' });
+
 const express = require('express');
 const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
@@ -8,7 +10,8 @@ const authRoutes = require('./routes/authRoutes.js');
 // morgan, body-parser
 require('./config/init.js')(app, express);
 
-app.use(express.static(__dirname + '/../client/public/'));
+// app.use(express.static(__dirname + '/../client/public/'));
+
 // set port
 app.set('port', process.env.PORT || 3000);
 
@@ -19,15 +22,8 @@ userProfileRoutes(app);
 authRoutes(app);
 // (*)
 
-app.route('/ingredients/')
- .get()
- .post((req, res) => {
- });
-
 // wildcard route
-app.get('/login', function (req, res) {
-	res.redirect('/');
-});
+app.get('/*', (req, res) => res.redirect('/'));
 
 // bind and listen to connections on specified port
 app.listen(app.get('port'), () => {
@@ -37,7 +33,6 @@ app.listen(app.get('port'), () => {
 });
 
 module.exports = app;
-
 
 // (*)
 // reference router
