@@ -7,11 +7,11 @@ const User = require('../models/user.js');
 
 module.exports = {
   addRecipe: function (req, res) {
-    let user = req.body.email;
-    let newRecipeTitle = req.body.recipeTitle;
-    let newRecipeUrl = req.body.recipeUrl;
-    let newRecipeImgUrl = req.body.recipeImgUrl;
-    let ingredients = req.body.ingredients; // will need to parse this and account for plurals
+    const user = req.body.email;
+    const newRecipeTitle = req.body.recipeTitle;
+    const newRecipeUrl = req.body.recipeUrl;
+    const newRecipeImgUrl = req.body.recipeImgUrl;
+    const ingredients = req.body.ingredients; // will need to parse this and account for plurals
 
     // need save to recipe
     // then save to ingredients

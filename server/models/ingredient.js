@@ -1,7 +1,7 @@
 const db = require('../db/schema');
 const User = require('./user');
 
-let Ingredient = db.Model.extend({
+const Ingredient = db.Model.extend({
   tableName: 'ingredients',
 
   users: () => {

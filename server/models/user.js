@@ -3,7 +3,7 @@ const db = require('../db/schema');
 const Promise = require('bluebird');
 const Recipe = require('./recipe');
 
-var User = db.Model.extend({
+const User = db.Model.extend({
 
   tableName: 'users',
 
