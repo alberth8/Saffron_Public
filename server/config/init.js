@@ -16,5 +16,4 @@ module.exports = function (app, express) {
 	app.use(bodyParser.json()); 
 
   // serve static files
-  app.use(express.static(__dirname + '/../client/public/'));
 }
