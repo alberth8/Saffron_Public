@@ -32,6 +32,7 @@ db.knex.schema.hasTable('recipes').then( (exists) => {
       recipe.string('recipeTitle', 100);
       recipe.string('recipeUrl', 300);
       recipe.string('recipeImgUrl', 300);
+      recipe.boolean('favorited');
     }).then( (table) => {
       console.log('Created table `recipes`', table)
     });
