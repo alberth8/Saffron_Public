@@ -1,11 +1,11 @@
 // Note to team: try to do these relationally. If not,
 // make use of the req object to obtain userID
-import { Ingredient } from '../models/ingredient.js';
-import { Ingredient } from '../models/ingredient.js';
+const Ingredient = require('../models/ingredient.js');
+const Ingredients = require('../colleciton/ingredients.js');
 const Recipes = require('../colleciton/recipe.js'); // more conveinet to create w/ colleciton
 const User = require('../models/user.js');
 
-export default {
+module.exports = {
   addRecipe: function (req, res) {
     let user = req.body.email;
     let newRecipeTitle = req.body.recipeTitle;

@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-// const router = require('./routes.js');
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
 const userProfileRoutes = require('./routes/userProfileRoutes.js');
@@ -29,6 +28,9 @@ app.listen(app.get('port'), () => {
 		+ app.get('env') + ' mode on port ' 
 		+ app.get('port'));
 });
+
+module.exports = app;
+
 
 // (*)
 // reference router

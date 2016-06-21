@@ -44,7 +44,7 @@ db.knex.schema.hasTable('ingredients').then( (exists) => {
       ingredient.increments('id').primary();
       ingredient.string('ingredient', 50);
     }).then( (table) => {
-      console.log('Created table `ingredients`', ingredient);
+      console.log('Created table `ingredients`', table);
     });
   }
 });

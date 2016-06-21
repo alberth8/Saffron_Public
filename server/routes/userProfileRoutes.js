@@ -1,13 +1,12 @@
-var usersController = require('../controllers/usersController.js');
-
+const usersProfileController = require('../controllers/usersProfileController.js');
 // 
 // User Profile
 // 
-export default  function (app) {
+module.exports = function (app) {
   // find all favorited sets of ingredients
   // Note: `:` is a place holder. `id` will be adeed to req.param
-  app.get('/api/ingredients/:userid', userController.getFavedIngredients);
+  app.get('/api/ingredients/:userid', usersProfileController.getFavedIngredients);
 
   // find all recipes favorited by the user
-  app.get('/api/recipes/:userid', userController.getFavedRecipes);
+  app.get('/api/recipes/:userid', usersProfileController.getFavedRecipes);
 };
