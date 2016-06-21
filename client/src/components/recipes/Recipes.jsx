@@ -32,19 +32,6 @@ const Recipes = (prop) => {
   );
 };
 
-// const Recipes = (props) => {
-//
-//   return (
-//     <div>
-//       <h1>Recipes</h1>
-//       <ul>
-//         {props.recipes.map(recipe =>
-//           <Recipe recipe={recipe} />
-//         )}
-//       </ul>
-//     </div>
-//   );
-// };
 
 function mapStateToProps(state) {
 

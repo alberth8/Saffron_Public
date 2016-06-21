@@ -30,8 +30,9 @@ function mapStateToProps(state) {
 
 }
 
-function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
+//
+// }
 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
+// export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
+export default connect(mapStateToProps)(Recipe);
