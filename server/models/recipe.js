@@ -1,12 +1,19 @@
-const db = require('../db/config');
+const db = require('../db/schema.js');
 const Users = require('./user');
 
-let Recipe = db.Model.extend({
+const Recipe = db.Model.extend({
   tableName: 'recipes',
 
   users: () => {
-    this.hasMany(Users);
+    this.belongsToMany(User);
   }
 });
 
 module.exports = Recipe;
+
+
+// ing has many recipes
+// recipe has many ing
+// 
+// 
+// users has many ingredients

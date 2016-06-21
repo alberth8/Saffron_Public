@@ -1,11 +1,11 @@
-const db = require('../db/config');
-const Users = require('./user');
+const db = require('../db/schema');
+const User = require('./user');
 
 let Ingredient = db.Model.extend({
   tableName: 'ingredients',
 
   users: () => {
-    this.hasMany(Users);
+    this.belongsToMany(User);
   }
 });
 

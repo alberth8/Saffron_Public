@@ -1,4 +1,4 @@
-var db = require('../db/config');
+var db = require('../db/schema');
 var Ingredient = require('../models/ingredient.js');
 
 // instatiate collection

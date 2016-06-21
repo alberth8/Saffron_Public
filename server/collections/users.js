@@ -1,4 +1,4 @@
-var db = require('../db/config');
+var db = require('../db/schema');
 var User = require('../models/user.js');
 
 // instatiate collection

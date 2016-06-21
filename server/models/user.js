@@ -1,9 +1,9 @@
-const db = require('../db/config');
-const bcrypt = require('bcrypt-nodejs');
+const db = require('../db/schema');
+// const bcrypt = require('bcrypt-nodejs');
 const Promise = require('bluebird');
-const Recipes = require('./recipes');
+const Recipe = require('./recipe');
 
-let User = db.Model.extend({
+var User = db.Model.extend({
 
   tableName: 'users',
 
@@ -27,7 +27,7 @@ let User = db.Model.extend({
   // },
 
   recipes: () => {
-    this.hasMany(Recipes);
+    this.belongsToMany(Recipe);
   }
 });
 

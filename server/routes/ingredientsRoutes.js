@@ -3,7 +3,7 @@ var ingredientsController = require('../controllers/ingredientsController.js');
 // 
 // Ingredients routes
 // 
-module.exports = function (app) {
+export default function (app) {
   // find all favorited sets of ingredients
   app.get('/api/ingredients/:id', ingredientsController.getIngredients);
 

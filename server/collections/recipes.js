@@ -1,4 +1,4 @@
-var db = require('../db/config');
+var db = require('../db/schema');
 var Recipe = require('../models/recipe.js');
 
 // instatiate collection
