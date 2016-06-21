@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Ingredients from './components/IngredientsLayout.jsx';
+import IngredientsLayout from './components/IngredientsLayout.jsx';
 
 class IngredientsContainer extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
     this.state = {
-      ingredients: this.props.ingredients,
+      ingredients: 
+        {selected: ['SALT', 'CHICKEN', 'Other stuff'],
+         suggested: ['PEPPER', 'hotdogs', 'chicken thighs']
+      }
+      //this.props.ingredients,
     };
     this.updateIngredients.bind(this);
   }
@@ -20,12 +24,16 @@ class IngredientsContainer extends React.Component {
     return (
       <div>
         <h1>IngredientsContainer</h1>
+        <IngredientsLayout 
+          ingredients={this.state.ingredients}
+          updateIngredients={this.updateIngredients} // handed additions/deletions from ingredient search
+        />
       </div>
     )
   };
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = function mapStateToProps(state) {
   return {
     ingredients: state.ingredients,
   }
@@ -35,12 +43,8 @@ IngredientsContainer.propTypes = {
   ingredients: React.PropTypes.object,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer);
+export default connect(mapStateToProps)(IngredientsContainer);
 
-//         <IngredientLayout 
-//           selectedIngredients={this.props.ingredients}
-//           updateIngredients={updateIngredients} // handed additions/deletions from ingredient search
-//         />
 // const mapDispatchToProps = (/* dispatch */) => {
 //   return {
 //     onClick: () => { console.log('Listing was clicked'); },

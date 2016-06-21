@@ -4,12 +4,7 @@ import { reduxForm } from 'redux-form';
 class SearchBar extends Component {
   render() {
     const {
-      fields: {ingredient},
-      handleSubmit,
-      resetForm,
-      submitting
-    } = this.props
-  
+      fields: {ingredient}, handleSubmit, resetForm, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
         <h3>SearchBar</h3>
@@ -36,7 +31,9 @@ SearchBar.propTypes = {
   submitting: PropTypes.bool.isRequired
 };
 
-export default reduxForm({
-  form: 'simple',
-  fields
+SearchBar = reduxForm({
+  form: 'search',
+  fields: ['ingredient']
 })(SearchBar);
+
+export default SearchBar;

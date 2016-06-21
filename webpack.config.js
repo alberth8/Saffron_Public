@@ -30,15 +30,21 @@ module.exports = {
    path: `${__dirname}/client/public`,
    filename: 'webpack.min.js',
  },
- devServer: {
-  context:'./',
-  historyApiFallback: true,
-  hot: true,
-  inline: true
-},
- eslint: {
-   failOnWarning: false,
-   failOnError: true,
- },
-
+ plugins: [
+   new webpack.optimize.OccurrenceOrderPlugin(),
+   new webpack.HotModuleReplacementPlugin(),
+   new webpack.NoErrorsPlugin(),
+ ],
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['react', 'es2015', 'react-hmre'],
+        },
+      },
+    ],
+  },
 };

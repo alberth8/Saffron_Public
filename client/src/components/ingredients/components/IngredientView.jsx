@@ -1,19 +1,20 @@
 import React from 'react';
 
-export default IngredientView = (props) => (
+const IngredientView = (props) => (
   <div>
     <h3>IngredientView</h3>
     <ul>
-      {props.selected ? 
-        <li> {props.selected} </li>
+      {props.selectOrSuggest === 'selected' ? 
+        <li>Selected: { props.ingredient }</li>
         :
-        <li>{props.suggested} </li>
+        <li>Suggested: { props.ingredient }</li>
       }
     </ul>
   </div>
-
 );
 
 IngredientView.propTypes = {
   ingredients: React.PropTypes.object,
 };
+
+export default IngredientView;

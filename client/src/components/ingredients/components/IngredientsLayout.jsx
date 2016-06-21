@@ -3,10 +3,12 @@ import SearchBar from './SearchBar.jsx';
 import IngredientView from './IngredientView.jsx';
 
 const mapIngredients = (ingredientsArray, selectOrSuggest, updateIngredients) => (
-  ingredientsArray.map( (ingredient) => (
+  ingredientsArray.map( (ingredient, key) => (
     <IngredientView 
-      selectOrSuggest={ingredient} 
+      ingredient={ingredient} 
       updateIngredients={updateIngredients}
+      key={key}
+      selectOrSuggest={selectOrSuggest}
     />
   ))
 )
