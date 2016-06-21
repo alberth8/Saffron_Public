@@ -15,10 +15,9 @@ const mapIngredients = (ingredientsArray, selectOrSuggest, updateIngredients) =>
 
 const IngredientsLayout = (props) => (
   <div>
-    <h1>IngredientsLayout</h1>
     <SearchBar updateIngredients={props.updateIngredients}/>
     {mapIngredients(props.ingredients.selected, 'selected', props.updateIngredients)}
-    {mapIngredients(props.ingredients.selected, 'suggested', props.updateIngredients)}
+    {mapIngredients(props.ingredients.suggested, 'suggested', props.updateIngredients)}
   </div>
 );
 

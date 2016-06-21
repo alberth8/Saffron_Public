@@ -7,7 +7,6 @@ class SearchBar extends Component {
       fields: {ingredient}, handleSubmit, resetForm, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
-        <h3>SearchBar</h3>
         <div>
           <label>Add Ingredient</label>
           <div>

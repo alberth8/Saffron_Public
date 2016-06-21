@@ -23,7 +23,6 @@ class IngredientsContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1>IngredientsContainer</h1>
         <IngredientsLayout 
           ingredients={this.state.ingredients}
           updateIngredients={this.updateIngredients} // handed additions/deletions from ingredient search

@@ -2,7 +2,6 @@ import React from 'react';
 
 const IngredientView = (props) => (
   <div>
-    <h3>IngredientView</h3>
     <ul>
       {props.selectOrSuggest === 'selected' ? 
         <li>Selected: { props.ingredient }</li>
