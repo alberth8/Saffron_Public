@@ -9,12 +9,12 @@ class Navbar extends React.Component {
 	}
 	
 	onLogout() {
-		
+
 	}
 
 	authCheck() {
 		if (this.props.authenticated) {
-			return <Link to="/" onClick="" >Logout</Link>
+			return <Link to="/" onClick={this.onLogout} >Logout</Link>
 		} else {
            	return <Link to="login">Login</Link>
 		}
