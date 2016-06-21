@@ -13,19 +13,19 @@ class Navbar extends React.Component {
           <ul class="nav navbar-nav">
            <li class="nav-item">
              <Link to="/">Home</Link>
-           </li>           
+           </li>
            <li class="nav-item">
              <a class="nav-link" href="#">Ingredients</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link" href="#">Recipes</a>
+             <Link to="recipes">Recipes</Link>
            </li>
            <li class="nav-item">
            	 <Link to="login">Login</Link>
            </li>
            <li class="nav-item">
            	 <Link to="signup">Signup</Link>
-           </li>           
+           </li>
           </ul>
         </nav>
 	  )
