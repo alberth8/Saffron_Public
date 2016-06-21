@@ -1,4 +1,8 @@
 import React from 'react';
+// To be added: 
+// Every time selected ingredient is click, remove it
+// then update update store, get updated suggested list
+// and updated recipes from the database
 
 const IngredientView = (props) => (
   <div>

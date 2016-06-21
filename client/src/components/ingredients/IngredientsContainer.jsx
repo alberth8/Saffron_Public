@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import IngredientsLayout from './components/IngredientsLayout.jsx';
+// To be added:
+// connect component to redux
 
 class IngredientsContainer extends React.Component {
   constructor(props) {
@@ -15,7 +17,12 @@ class IngredientsContainer extends React.Component {
     this.updateIngredients.bind(this);
   }
 
+  componentWillMount() {
+    this.getIngredients('load', 'null');
+  }
+
   updateIngredients (event, ingredient) {
+    
     // exists in selected ingredients & searchbox containers sends updated ingredients list to server updates state
     // event === 'Add' ? add(ingredient): remove(ingredient);
   }
@@ -25,7 +32,7 @@ class IngredientsContainer extends React.Component {
       <div>
         <IngredientsLayout 
           ingredients={this.state.ingredients}
-          updateIngredients={this.updateIngredients} // handed additions/deletions from ingredient search
+          updateIngredients={this.updateIngredients}
         />
       </div>
     )
@@ -43,7 +50,6 @@ IngredientsContainer.propTypes = {
 };
 
 export default connect(mapStateToProps)(IngredientsContainer);
-
 // const mapDispatchToProps = (/* dispatch */) => {
 //   return {
 //     onClick: () => { console.log('Listing was clicked'); },

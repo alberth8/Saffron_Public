@@ -1,5 +1,9 @@
 import React, { Component, PropTypes }  from 'react';
 import { reduxForm } from 'redux-form';
+// To be added: 
+// Every time ingredient is added, update store
+// Also, send it to database to get updated
+// suggested ingredients & recipes
 
 class SearchBar extends Component {
   render() {

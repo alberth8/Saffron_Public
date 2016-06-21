@@ -19,6 +19,11 @@ userProfileRoutes(app);
 authRoutes(app);
 // (*)
 
+app.route('/ingredients/')
+ .get()
+ .post((req, res) => {
+ });
+
 // wildcard route
 app.get('/login', function (req, res) {
 	res.redirect('/');
@@ -26,9 +31,9 @@ app.get('/login', function (req, res) {
 
 // bind and listen to connections on specified port
 app.listen(app.get('port'), () => {
-	console.log('Express server started in '
-		+ app.get('env') + ' mode on port '
-		+ app.get('port'));
+  console.log('Express server started in '
+    + app.get('env') + ' mode on port '
+    + app.get('port'));
 });
 
 module.exports = app;
@@ -45,16 +50,11 @@ module.exports = app;
 // 	})
 
 // app.route('/user/')
-// 	.get()
-// 	.post((req, res) => {
-// 	});
+//  .get()
+//  .post((req, res) => {
+//  });
 
 // app.route('/recipes/')
-// 	.get()
-// 	.post((req, res) => {
-// 	});
-
-// app.route('/ingredients/')
-// 	.get()
-// 	.post((req, res) => {
-// 	});
+//  .get()
+//  .post((req, res) => {
+//  });
