@@ -7,6 +7,7 @@ const userProfileRoutes = require('./routes/userProfileRoutes.js');
 // morgan, body-parser
 require('./config/init.js')(app, express);
 
+app.use(express.static(__dirname + '/../client/public/'));
 // set port
 app.set('port', process.env.PORT || 3000);
 
@@ -24,8 +25,8 @@ app.get('/*', function (req, res) {
 
 // bind and listen to connections on specified port
 app.listen(app.get('port'), () => {
-	console.log('Express server started in ' 
-		+ app.get('env') + ' mode on port ' 
+	console.log('Express server started in '
+		+ app.get('env') + ' mode on port '
 		+ app.get('port'));
 });
 
