@@ -10,7 +10,6 @@ import requireAuth from './components/RequireAuth.jsx';
 import IngredientsContainer from './components/ingredients/IngredientsContainer.jsx';
 
 export default (
-<<<<<<< 09ddab256799ec4b41eef2026136870a56d1a490
   <Route path="/" component={App}>
     <Route path="login" component={Login} />
     <Route path="signup" component={Signup} />
