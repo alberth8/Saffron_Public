@@ -6,7 +6,7 @@ module.exports = {
  context: path.join(__dirname, ''),
  devtool: debug ? 'inline-sourcemap' : null,
  historyApiFallback: true,
- entry: ['webpack-hot-middleware/client', './client'],
+ entry: ['./client/app.js'],
  module: {
    preLoaders: [
      {
