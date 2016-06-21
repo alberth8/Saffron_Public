@@ -16,17 +16,13 @@ class SignUp extends React.Component {
   	  <div>
   	    <form>
           <fieldset class="form-group">
-            <label for="formGroupExampleInput">Username</label>
-            <input type="text" className="form-control" id="formGroupExampleInput"></input>
+            <label for="formGroupExampleInput">Email</label>
+            <input type="email" className="form-control" id="formGroupExampleInput"></input>
           </fieldset>
           <fieldset class="form-group">
             <label for="formGroupExampleInput2">Password</label>
             <input type="text" className="form-control" id="formGroupExampleInput2"></input>
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="formGroupExampleInput2">email</label>
-            <input type="email" className="form-control" id="formGroupExampleInput2"></input>
-          </fieldset>          
+          </fieldset>        
         </form>
         <button onClick={ this.onSignup }>Signup</button>  	  
   	  </div>
