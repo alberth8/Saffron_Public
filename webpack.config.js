@@ -36,13 +36,20 @@ module.exports = {
    new webpack.NoErrorsPlugin(),
  ],
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'eslint',
+        exclude: /(node_modules|bower_components)/,
+      },
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babelloader',
         query: {
-          presets: ['react', 'es2015', 'react-hmre'],
+          presets: ['react', 'es2015'],
         },
       },
     ],

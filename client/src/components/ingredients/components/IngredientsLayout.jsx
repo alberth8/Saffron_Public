@@ -15,7 +15,7 @@ const mapIngredients = (ingredientsArray, selectOrSuggest, updateIngredients) =>
 
 const IngredientsLayout = (props) => (
   <div>
-    <SearchBar updateIngredients={props.updateIngredients}/>
+    <SearchBar handleSubmit={props.updateIngredients}/>
     {mapIngredients(props.ingredients.selected, 'selected', props.updateIngredients)}
     {mapIngredients(props.ingredients.suggested, 'suggested', props.updateIngredients)}
   </div>
