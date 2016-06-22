@@ -12,7 +12,7 @@ const localLogin = new LocalStrategy( {
  	User.where({ 'email': email}).fetch().then(function(user) {
  		if(!user) { return done(false) };
  		bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
- 			if(err) { return err; }
+ 			if(err) { return false; }
 
  			return done(true);
  		})
@@ -25,6 +25,7 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+	console.log(payload);
 	User.where('id', payload.sub).fetch().then(function(user) {
 		if (user) {
 			done(user);
@@ -35,3 +36,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 });
 
 passport.use(jwtLogin);
+passport.use(localLogin);

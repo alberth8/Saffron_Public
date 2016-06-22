@@ -42,12 +42,9 @@ module.exports = {
     });
   },
 
-  loginUser: function (req, res) {
-  	let userInfo = {
-      email: req.body.username,
-      password: req.body.password
-    };
-
+  login: function (req, res) {
+  	res.send({ token: token(req.user) });
   }
+
 }
 
