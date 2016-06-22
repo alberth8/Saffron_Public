@@ -2,21 +2,45 @@ import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 
 class ContactForm extends Component {
+
+  // constructor(props){
+  //   super(props);
+  // }
+
+
+  // handleSubmit(data) {
+  //   console.log('HEY THERE');
+  //   // axios.post('/api/addRecipe', {
+
+  //   //   })
+  //   //   .then(function (res) {
+  //   //     console.log(res);
+  //   //   })
+  //   //   .catch(function (err) {
+  //   //     console.log(error);
+  //   //   });
+  // }
+
+
   render() {
-    const {fields: {firstName, lastName, email}, handleSubmit} = this.props;
+    const {fields: {recipeTitle, recipeUrl, recipeImgUrl, recipeIngredients}, handleSubmit} = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label>First Name</label>
-          <input type="text" placeholder="First Name" {...firstName}/>
+          <label>Recipe Title</label>
+          <input type="text" placeholder="Recipe title" {...recipeTitle}/>
         </div>
         <div>
-          <label>Last Name</label>
-          <input type="text" placeholder="Last Name" {...lastName}/>
+          <label>Recipe Link:</label>
+          <input type="text" placeholder="Recipe URL" {...recipeUrl}/>
         </div>
         <div>
-          <label>Email</label>
-          <input type="email" placeholder="Email" {...email}/>
+          <label>Image Link:</label>
+          <input type="text" placeholder="Image URL" {...recipeImgUrl}/>
+        </div>
+        <div>
+          <label>Recipe Ingredients</label>
+          <input type="email" placeholder="Enter all ingredients associated with the above recipe" {...recipeIngredients}/>
         </div>
         <button type="submit">Submit</button>
       </form>
