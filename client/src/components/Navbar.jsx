@@ -15,7 +15,7 @@ class Navbar extends React.Component {
 		if (this.props.authenticated) {
 			return <Link to="/" onClick={this.onLogout} >Logout</Link>
 		} else {
-           	return <Link to="login">Login</Link>
+      return <Link to="login">Login</Link>
 		}
 	}
 
