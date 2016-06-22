@@ -7,15 +7,13 @@ const recipesRoutes = require('./routes/recipesRoutes.js');
 const userProfileRoutes = require('./routes/userProfileRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 
-// morgan, body-parser
+// morgan, body-parser, static files
 require('./config/init.js')(app, express);
-
-// app.use(express.static(__dirname + '/../client/public/'));
 
 // set port
 app.set('port', process.env.PORT || 3000);
 
-// create routes per page
+// page specific routes
 ingredientsRoutes(app);
 recipesRoutes(app);
 userProfileRoutes(app);

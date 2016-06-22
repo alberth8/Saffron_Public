@@ -5,6 +5,8 @@ const morgan = require('morgan');
 // const webpackConfig = require('../../webpack.config.js');
 // const webpack = require('webpack');
 // const compiler = webpack(webpackConfig);
+// const webpackHotMiddleware = require('webpack-hot-middleware');
+// const webpackDevMiddleware = require('webpack-dev-middleware');
 
 module.exports = (app, express) => {
   // app.use(webpackDevMiddleware(compiler, {
