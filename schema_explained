@@ -1,3 +1,5 @@
+  Joins
+==========
 saved set:
 - foreign key: userid
 - foreign key: ingredientid
@@ -10,7 +12,11 @@ recipe_ingredient table:
 - foreign key: recipeid
 - foreign key: ingredientid
 
-=> 
-user : [ingredients, recipe]
-recipe: [ingredients, user]
-ingredients: [recipe, user]
+
+  Relationships
+==================
+user <=> ingredients 
+   ^        ^
+   \\      //
+    v      v
+     recipes
