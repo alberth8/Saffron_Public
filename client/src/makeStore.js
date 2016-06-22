@@ -1,4 +1,10 @@
+<<<<<<< 4c1b923bcd211dc2a7cc4bff09f4c0818dff6bc8
 import { createStore, applyMiddleware, compose } from 'redux';
+||||||| merged common ancestors
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+=======
+import { createStore, applyMiddleware, compose,  } from 'redux';
+>>>>>>> minor changes, need to rebase
 import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
