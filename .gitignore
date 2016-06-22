@@ -5,6 +5,8 @@ node_modules/
 bower_components/
 *.log
 
+.eslintrc
+
 build/
 dist/
 client/public/webpack*
