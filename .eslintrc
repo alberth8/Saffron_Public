@@ -1,5 +1,4 @@
 {
-  "extends": "airbnb",
   "settings": {
     "react": {
       "pragma": "React",  // Pragma to use, default to "React"
@@ -15,6 +14,7 @@
     "browser": true,
     "node": true
   },
+  "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
     "quotes": [2, "single"],
