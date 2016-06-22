@@ -3,7 +3,7 @@ const knex = require('knex')({
   connection: {
     host     : '127.0.0.1',
     user     : 'root',
-    // password : '123',
+    password : '',
     database : 'saffron',
     charset  : 'utf8'
   }
@@ -21,7 +21,7 @@ db.knex.schema.hasTable('users').then( (exists) => {
     db.knex.schema.createTable('users', (user) => {
       user.increments('id').primary();
       user.string('email', 100).unique();
-      user.string('password', 100);
+      user.string('password', 200);
     }).then( (table) => {
       console.log('Created table `users`', table);
     });
