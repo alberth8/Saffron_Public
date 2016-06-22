@@ -6,18 +6,18 @@ const User = require('../models/user.js');
 const config = require('../config/authConfig.js');
 const bcrypt = require('bcrypt-nodejs');
 
-const localLogin = new LocalStrategy( {
-	usernameField: 'email'
- }, function(email, password, done) {
- 	User.where({ 'email': email}).fetch().then(function(user) {
- 		if(!user) { return done(false) };
- 		bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
- 			if(err) { return false; }
+const localOption = { usernameField: 'email' };
+const localLogin = new LocalStrategy(localOption, function(email, password, done) {
+	console.log(email)
+	User.where('email', email).fetch().then(function(user) {
+	  user.comparePassword(password, function(err, isMatch) {
+		  if(err){ return done(err); }
+		  if(!isMatch) { return done(null, false); }
 
- 			return done(true);
- 		})
- 	})
-})
+		  return done(null, true);
+	  });
+	});
+});
 
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
