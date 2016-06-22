@@ -12,7 +12,7 @@ const localLogin = new LocalStrategy( {
  	User.where({ 'email': email}).fetch().then(function(user) {
  		if(!user) { return done(false) };
  		bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
- 			if(err) { return err; }
+ 			if(err) { return false; }
 
  			return done(true);
  		})
