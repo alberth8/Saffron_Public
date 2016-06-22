@@ -43,3 +43,21 @@ export function userInfo(email) {
     });
   };
 }
+
+export const addIngredient = (ingredients, dispatch) => (
+	axios.post('/api/updateIngredients',
+    dispatch({
+      ingredients,
+      // payload,
+    })
+  )
+);
+
+export const removeIngredient = (ingredients, dispatch) => (
+  axios.post('/api/updateIngredients',
+    dispatch({
+      ingredients,
+      // payload,
+    })
+  )
+);

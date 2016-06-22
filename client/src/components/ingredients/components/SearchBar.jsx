@@ -1,35 +1,34 @@
 import React, { Component, PropTypes } from 'react';
-// import { TextField } from 'material-ui';
-
-// injectTapEventPlugin();
-// To be added:
-// Every time ingredient is added, update store
-// Also, send it to database to get updated
-// suggested ingredients & recipes
-
+import { connect } from 'react-redux';
+import * as actions from '../../../redux/actions/index.js';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ingredient: '',
-      },
-  };
-
+    };
+  }
   render() {
     return (
       <div>
         <input
-          value={this.state.ingredient}
-          onChange={this.props.handleSubmit}
+          value={this.props.ingredient}
+          onSubmit={this.props.addIngredient}
         />
       </div>
-    )
+    );
   }
-};
+}
+
+const mapStateToProps = (state) => ({
+  ingredients: state.ingredients.selected,
+});
 
 SearchBar.propTypes = {
-  handleSubmit: PropTypes.func,
+  ingredient: PropTypes.string,
+  ingredients: PropTypes.array,
+  addIngredient: PropTypes.func,
 };
 
-export default SearchBar;
+export default connect(mapStateToProps, actions)(SearchBar);

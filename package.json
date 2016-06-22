@@ -40,7 +40,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "jwt-simple": "^0.5.0",
-    "knex": "^0.11.7",
+    "knex": "^0.11.5",
     "lodash.assign": "^4.0.9",
     "material-ui": "^0.15.1",
     "minimatch": "^3.0.2",
