@@ -1,56 +1,63 @@
-import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index.js'
 
-class ContactForm extends Component {
+class AddRecipeForm extends React.Component {
 
-  // constructor(props){
-  //   super(props);
+  constructor(props){
+    super(props);
+    this.state = { // NEED USER EMAIL
+      recipeTitle: '',
+      recipeUrl: '',
+      recipeImgUrl: '',
+      recipeIngredients: []
+    }
+  }
+
+  // getInitialState () {
+  //   return {
+
+  //   }
   // }
 
 
-  // handleSubmit(data) {
-  //   console.log('HEY THERE');
-  //   // axios.post('/api/addRecipe', {
+  handleChange (name, e) {
+    console.log('HANDLINGCHANGE')
+    console.log('handlechangetargetvalue:', e.target.value);
+    var change = {};
+    change[name] = e.target.value
+    this.setState(change);
+  }
 
-  //   //   })
-  //   //   .then(function (res) {
-  //   //     console.log(res);
-  //   //   })
-  //   //   .catch(function (err) {
-  //   //     console.log(error);
-  //   //   });
-  // }
-
+  handleSubmit() {
+    console.log(this.state.recipeTitle);
+    console.log(this.state);
+    this.props.addRecipe(this.state);
+    this.setState({
+      recipeTitle: '',
+      recipeUrl: '',
+      recipeImgUrl: '',
+      recipeIngredients:''
+    })
+  }
 
   render() {
-    const {fields: {recipeTitle, recipeUrl, recipeImgUrl, recipeIngredients}, handleSubmit} = this.props;
-    return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Recipe Title</label>
-          <input type="text" placeholder="Recipe title" {...recipeTitle}/>
-        </div>
-        <div>
-          <label>Recipe Link:</label>
-          <input type="text" placeholder="Recipe URL" {...recipeUrl}/>
-        </div>
-        <div>
-          <label>Image Link:</label>
-          <input type="text" placeholder="Image URL" {...recipeImgUrl}/>
-        </div>
-        <div>
-          <label>Recipe Ingredients</label>
-          <input type="email" placeholder="Enter all ingredients associated with the above recipe" {...recipeIngredients}/>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+    return ( 
+      <div>
+        <form>
+          Title:
+          <input onChange={this.handleChange.bind(this, 'recipeTitle')} value={this.state.recipeTitle} type="text"/><br/>
+          URL:
+          <input onChange={this.handleChange.bind(this, 'recipeUrl')} value={this.state.recipeUrl} type="text"/><br/>
+          Image URL:
+          <input onChange={this.handleChange.bind(this, 'recipeImgUrl')} value={this.state.recipeImgUrl} type="text"/><br/>
+          Ingredients:
+          <input onChange={this.handleChange.bind(this, 'recipeIngredients')} value={this.state.recipeIngredients} type="text"/><br/>
+        </form>
+        <button onClick={() => this.handleSubmit()} type="submit">Submit</button>
+      </div>
     );
   }
 }
 
-ContactForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
-  form: 'contact',                           // a unique name for this form
-  fields: ['firstName', 'lastName', 'email'] // all the fields in your form
-})(ContactForm);
-
-export default ContactForm;
+export default connect(null, actions)(AddRecipeForm);
