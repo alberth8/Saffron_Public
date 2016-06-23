@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
-import { Route, Link } from 'react-router';
-// var Link = Router.Link;
+import React, { PropTypes } from 'react';
 
 import Navbar from './Navbar.jsx';
 
-export default class App extends Component {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      random: '',
+    };
+  }
+
   render() {
     return (
       <div>
-      <Navbar />
-      {this.props.children}      
+        <Navbar />
+          {this.props.children}
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.object,
+};

@@ -1,66 +1,56 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router';
-import AuthAction from '../redux/actions/AuthAction.js';
+import { Link } from 'react-router';
+import * as actions from '../redux/actions/index.js';
+
 
 class Navbar extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	onLogout() {
-	}
 
-	authCheck() {
-		if (this.props.authenticated) {
-			return <Link to="/" onClick={this.onLogout} >Logout</Link>
-		} else {
-      return <Link to="login">Login</Link>
-		}
-	}
+  onLogout() {
+    this.props.signoutUser();
+  }
 
-	render() {
-	  return (
-		<nav class="navbar navbar-light bg-faded">
-          <ul class="nav navbar-nav">
-           <li class="nav-item">
-             <Link to="/">Home</Link>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="#">Ingredients</a>
-           </li>
-           <li class="nav-item">
-             <Link to="recipes">Recipes</Link>
-           </li>
-           {this.props.authenticated ? 
-           <li class="nav-item">
-           	 <Link to="profile">Profile</Link>
-           </li>           
-           : null}
-           <li class="nav-item">
-           	 { this.authCheck() }
-           </li>
-           {!	this.props.authenticated ? 
-           <li class="nav-item">
-           	 <Link to="signup">Signup</Link>
-           </li>
-           : null}           
-          </ul>
-        </nav>
-	  )
-	}
+  render() {
+    return (
+      <nav className="navbar navbar-light bg-faded">
+        <ul className="nav navbar-nav">
+          <li className="nav-item">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">Ingredients</a>
+          </li>
+          <li className="nav-item">
+            <Link to="recipes">Recipes</Link>
+          </li>
+           {this.props.authenticated ?
+             <li className="nav-item">
+               <Link to="profile">Profile</Link>
+             </li> : null}
+          <li className="nav-item">
+            {this.props.authenticated ?
+              <Link to="/" onClick={this.onLogout} >Logout</Link>
+              : <Link to="login">Login</Link>}
+          </li>
+           {!	this.props.authenticated ?
+             <li className="nav-item">
+               <Link to="signup">Signup</Link>
+             </li> : null}
+        </ul>
+      </nav>
+    );
+  }
 }
 
-const mapStateToProps = function(state, ownProps) {
-	return {
-		authenticated: state.authenticated
-	};
-}
+const mapStateToProps = function (state) {
+  return {
+    authenticated: state.authenticated,
+  };
+};
 
-const mapDispatchToprops = function(dispatch) {
-	return {
+Navbar.propTypes = {
+  authenticated: PropTypes.bool,
+  signoutUser: PropTypes.func,
+};
 
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToprops)(Navbar)
+export default connect(mapStateToProps, actions)(Navbar);
