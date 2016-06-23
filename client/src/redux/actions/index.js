@@ -42,4 +42,5 @@ export function userInfo(email) {
       payload: { email },
     });
   };
+
 }
