@@ -9,12 +9,13 @@ class SearchBar extends Component {
       ingredient: '',
     };
   }
+
   render() {
     return (
       <div>
         <input
-          value={this.props.ingredient}
-          onSubmit={this.props.addIngredient}
+          value={this.state.ingredient}
+          onSubmit={this.props.addIngredient(this.state.ingredient)}
         />
       </div>
     );

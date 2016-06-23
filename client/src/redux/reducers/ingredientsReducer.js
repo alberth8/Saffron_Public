@@ -1,13 +1,27 @@
-// reducers take in actions and a copy of current state
-export default function (state = {}, action) {
+import { combineReducers } from 'redux';
+
+const addIngredient = (state = {}, action) => {
   console.log(state, action);
   switch (action.type) {
-    case 'UPDATE_INGREDIENTS':
-      return action.updateIngredients;
+    case 'ADD_INGREDIENT':
+      return action.addIngredient;
+
     default:
       return state;
   }
-  // default:
-  //   return state;
-  // }
-}
+};
+
+const removeIngredient = (state = {}, action) => {
+  switch (action.type) {
+    case 'REMOVE_INGREDIENT':
+      return action.removeIngredient;
+
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  addIngredient,
+  removeIngredient,
+});

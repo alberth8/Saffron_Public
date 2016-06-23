@@ -45,19 +45,27 @@ export function userInfo(email) {
 }
 
 export const addIngredient = (ingredients, dispatch) => (
-	axios.post('/api/updateIngredients',
-    dispatch({
-      ingredients,
-      // payload,
-    })
-  )
+	axios.post('/api/updateIngredients', {
+  ingredients,
+})
+  .then((response) => {
+    // update selected, suggested and receipes w/ response
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 );
 
 export const removeIngredient = (ingredients, dispatch) => (
-  axios.post('/api/updateIngredients',
-    dispatch({
-      ingredients,
-      // payload,
-    })
-  )
+  axios.post('/api/removeIngredients', {
+    ingredients,
+  })
+  .then((response) => {
+    // update selected, suggested and receipes w/ response
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 );

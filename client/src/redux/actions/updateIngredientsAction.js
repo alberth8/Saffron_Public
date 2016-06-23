@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 // send new set of ingredients to server
 // reset state with selected ingredients,
 // suggested ingredients

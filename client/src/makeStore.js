@@ -20,7 +20,6 @@ export const makeStore = initialState => {
     middlewares.push(logger);
   }
 
-
   const mw = compose(
     applyMiddleware(...middlewares),
     devtoolsExt || (f => f)
