@@ -11,7 +11,6 @@ function token(user) {
   }, config.secret);
 }
 
-
 module.exports = {
   signup: (req, res) => {
     const userInfo = {
