@@ -3,12 +3,15 @@ require('dotenv').config({ path: './env/development.env' });
 const express = require('express');
 const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
+const addRecipeRoutes = require('./routes/addRecipeRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
 const userProfileRoutes = require('./routes/userProfileRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 
 // morgan, body-parser, static files
 require('./config/init.js')(app, express);
+
+app.use(express.static(__dirname + '/../client/public/'));
 
 // set port
 app.set('port', process.env.PORT || 3000);
@@ -18,6 +21,8 @@ ingredientsRoutes(app);
 recipesRoutes(app);
 userProfileRoutes(app);
 authRoutes(app);
+addRecipeRoutes(app);
+
 // (*)
 
 // wildcard route

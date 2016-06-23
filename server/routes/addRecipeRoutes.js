@@ -5,5 +5,11 @@ const addRecipeController = require('../controllers/addRecipeController.js');
 // 
 module.exports = function (app) {
   // find all favorited sets of ingredients
+  console.log('HORRAY');
+
+
+  // app.post('/api/addrecipe', function() {
+  //   console.log('TEST TEST');
+  // });
   app.post('/api/addRecipe', addRecipeController.addRecipe);
 };

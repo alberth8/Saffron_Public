@@ -54,3 +54,8 @@ db.knex.schema.hasTable('ingredients').then((exists) => {
 });
 
 module.exports = db;
+
+// join tables: 
+//  ingredients_recipes: associates recipes w/ ingredients
+//  recipes_users: favorited table
+//  ingredients_users: user's saved sets
