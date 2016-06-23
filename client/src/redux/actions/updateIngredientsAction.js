@@ -5,6 +5,6 @@
 export function updateIngredients(ingredients) {
   return {
     type: 'UPDATE_INGREDIENTS',
-    ingredients,
+    payload: ingredients,
   };
 }

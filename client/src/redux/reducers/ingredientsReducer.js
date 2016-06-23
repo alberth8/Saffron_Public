@@ -1,12 +1,9 @@
-const updateIngredient = (state = {}, action) => {
-  console.log(state, action);
+export default function (state = {}, action) {
   switch (action.type) {
     case 'UPDATE_INGREDIENTS':
-      return Object.assign({}, action.updateIngredients);
+      return { ingredients: action.payload };
 
     default:
       return state;
   }
-};
-
-export default updateIngredient;
+}

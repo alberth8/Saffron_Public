@@ -1,15 +1,14 @@
 // import { Ingredient } from '../models/ingredient';
 // import { Ingredients } from '../collections/ingredients';
-const Ingredient = require('../models/ingredient.js');
-const Ingredients = require('../collections/ingredients.js');
+// const Ingredient = require('../models/ingredient.js');
+// const Ingredients = require('../collections/ingredients.js');
 
 // Note to team: try to do these relationally. If not,
 // make use of the req object to obtain userID
 
 module.exports = {
-  addIngredient: function (req, res) {
-    const ingredient = req.body.ingredient;
-    // Ingredients.forge({email: user}).
+  updateIngredients: function (req, res) {
+    const ingredients = req.body.ingredients;
   },
 
 
@@ -17,7 +16,6 @@ module.exports = {
 
   },
 
-  favedSets: function (req, res) {
-
-  }
+  // favedSets: function (req, res) {
+  // }
 };

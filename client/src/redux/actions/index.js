@@ -44,18 +44,19 @@ export function userInfo(email) {
   };
 }
 
-export function updateIngredients(ingredients, dispatch){
-  return function (dispatch) {
-    dispatch(updateIngredients(ingredients));
-    console.log(ingredients, dispatch) 
+export function updateIngredients(ingredients) {
+  return (dispatch) => {
     axios.post('/api/updateIngredients', { ingredients })
       .then((response) => {
       // update selected, suggested and receipes w/ response
-      console.log('add ingredient', ingredients);
-      console.log(response, dispatch);
+        console.log('index.js data', response.data);
+        dispatch({
+          type: 'UPDATE_INGREDIENTS',
+          payload: { ingredients },
+        });
       })
       .catch((error) => {
-      console.log(error);
-      })
- }
-};
+        console.log(error);
+      });
+  };
+}

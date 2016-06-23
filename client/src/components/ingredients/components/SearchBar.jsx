@@ -16,6 +16,8 @@ class SearchBar extends Component {
   }
   onAddIngredient() {
     const array = ['salt', 'pepper', 'chicken'];
+    // if the input has spaces, split it into an array
+    // then push each of those into the selected
     array.push(this.state.ingredient);
     console.log(array);
     this.props.updateIngredients(array);
@@ -23,13 +25,6 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <input
-          onChange={(e) => { this.onIngredientChange(e); }}
-          value={this.state.ingredient}
-        />
-        <button
-          onClick={() => this.onAddIngredient()}
-        >Submit</button>
       </div>
     );
   }
@@ -46,3 +41,5 @@ SearchBar.propTypes = {
 };
 
 export default connect(mapStateToProps, actions)(SearchBar);
+
+
