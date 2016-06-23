@@ -1,47 +1,43 @@
-const jwt = require('jwt-simple'); 
-const Promise = require('bluebird');
-const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jwt-simple');
 const User = require('../models/user.js');
 const config = require('../config/authConfig.js');
 
-//function to create token for user 
+// function to create token for user
 function token(user) {
-	const timestamp = new Date().getTime();
-	return jwt.encode({ 
-		sub: user.id, 
-		iat: timestamp
-	}, config.secret);
+  const timestamp = new Date().getTime();
+  return jwt.encode({
+    sub: user.id,
+    iat: timestamp,
+  }, config.secret);
 }
 
 
 module.exports = {
-  signup: function (req, res) {
-    let userInfo = {
+  signup: (req, res) => {
+    const userInfo = {
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     };
-      if (!userInfo.email || !userInfo.password) {
-        return res.status(422).send({ error: 'You must provide email and password'});
+    if (!userInfo.email || !userInfo.password) {
+      return res.status(422).send({ error: 'You must provide email and password' });
+    }
+    User.where('email', userInfo.email).fetch().then((user) => {
+      if (!user) {
+        return new User(userInfo).save();
       }
-      User.where('email' , userInfo.email).fetch().then(function(user) {
-        if(!user){
-          return new User(userInfo).save();
-        } else {
-          res.send({error:'Email already has a account'})
-        }
-      }).then(function(newUser) {
-      console.log(newUser);
-      res.json({ token: token(newUser.attributes)});
+      return res.send({ error: 'Email already has a account' });
     })
-    .catch(function(err) {
-    	console.log(err);
+    .then((newUser) => {
+      res.json({ token: token(newUser.attributes) });
+    })
+    .catch((err) => {
+      console.error(err);
     });
+    return null;
   },
 
-  login: function (req, res) {
-  	console.log('IN THE THING DOE')
-  	res.send({ token: token(req.user) });
-  }
+  login: (req, res) => {
+    res.send({ token: token(req.user) });
+  },
 
-}
-
+};

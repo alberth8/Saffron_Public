@@ -1,9 +1,9 @@
-export default function (state = {}, action) {
+export default function (state = false, action) {
   switch (action.type) {
     case 'AUTH_USER':
-      return { ...state, authenticated: true };
+      return { authenticated: true };
     case 'UNAUTH_USER':
-      return { ...state, authenticated: false };
+      return { authenticated: false };
     default:
       return state;
   }

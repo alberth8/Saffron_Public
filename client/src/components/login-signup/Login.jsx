@@ -15,6 +15,7 @@ class Login extends React.Component {
   onLogin() {
     const email = this.state.email;
     const password = this.state.password;
+    this.props.userInfo(email, password);
     this.props.loginUser(email, password);
     this.setState({
       email: '',
@@ -73,6 +74,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func,
+  userInfo: PropTypes.func,
 };
 
 export default connect(null, actions)(Login);

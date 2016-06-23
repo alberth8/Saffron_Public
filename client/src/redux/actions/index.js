@@ -34,3 +34,12 @@ export function signoutUser() {
 
   return { type: 'UNAUTH_USER' };
 }
+
+export function userInfo(email) {
+  return (dispatch) => {
+    dispatch({
+      type: 'USER_INFO',
+      payload: { email },
+    });
+  };
+}
