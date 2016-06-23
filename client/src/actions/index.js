@@ -49,14 +49,3 @@ export function addRecipe(addRecipeObj) {
     });
    }
 }
-
-// () => { // return callback
-//     console.log('IN CALLBACK');
-//     axios.post('/api/addrecipe', {
-//       recipeTitle: recipeTitle
-//       }).then(function(response) {
-//         console.log('THEN > RESPONSE')
-//         console.log(response);
-//       }).catch(function(error) {
-//         console.log('ERROR:', error);
-//       });

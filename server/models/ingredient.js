@@ -9,8 +9,9 @@ const Ingredient = db.Model.extend({
   initialize: () => {
     this.on('creating');
   },
+
   user: () => {
-    this.belongsToMany('User');
+    this.belongsToMany('User', 'ingredient_user', 'ingredient_id', 'user_id');
   },
 
   recipe: () => {

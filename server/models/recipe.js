@@ -7,7 +7,7 @@ const Recipe = db.Model.extend({
   tableName: 'recipes',
 
   user: () => {
-    this.belongsToMany('User');
+    this.belongsToMany('User', 'recipe_user', 'recipe_id', 'user_id');
   },
 
   ingredient: () => {

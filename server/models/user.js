@@ -26,11 +26,11 @@ const User = db.Model.extend({
   },
 
   recipe: () => {
-    this.belongsToMany('Recipe');
+    this.belongsToMany('Recipe', 'recipe_user', 'recipe_id', 'user_id');
   },
 
   ingredient: () => {
-    this.belongsToMany('Ingredient');
+    this.belongsToMany('Ingredient', 'ingredient_user', 'ingredient_id', 'user_id');
   }
 });
 
