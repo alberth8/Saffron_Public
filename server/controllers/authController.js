@@ -20,14 +20,18 @@ module.exports = {
       email: req.body.email,
       password: req.body.password
     };
-    console.log(userInfo)
       if (!userInfo.email || !userInfo.password) {
         return res.status(422).send({ error: 'You must provide email and password'});
       }
       User.where('email' , userInfo.email).fetch().then(function(user) {
-      	return new User(userInfo).save();
+        if(!user){
+          return new User(userInfo).save();
+        } else {
+          res.send({error:'Email already has a account'})
+        }
       }).then(function(newUser) {
-    	res.json({ token: token(newUser)});
+      console.log(newUser);
+      res.json({ token: token(newUser.attributes)});
     })
     .catch(function(err) {
     	console.log(err);
