@@ -8,15 +8,14 @@ const bcrypt = require('bcrypt-nodejs');
 
 const localOption = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOption, function(email, password, done) {
-	console.log(email)
 	User.where('email', email).fetch().then(function(user) {
-	  user.comparePassword(password, function(err, isMatch) {
-		  if(err){ return done(err); }
+	  user.comparePassword(password, function(isMatch) {
 		  if(!isMatch) { return done(null, false); }
-
 		  return done(null, true);
 	  });
-	});
+	}).catch(function(err){
+		console.error(err);
+	})
 });
 
 const jwtOptions = {

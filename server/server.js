@@ -20,7 +20,7 @@ authRoutes(app);
 // (*)
 
 // wildcard route
-app.get('/*', function (req, res) {
+app.get('/login', function (req, res) {
 	res.redirect('/');
 });
 
@@ -38,10 +38,10 @@ module.exports = app;
 // reference router
 // app.use('/', router)
 
-// app.route('/')
+// app.route('/login')
 // 	.get((req, res) => {
+// 		res.sendFile(__dirname + '/../client/public/index.html');
 // 		res.end();
-// 		//res.sendFile(__dirname + '/../client/public/index.html');
 // 	})
 
 // app.route('/user/')
