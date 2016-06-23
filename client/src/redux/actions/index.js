@@ -44,28 +44,18 @@ export function userInfo(email) {
   };
 }
 
-export const addIngredient = (ingredients, dispatch) => (
-	axios.post('/api/updateIngredients', {
-  ingredients,
-})
-  .then((response) => {
-    // update selected, suggested and receipes w/ response
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-);
-
-export const removeIngredient = (ingredients, dispatch) => (
-  axios.post('/api/removeIngredients', {
-    ingredients,
-  })
-  .then((response) => {
-    // update selected, suggested and receipes w/ response
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-);
+export function updateIngredients(ingredients, dispatch){
+  return function (dispatch) {
+    dispatch(updateIngredients(ingredients));
+    console.log(ingredients, dispatch) 
+    axios.post('/api/updateIngredients', { ingredients })
+      .then((response) => {
+      // update selected, suggested and receipes w/ response
+      console.log('add ingredient', ingredients);
+      console.log(response, dispatch);
+      })
+      .catch((error) => {
+      console.log(error);
+      })
+ }
+};

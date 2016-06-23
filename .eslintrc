@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  //"extends": "airbnb",
   "settings": {
     "react": {
       "pragma": "React",  // Pragma to use, default to "React"

@@ -9,14 +9,27 @@ class SearchBar extends Component {
       ingredient: '',
     };
   }
-
+  onIngredientChange(e) {
+    this.setState({
+      ingredient: e.target.value,
+    });
+  }
+  onAddIngredient() {
+    const array = ['salt', 'pepper', 'chicken'];
+    array.push(this.state.ingredient);
+    console.log(array);
+    this.props.updateIngredients(array);
+  }
   render() {
     return (
       <div>
         <input
+          onChange={(e) => { this.onIngredientChange(e); }}
           value={this.state.ingredient}
-          onSubmit={this.props.addIngredient(this.state.ingredient)}
         />
+        <button
+          onClick={() => this.onAddIngredient()}
+        >Submit</button>
       </div>
     );
   }
@@ -29,7 +42,7 @@ const mapStateToProps = (state) => ({
 SearchBar.propTypes = {
   ingredient: PropTypes.string,
   ingredients: PropTypes.array,
-  addIngredient: PropTypes.func,
+  updateIngredients: PropTypes.func,
 };
 
 export default connect(mapStateToProps, actions)(SearchBar);

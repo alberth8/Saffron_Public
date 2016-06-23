@@ -7,6 +7,12 @@ const Ingredients = require('../collections/ingredients.js');
 // make use of the req object to obtain userID
 
 module.exports = {
+  addIngredient: function (req, res) {
+    const ingredient = req.body.ingredient;
+    // Ingredients.forge({email: user}).
+  },
+
+
   getIngredients: function (req, res) {
 
   },

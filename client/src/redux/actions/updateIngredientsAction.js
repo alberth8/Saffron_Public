@@ -5,14 +5,6 @@
 export function updateIngredients(ingredients) {
   return {
     type: 'UPDATE_INGREDIENTS',
-    payload: ingredients,
+    ingredients,
   };
-
-
-  // return function(dispatch) {
-  //     axios.post('/login', {
-  //         email: email,
-  //         password :password
-  //     })
-  // }
 }
