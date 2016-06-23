@@ -1,76 +1,80 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-//import { bindActionCreators } from 'redux';
-// import { LoginUser } from '../../redux/actions/LoginUser.js';
 import * as actions from '../../redux/actions/index.js';
 
 class Login extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
     this.onLogin = this.onLogin.bind(this);
-	}
+  }
 
   onLogin() {
-    let email = this.state.email;
-    let password = this.state.password;
-    console.log(this.props.loginUser)
-    this.props.loginUser(email, password,)
+    const email = this.state.email;
+    const password = this.state.password;
+    this.props.userInfo(email, password);
+    this.props.loginUser(email, password);
     this.setState({
       email: '',
-      password: ''
-    })
-    
+      password: '',
+    });
   }
   onPasswordChange(e) {
     this.setState({
-      password: e.target.value
-    })
+      password: e.target.value,
+    });
   }
 
-  onEmailChange(e){
+  onEmailChange(e) {
     this.setState({
-      email: e.target.value
-    })
+      email: e.target.value,
+    });
   }
 
   render() {
-  	return (
-  	  <div>
-  	    <form>
-          <fieldset class="form-group">
-            <label for="formGroupExampleInput">Email</label>
-            <input type="email" className="form-control" id="formGroupExampleInput"
-            value={ this.state.email }
-            onChange={ (e) => {this.onEmailChange(e)} }>
-            </input>
+    return (
+      <div>
+        <form>
+          <fieldset className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="formGroupExampleInput"
+              value={this.state.email}
+              onChange={(e) => { this.onEmailChange(e); }}
+            />
+
           </fieldset>
-          <fieldset class="form-group">
-            <label for="formGroupExampleInput2">Password</label>
-            <input type="text" className="form-control" id="formGroupExampleInput2"
-            value={ this.state.password }
-            onChange={ (e) => {this.onPasswordChange(e)} }>
-            </input>
+          <fieldset
+            className="form-group"
+          >
+            <label>Password</label>
+            <input
+              type="text"
+              className="form-control" id="formGroupExampleInput2"
+              value={this.state.password}
+              onChange={(e) => { this.onPasswordChange(e); }}
+            />
           </fieldset>
         </form>
-        <button onClick={ this.onLogin }>Login</button>
-  	  </div>
-  	);
+        <button onClick={this.onLogin}>Login</button>
+      </div>
+    );
   }
 
 }
 
-const mapStateToProps = function(state, ownProps) {
-	return {
+// const mapStateToProps = (state) => ({
 
-	};
-}
+// });
 
-// const mapDispatchToProps = function(dispatch) {
-// 	return bindActionCreators({ LoginUser }, dispatch); 
-//  }
+Login.propTypes = {
+  loginUser: PropTypes.func,
+  userInfo: PropTypes.func,
+};
 
-export default connect(mapStateToProps, actions)(Login)
+export default connect(null, actions)(Login);
