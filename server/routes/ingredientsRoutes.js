@@ -1,11 +1,9 @@
-const ingredientsController = require('../controllers/ingredientsController.js');
+ const ingredientsController = require('../controllers/ingredientsController.js');
 
-// 
 // Ingredients routes
-// 
-module.exports = function (app) {
+ module.exports = (app) => {
   // find all favorited sets of ingredients
-  app.get('/api/ingredients/:id', ingredientsController.getIngredients);
+   app.get('/api/ingredients/:id', ingredientsController.getIngredients);
 
   // if user saves set of ingredients
   // NOTE: not sure if will need `:/id`

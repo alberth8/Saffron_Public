@@ -1,5 +1,5 @@
 const authController = require('../controllers/authController.js');
-// const passportService = require('../controllers/passportController.js');
+const passportService = require('../controllers/passportController.js');
 const passport = require('passport');
 
 

@@ -49,7 +49,7 @@ const mapStateToProps = function (state) {
 };
 
 Navbar.propTypes = {
-  authenticated: PropTypes.bool,
+  authenticated: PropTypes.func,
   signoutUser: PropTypes.func,
 };
 
