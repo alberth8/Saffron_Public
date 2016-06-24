@@ -8,11 +8,10 @@ const morgan = require('morgan');
 // const webpackHotMiddleware = require('webpack-hot-middleware');
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 
-module.exports = (app, express) => {
+module.exports = (app) => {
   // app.use(webpackDevMiddleware(compiler, {
   // noInfo: true, publicPath: webpackConfig.output.publicPath}))
   // app.use(webpackDevMiddleware(compiler))
-  console.log(express);
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
