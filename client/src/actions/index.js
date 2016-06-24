@@ -37,8 +37,7 @@ export function signoutUser() {
 
 // Post recipe to db. Used in addRecipeForm
 export function addRecipe(addRecipeObj) {
-  console.log('IN ACTIONS/INDEX.JS');
-  console.log('addRecipeObj', addRecipeObj);
+  console.log('addRecipeObj:', addRecipeObj);
   return () => {
     axios.post('/api/addrecipe', addRecipeObj)
     .then(function(response) {
