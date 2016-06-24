@@ -1,23 +1,19 @@
 const db = require('../db/schema.js');
 // don't need to assign the following two requires to variables
-require('./user');
-require('./ingredient');
+// var User = require('./user');
+const Recipe_User = require('./recipe_user');
+const Ingredient_Recipe = require('./ingredient_recipe');
 
 const Recipe = db.Model.extend({
   tableName: 'recipes',
 
-  user: () => {
-    this.belongsToMany('User', 'recipe_user', 'recipe_id', 'user_id');
+  recipe_user: () => {
+    this.hasMany(Recipe_User);
   },
 
-  ingredient: () => {
-    this.belongsToMany('Ingredient');
+  ingredient_recipe: () => {
+    this.hasMany(Ingredient_Recipe);
   },
 });
 
-module.exports = db.model('Recipe', Recipe);
-
-
-// ing has many recipes
-// recipe has many ing
-// users has many ingredients
+module.exports = Recipe;

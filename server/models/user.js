@@ -1,7 +1,9 @@
 const db = require('../db/schema');
 const bcrypt = require('bcrypt-nodejs');
 const Promise = require('bluebird');
-const Recipe = require('./recipe');
+// const Recipe = require('./recipe');
+var Recipe_User = require('./recipe_user');
+var Ingredient_User = require('./ingredient_user');
 
 const User = db.Model.extend({
 
@@ -25,14 +27,14 @@ const User = db.Model.extend({
       });
   },
 
-  recipe: () => {
-    this.belongsToMany('Recipe', 'recipe_user', 'recipe_id', 'user_id');
+  ingredient_user: function() {
+    return this.hasMany(Ingredient_User);
   },
 
-  ingredient: () => {
-    this.belongsToMany('Ingredient', 'ingredient_user', 'ingredient_id', 'user_id');
+  recipe_user: function() {
+    return this.hasMany(Recipe_User);
   }
 });
 
-
-module.exports = db.model('User', User);
+module.exports = User;
+// module.exports = db.model('User', User);
