@@ -3,7 +3,7 @@ const ingredientsController = require('../controllers/ingredientsController.js')
 // Ingredients routes
 module.exports = (app) => {
   // find all favorited sets of ingredients
-  app.post('api/updateIngredinents', ingredientsController.updateIngredients);
+  app.post('api/updateIngredients', ingredientsController.updateIngredients);
 };
 
 
