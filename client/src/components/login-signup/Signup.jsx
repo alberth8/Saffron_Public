@@ -23,6 +23,14 @@ class SignUp extends React.Component {
     });
   }
 
+  onKeyPress(e) {
+    const email = this.state.email;
+    const password = this.state.password;
+    if (e.keyCode === 13) {
+      this.onLogin(email, password);
+    }
+  }
+
   onPasswordChange(e) {
     this.setState({
       password: e.target.value,
@@ -56,6 +64,7 @@ class SignUp extends React.Component {
               className="form-control" id="formGroupExampleInput2"
               value={this.state.password}
               onChange={(e) => { this.onPasswordChange(e); }}
+              onKeyDown={(e) => { this.onKeyPress(e); }}
             />
           </fieldset>
         </form>
