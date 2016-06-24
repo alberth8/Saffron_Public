@@ -5,6 +5,7 @@ const path = require('path');
 module.exports = {
   context: path.join(__dirname, ''),
   devtool: debug ? 'inline-sourcemap' : null,
+  historyApiFallback: true,
   entry: ['./client/app.js'],
   module: {
     preLoaders: [
