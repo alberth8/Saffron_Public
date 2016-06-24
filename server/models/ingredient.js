@@ -12,7 +12,7 @@ const Ingredient = db.Model.extend({
 
   recipe: () => {
     this.belongsToMany('Recipe');
-  }
+  },
 });
 
-module.exports = db.model('Ingredient', Ingredient);  
+module.exports = db.model('Ingredient', Ingredient);

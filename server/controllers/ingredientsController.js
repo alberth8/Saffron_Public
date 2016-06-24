@@ -7,15 +7,11 @@
 // make use of the req object to obtain userID
 
 module.exports = {
-  updateIngredients: function (req, res) {
-    const ingredients = req.body.ingredients;
-  },
-
-
-  getIngredients: function (req, res) {
-
-  },
-
+  // updateIngredients: (req, res) => {
+  //   const ingredients = req.body.ingredients;
+  // },
+  // getIngredients: (req, res) => {
+  // },
   // favedSets: function (req, res) {
-  // }
+  // },
 };
