@@ -30,9 +30,8 @@ module.exports = {
     path: `${__dirname}/client/public`,
     filename: 'webpack.min.js',
   },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
+  eslint: {
+    failOnWarning: false,
+    failOnError: true,
+  },
 };
