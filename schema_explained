@@ -20,3 +20,8 @@ user <=> ingredients
    \\      //
     v      v
      recipes
+
+// join tables: 
+//  x ingredients_recipes: associates recipes w/ ingredients
+//  x recipes_users: favorited table
+//  x ingredients_users: user's saved sets
