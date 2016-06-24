@@ -6,6 +6,9 @@ require('./recipe');
 const Ingredient = db.Model.extend({
   tableName: 'ingredients',
 
+  initialize: () => {
+    this.on('creating');
+  },
   user: () => {
     this.belongsToMany('User');
   },

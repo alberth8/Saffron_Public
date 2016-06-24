@@ -68,11 +68,11 @@ class IngredientsView extends Component {
           value={this.state.ingredient}
         />
         <button
-          onClick={() => this.onSubmitIngredients()}
-        >Submit</button>
-        <button
           onClick={() => this.onAddIngredient(this.state.ingredient)}
-        >Search</button>
+        >Add Ingredient</button>
+        <button
+          onClick={() => this.onSubmitIngredients()}
+        >Get Suggestions</button>
         {this.mapIngredients(this.state.selectedIngredients, 'selected')}
         {this.mapIngredients(this.state.suggestedIngredients, 'suggested')}
       </div>

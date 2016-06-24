@@ -9,10 +9,12 @@
 module.exports = {
   updateIngredients: (req, res) => {
     const ingredients = req.body.ingredients;
-    console.log(ingredients, req, res);
+    res.send('POST to /api/ingredients, this is ingredients');
+    console.log('ingredients controller!!!!', ingredients, req, res);
   },
-  // getIngredients: (req, res) => {
-  // },
-  // favedSets: function (req, res) {
-  // },
+  getIngredients: (req, res) => {
+    const ingredients = req.body.ingredients;
+    res.send('get to /api/updateingredients, this is ingredients');
+    console.log('GET: ', ingredients);
+  },
 };
