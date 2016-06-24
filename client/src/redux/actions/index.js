@@ -49,7 +49,7 @@ export function updateIngredients(ingredients) {
     axios.post('/api/updateIngredients', { ingredients })
       .then((response) => {
       // update selected, suggested and receipes w/ response
-        console.log('index.js data', response.data);
+        console.log('index.js data', response);
         dispatch({
           type: 'UPDATE_INGREDIENTS',
           payload: { ingredients },

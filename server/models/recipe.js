@@ -12,7 +12,7 @@ const Recipe = db.Model.extend({
 
   ingredient: () => {
     this.belongsToMany('Ingredient');
-  }
+  },
 });
 
 module.exports = db.model('Recipe', Recipe);
@@ -20,6 +20,4 @@ module.exports = db.model('Recipe', Recipe);
 
 // ing has many recipes
 // recipe has many ing
-// 
-// 
 // users has many ingredients
