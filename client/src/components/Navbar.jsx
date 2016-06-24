@@ -18,7 +18,7 @@ class Navbar extends React.Component {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Ingredients</a>
+            <Link to="/ingredients">Ingredients</Link>
           </li>
           <li className="nav-item">
             <Link to="recipes">Recipes</Link>
@@ -42,11 +42,9 @@ class Navbar extends React.Component {
   }
 }
 
-const mapStateToProps = function (state) {
-  return {
-    authenticated: state.authenticated,
-  };
-};
+const mapStateToProps = (state) => ({
+  authenticated: state.authenticated,
+});
 
 Navbar.propTypes = {
   authenticated: PropTypes.func,

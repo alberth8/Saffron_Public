@@ -43,3 +43,20 @@ export function userInfo(email) {
     });
   };
 }
+
+export function updateIngredients(ingredients) {
+  return (dispatch) => {
+    axios.post('/api/updateIngredients', { ingredients })
+      .then((response) => {
+      // update selected, suggested and receipes w/ response
+        console.log('index.js data', response.data);
+        dispatch({
+          type: 'UPDATE_INGREDIENTS',
+          payload: { ingredients },
+        });
+      })
+      .catch((error) => {
+        console.log('error in client ', error);
+      });
+  };
+}

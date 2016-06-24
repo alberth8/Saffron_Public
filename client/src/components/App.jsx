@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-
 import Navbar from './Navbar.jsx';
 
 export default class App extends React.Component {
