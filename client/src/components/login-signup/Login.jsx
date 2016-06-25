@@ -28,6 +28,7 @@ class Login extends React.Component {
     const password = this.state.password;
     if (e.keyCode === 13) {
       this.onLogin(email, password);
+      this.props.userInfo(email, password);
     }
   }
 
@@ -72,19 +73,21 @@ class Login extends React.Component {
           </fieldset>
         </form>
         <button onClick={this.onLogin}>Login</button>
+        {this.props.authErrorMessage}
       </div>
     );
   }
 
 }
 
-// const mapStateToProps = (state) => ({
-
-// });
+const mapStateToProps = (state) => ({
+  authErrorMessage: state.authErrorMessage,
+});
 
 Login.propTypes = {
   loginUser: PropTypes.func,
   userInfo: PropTypes.func,
+  authErrorMessage: PropTypes.string,
 };
 
-export default connect(null, actions)(Login);
+export default connect(mapStateToProps, actions)(Login);
