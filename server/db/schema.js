@@ -34,7 +34,8 @@ db.knex.schema.hasTable('recipes').then((exists) => {
     db.knex.schema.createTable('recipes', (recipe) => {
       recipe.increments('id').primary();
       recipe.string('recipeTitle', 100);
-      recipe.string('recipeUrl', 300).unique().comment('recipes must not be duplicated in db');
+      recipe.string('recipeUrl', 300).unique()
+            .comment('Recipes must not be duplicated in db. Duplicate titles and images are okay.');
       recipe.string('recipeImgUrl', 300);
     }).then((table) => {
       console.log('Created table `recipes`', table);
