@@ -80,11 +80,9 @@ class Login extends React.Component {
 
 }
 
-const mapStateToProps = function (state) {
-  return {
-    authErrorMessage: state.authErrorMessage,
-  };
-};
+const mapStateToProps = (state) => ({
+  authErrorMessage: state.authErrorMessage,
+});
 
 Login.propTypes = {
   loginUser: PropTypes.func,
