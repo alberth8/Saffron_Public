@@ -39,46 +39,65 @@ module.exports = {
       // add associations
       // the issue is with forEach
       ingredientsArr.forEach(function(ing) { // (*)
-        currIngredient = ing;
-        Ingredients.create({
-          ingredient: currIngredient
-        }) // returns newly created model (see following)
-        .then( function (ingredientModel) { // update join table w/ recipeId
-          // console.log('Ingredient Model:', ingredientModel);
-          ingredientId = ingredientModel.attributes.id;
-          Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
-            ingredient_id: ingredientId,
-            recipe_id: recipeId
+        console.log('at the very top of the for loop.....');
+        console.log('if it doesnt exist, it should print this...');
+        Ingredient.where({ingredient: ing}).fetch()
+          .then(function(foundModel) {
+            if (foundModel) {
+              console.log('Model found. Extracting id...')
+              ingredientId = model.attributes.id;
+            } else { // otherwise, create it
+              console.log('Model does not exist. Creating model...');
+              Ingredients.create({
+                  ingredient: currIngredient
+              }) // returns newly created model (see following)
+              .then(function (ingredientModel) { // update join table w/ recipeId
+                ingredientId = ingredientModel.attributes.id;
+              })
+              .catch(function(err) {
+                console.log(err);
+              })
+            } // end else
+
+            // HELPER: insert in to join table
+            Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
+              ingredient_id: ingredientId,
+              recipe_id: recipeId
+            }) 
+
+            // TODO: HOW TO END A PROMISE? OKAY TO JUST DO WHAT I"VE DONE ABOVE IN THE ELSE AND AFTER ELSE?
           })
-        })
-        .catch(function (error) { // if ingredient already exists, grab id so that can still associate
-          console.log('An ingredient in this recipe already exists');
-
-          foo(function(result) {
-
+          .catch(function(err) {
+            console.log(err);
           });
+        console.log('fininish...')
+        // if (!( Ingredient.where({ingredient: ing}).fetch() )) {
+        //   // get id 
+        //   console.log('!!! Ingredient already exists. Fetching id...');
+        //   Ingredient.where({ingredient:ing}).fetch()
+        // } else {
+        //   // create it
+        //   console.log('Ingredient does not exist. Creating entry....');
+        // }
 
-          // find id of the duplicate ingredient
-          // use promise.all here
 
-          Ingredients.query('where', 'ingredient', '=', ing)
-
-          //     .fetch()
-          //     .then( function(resp) {
-          //     console.log(resp.models[0].id);
-          //     console.log('ASYNC????/');
-          //   })
-          //   .catch( function(err) {
-          //     console.log(err);
-          //   });
-          
-
-          //   resolve
-          // });
-          // Promise.all([qry])
-          // // obtain the id to make the entry in ingredients recipes
-
-        });
+        // currIngredient = ing;
+        // Ingredients.create({
+        //   ingredient: currIngredient
+        // }) // returns newly created model (see following)
+        // // could implement a bloom filter to check for non-existent rows!
+        // .then( function (ingredientModel) { // update join table w/ recipeId
+        //   // console.log('Ingredient Model:', ingredientModel);
+        //   ingredientId = ingredientModel.attributes.id;
+        //   Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
+        //     ingredient_id: ingredientId,
+        //     recipe_id: recipeId
+        //   })
+        // })
+        // .catch(function (error) { // if ingredient already exists, grab id so that can still associate
+        //   // console.log('An ingredient in this recipe already exists');
+        //   console.log(error);
+        // });
       })
     })
     .catch(function (err) { // if already exists, favorite it (needs recipes_users join table)
