@@ -18,14 +18,23 @@ export function loginUser(email, password) {
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');
     }).catch(() => {
-      dispatch(authError('Bad Login Info'));
+      dispatch(authError('Must enter a valid email and password'));
     });
   };
 }
 
 export function signupUser(email, password) {
-  return () => {
-    axios.post('/api/signup', { email, password });
+  return (dispatch) => {
+    axios.post('/api/signup', { email, password })
+    .then((response) => {
+      dispatch({
+        type: 'AUTH_USER',
+      });
+      localStorage.setItem('token', response.data.token);
+      browserHistory.push('/');
+    }).catch((response) => {
+      dispatch(authError(response.data));
+    });
   };
 }
 
@@ -36,10 +45,11 @@ export function signoutUser() {
 }
 
 export function userInfo(email) {
+  console.log(email);
   return (dispatch) => {
     dispatch({
       type: 'USER_INFO',
-      payload: { email },
+      email,
     });
   };
 }
