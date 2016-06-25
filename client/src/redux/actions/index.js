@@ -53,15 +53,27 @@ export function userInfo(email) {
   };
 }
 
-export function updateIngredients(ingredients) {
+// these are our actions
+export function updateSuggestedIngredients(suggestedIngredients) {
+  console.log(suggestedIngredients);
   return (dispatch) => {
-    axios.post('/api/updateIngredients', { ingredients })
+    dispatch({
+      type: 'UPDATE_SUGGESTED_INGREDIENTS',
+      suggestedIngredients,
+    });
+  };
+}
+
+export function sendIngredientsToServer(selectedIngredients) {
+  return (dispatch) => {
+    axios.post('/api/updateIngredients', { selectedIngredients })
       .then((response) => {
       // update selected, suggested and receipes w/ response
-        console.log('index.js data', response);
+        console.log('index.js response: ', response.data);
         dispatch({
           type: 'UPDATE_INGREDIENTS',
-          payload: { ingredients },
+          selectedIngredients: response.data.selectedingredients,
+          suggestedIngredients: response.data.suggestedIngredients,
         });
       })
       .catch((error) => {

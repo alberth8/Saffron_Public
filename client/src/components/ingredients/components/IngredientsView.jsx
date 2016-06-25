@@ -8,7 +8,6 @@ class IngredientsView extends Component {
     this.state = {
       ingredient: '',
       selectedIngredients: ['egg', 'milk', 'honey'],
-      suggestedIngredients: ['bread', 'cinnomen', 'beer'],
     };
   }
   // when the user types in the input box, capture that text in e.target.value
@@ -18,12 +17,13 @@ class IngredientsView extends Component {
     });
   }
   onAddIngredient(addedIngredient, key) {
+    // if key is defined, it means the user clicked on a suggested ingredient
+    // so remove it from state, and rerender the list
     if (key !== undefined) {
-      // if key is defined, it means the user clicked on a suggested ingredient
-      // so remove it from state, and rerender the list
-      const newState = this.state.suggestedIngredients.slice();
-      newState.splice(key, 1);
-      this.setState({ suggestedIngredients: newState });
+      console.log(this.props.suggestedIngredients);
+      const newSuggested = this.props.suggestedIngredients.slice();
+      newSuggested.splice(key, 1);
+      this.props.updateSuggestedIngredients(newSuggested);
     }
     // if key isn't defined, then just add the ingredient to state
     this.setState({
@@ -38,7 +38,7 @@ class IngredientsView extends Component {
     });
   }
   onSubmitIngredients() {
-    this.props.updateIngredients(this.state.selectedIngredients);
+    this.props.sendIngredientsToServer(this.state.selectedIngredients);
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
     return (
@@ -74,14 +74,22 @@ class IngredientsView extends Component {
           onClick={() => this.onSubmitIngredients()}
         >Get Suggestions</button>
         {this.mapIngredients(this.state.selectedIngredients, 'selected')}
-        {this.mapIngredients(this.state.suggestedIngredients, 'suggested')}
+        {this.mapIngredients(this.props.suggestedIngredients, 'suggested')}
       </div>
     );
   }
 }
+// replace ['bread', 'cinnomen', 'beer']; with this.props.suggestedIngredients
+
+
+const mapStateToProps = (state) => ({
+  suggestedIngredients: state.suggestedIngredients,
+});
 
 IngredientsView.propTypes = {
-  updateIngredients: PropTypes.func,
+  sendIngredientsToServer: PropTypes.func,
+  updateSuggestedIngredients: PropTypes.func,
+  suggestedIngredients: PropTypes.array,
 };
 
-export default connect(null, actions)(IngredientsView);
+export default connect(mapStateToProps, actions)(IngredientsView);
