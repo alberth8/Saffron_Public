@@ -27,7 +27,8 @@ class SignUp extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
-      this.onLogin(email, password);
+      this.signupUser.on(email, password);
+      this.props.userInfo(email, password);
     }
   }
 
@@ -69,22 +70,24 @@ class SignUp extends React.Component {
           </fieldset>
         </form>
         <button onClick={this.onSignup}>Signup</button>
+        {this.props.authErrorMessage.error}
       </div>
     );
   }
 
 }
 
-// const mapStateToProps = function(state, ownProps) {
-// 	return {
-
-// 	};
-// }
+const mapStateToProps = function (state) {
+  return {
+    authErrorMessage: state.authErrorMessage,
+  };
+};
 
 SignUp.propTypes = {
   signupUser: PropTypes.func,
   userInfo: PropTypes.func,
+  authErrorMessage: PropTypes.string,
 };
 
 
-export default connect(null, actions)(SignUp);
+export default connect(mapStateToProps, actions)(SignUp);
