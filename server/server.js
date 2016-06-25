@@ -1,5 +1,10 @@
 require('dotenv').config({ path: './env/development.env' });
 
+// deubgging Bookshelf
+process.stderr.on('data', function(data) {
+  console.log(data);
+});
+
 const express = require('express');
 const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');

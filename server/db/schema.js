@@ -34,9 +34,8 @@ db.knex.schema.hasTable('recipes').then((exists) => {
     db.knex.schema.createTable('recipes', (recipe) => {
       recipe.increments('id').primary();
       recipe.string('recipeTitle', 100);
-      recipe.string('recipeUrl', 300);
+      recipe.string('recipeUrl', 300).unique().comment('recipes must not be duplicated in db');
       recipe.string('recipeImgUrl', 300);
-      recipe.boolean('favorited');
     }).then((table) => {
       console.log('Created table `recipes`', table);
     });
@@ -47,7 +46,7 @@ db.knex.schema.hasTable('ingredients').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('ingredients', (ingredient) => {
       ingredient.increments('id').primary();
-      ingredient.string('ingredient', 50);
+      ingredient.string('ingredient', 50).unique();
     }).then((table) => {
       console.log('Created table `ingredients`', table);
     });
