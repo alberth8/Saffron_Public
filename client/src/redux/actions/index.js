@@ -45,7 +45,6 @@ export function signoutUser() {
 }
 
 export function userInfo(email) {
-  console.log(email);
   return (dispatch) => {
     dispatch({
       type: 'USER_INFO',
