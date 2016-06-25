@@ -20,7 +20,6 @@ class IngredientsView extends Component {
     // if key is defined, it means the user clicked on a suggested ingredient
     // so remove it from state, and rerender the list
     if (key !== undefined) {
-      console.log(this.props.suggestedIngredients);
       const newSuggested = this.props.suggestedIngredients.slice();
       newSuggested.splice(key, 1);
       this.props.updateSuggestedIngredients(newSuggested);
