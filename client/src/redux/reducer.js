@@ -9,7 +9,7 @@ import ingredientsReducer from './reducers/ingredientsReducer.js';
 export default combineReducers({
   // ...sharedReducers,
   user: userInfoReducer,
-  ingredients: ingredientsReducer,
+  suggestedIngredients: ingredientsReducer,
   authenticated: authReducer,
   authErrorMessage: authErrorReducer,
   form: formReducer,
