@@ -27,65 +27,76 @@ module.exports = {
     // console.log(Recipes.query('where', 'recipeUrl', '=', 'u4'));
 
     // need save to recipe, then ingredients, then update join table
-    // Recipe.
-
-    Recipes.create({ // use `Recipes` collection as convenience method
-      recipeTitle: newRecipeTitle,
-      recipeUrl: newRecipeUrl,
-      recipeImgUrl: newRecipeImgUrl,
-      favorited: true
-    }) // returns the model that was just created
-    .then(function (recipeModel) {
-      recipeId = recipeModel.attributes.id;
-
-      // add associations
-      ingredientsArr.forEach(function(ing) { 
-        Ingredient.where({ingredient: ing}).fetch()
-          .then(function(foundModel) {
-            if (foundModel) {
-              console.log('Model found. Extracting id...')
-              ingredientId = foundModel.attributes.id;
-              // HELPER: insert in to join table
-              Ingredients_Recipes.create({
-                ingredient_id: ingredientId,
-                recipe_id: recipeId
-              }).then(function (ingredient_recipe) {
-                console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
-                res.status(200).send(ingredient_recipe);
-              }).catch(function (error) {
-                console.log(error);
-              })
-            } else { // otherwise, create it
-              console.log('Ingredient does not exist. Creating ingredient...');
-              Ingredients.create({
-                  ingredient: ing
-              }) // returns newly created model (see following)
-              .then(function (ingredientModel) { // update join table w/ recipeId
-                ingredientId = ingredientModel.attributes.id;
-                // HELPER: insert in to join table
-                Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
-                  ingredient_id: ingredientId,
-                  recipe_id: recipeId
-                }).then(function (ingredient_recipe) {
-                  console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
-                  res.status(200).send(ingredient_recipe);
-                }).catch(function (error) {
-                  console.log(error);
-                })
-              })
-              .catch(function(err) {
-                console.log(err);
-              })
-            } // end else
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+    // Recipe
+    Recipe.where({recipeUrl: newRecipeUrl}).fetch()
+      .then(function(foundRecipe) {
+        console.log(foundRecipe);
+        if (foundRecipe) {
+          foundRecipeId = foundRecipe.attributes.id
+          // fave for user
+          new Recipe({id: foundRecipeId}).save({favorited: 1});
+        } else {
+          // do everything below...
+        }
       })
-    })      
-    .catch(function (err) { // if already exists, favorite it (needs recipes_users join table)
-      console.log('Recipe already exists in database, but we have added it to your favorited recipes'); 
-    });
+
+    // Recipes.create({ // use `Recipes` collection as convenience method
+    //   recipeTitle: newRecipeTitle,
+    //   recipeUrl: newRecipeUrl,
+    //   recipeImgUrl: newRecipeImgUrl,
+    //   favorited: true
+    // }) // returns the model that was just created
+    // .then(function (recipeModel) {
+    //   recipeId = recipeModel.attributes.id;
+
+    //   // add associations
+    //   ingredientsArr.forEach(function(ing) { 
+    //     Ingredient.where({ingredient: ing}).fetch()
+    //       .then(function(foundModel) {
+    //         if (foundModel) {
+    //           console.log('Model found. Extracting id...')
+    //           ingredientId = foundModel.attributes.id;
+    //           // HELPER: insert in to join table
+    //           Ingredients_Recipes.create({
+    //             ingredient_id: ingredientId,
+    //             recipe_id: recipeId
+    //           }).then(function (ingredient_recipe) {
+    //             console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
+    //             res.status(200).send(ingredient_recipe);
+    //           }).catch(function (error) {
+    //             console.log(error);
+    //           })
+    //         } else { // otherwise, create it
+    //           console.log('Ingredient does not exist. Creating ingredient...');
+    //           Ingredients.create({
+    //               ingredient: ing
+    //           }) // returns newly created model (see following)
+    //           .then(function (ingredientModel) { // update join table w/ recipeId
+    //             ingredientId = ingredientModel.attributes.id;
+    //             // HELPER: insert in to join table
+    //             Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
+    //               ingredient_id: ingredientId,
+    //               recipe_id: recipeId
+    //             }).then(function (ingredient_recipe) {
+    //               console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
+    //               res.status(200).send(ingredient_recipe);
+    //             }).catch(function (error) {
+    //               console.log(error);
+    //             })
+    //           })
+    //           .catch(function(err) {
+    //             console.log(err);
+    //           })
+    //         } // end else
+    //       })
+    //       .catch(function(err) {
+    //         console.log(err);
+    //       });
+    //   })
+    // })      
+    // .catch(function (err) { // if already exists, favorite it (needs recipes_users join table)
+    //   console.log('Recipe already exists in database, but we have added it to your favorited recipes'); 
+    // });
   }
 }
   
