@@ -6,6 +6,10 @@ const Ingredient_Recipe = require('./ingredient_recipe');
 const Ingredient = db.Model.extend({
   tableName: 'ingredients',
 
+  ingredient_user: () => {
+    this.hasMany(Ingredient_User);
+  },
+
   ingredient_recipe: () => {
     this.hasMany(Ingredient_Recipe);
   },

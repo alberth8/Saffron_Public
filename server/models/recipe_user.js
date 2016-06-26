@@ -8,13 +8,13 @@ const User = require('./user');
 const Recipe_User = db.Model.extend({
   tableName: 'recipes_users',
 
-  recipe: function () {
-    return this.belongsTo(Recipe);
+  recipe: () => {
+    this.belongsTo(Recipe);
   },
 
-  user: function() {
-      return this.belongsTo(User);
-  }
+  user: () => {
+    this.belongsTo(User);
+  },
 });
 
 module.exports = Recipe_User;
