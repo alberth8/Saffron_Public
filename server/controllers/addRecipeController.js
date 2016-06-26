@@ -7,13 +7,13 @@ const Ingredients = require('../collections/ingredients.js');
 const Recipes = require('../collections/recipes.js'); // more conveinet to create w/ colleciton
 const Ingredients_Recipes = require('../collections/ingredients_recipes.js');
 const Ingredients_Users = require('../collections/ingredients_users.js');
-const Recipes_Users = require('../collections/ingredients_users.js');
+const Recipes_Users = require('../collections/recipes_users.js');
 // const User = require('../models/user.js');
 
 
 module.exports = {
   addRecipe: function (req, res) {
-    const user = 'e@mail.com'; // req.body.email or req.body.id
+    const userId = 1; //req.body.id
     const newRecipeTitle = req.body.recipeTitle;
     const newRecipeUrl = req.body.recipeUrl;
     const newRecipeImgUrl = req.body.recipeImgUrl;
@@ -54,19 +54,21 @@ module.exports = {
 
             // Then we need to favorite it for them again
             Recipes_Users.create({
-              user_id: user,
-              recipe_id: foundRecipeId
-            })
+              user_id: userId,
+              recipe_id: recipeId
+            });
 
             return recipeId;
           }).then(function(recipeId) {
-            console.log('Just in case, can you see the recipeID?:', recipeId);
+            console.log('>>>> Just in case, can you see the recipeID?:', recipeId);
 
-            // loop through ingredients to [create new ingredient and] add to join tables
+            // Iterate through ingredients to [create new ingredient and] add to join tables
             ingredientsArr.forEach(function(ing) { 
+
+              // Check if ingredient exists
               Ingredient.where({ingredient: ing}).fetch()
                 .then(function(foundModel) {
-                  if (foundModel) {
+                  if (foundModel) {  // If so, then extract the id, so that we can save it in the join table below
                     console.log('Model found. Extracting id...')
                     ingredientId = foundModel.attributes.id;
                     // TODO: Clean up by adding helper function for inserting in to join table
@@ -79,15 +81,15 @@ module.exports = {
                     }).catch(function (error) {
                       console.log(error);
                     })
-                  } else { // otherwise, create it
+                  } else { // Otherwise, we need to add the ingredient to our table of ingredients
                     console.log('Ingredient does not exist. Creating ingredient...');
                     Ingredients.create({
                         ingredient: ing
                     }) // returns newly created model (see following)
-                    .then(function (ingredientModel) { // update join table w/ recipeId
+                    .then(function (ingredientModel) { // similarly, pdate join table w/ recipeId
                       ingredientId = ingredientModel.attributes.id;
-                    // TODO: Clean up by adding helper function for inserting in to join table
-                      Ingredients_Recipes.create({ // won't have unique conflicts b/c will have been caught above
+                      // TODO: Clean up by adding helper function for inserting in to join table
+                      Ingredients_Recipes.create({ 
                         ingredient_id: ingredientId,
                         recipe_id: recipeId
                       }).then(function (ingredient_recipe) {
