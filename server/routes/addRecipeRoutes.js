@@ -1,9 +1,7 @@
 const addRecipeController = require('../controllers/addRecipeController.js');
 
-// 
 // Add a recipe router
-// 
-module.exports = function (app) {
+module.exports = (app) => {
   // find all favorited sets of ingredients
   console.log('HORRAY');
 

@@ -1,5 +1,5 @@
-var db = require('../db/schema');
-var User = require('../models/user.js');
+const db = require('../db/schema');
+const User = require('../models/user.js');
 
 // instatiate collection
 const Users = new db.Collection();

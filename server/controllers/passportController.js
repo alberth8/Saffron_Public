@@ -7,13 +7,13 @@ const config = require('../config/authConfig.js');
 const bcrypt = require('bcrypt-nodejs');
 
 const localOption = { usernameField: 'email' };
-const localLogin = new LocalStrategy(localOption, function(email, password, done) {
-	User.where('email', email).fetch().then(function(user) {
-	  user.comparePassword(password, function(isMatch) {
+const localLogin = new LocalStrategy(localOption, (email, password, done) => {
+	User.where('email', email).fetch().then((user) => {
+	  user.comparePassword(password, (isMatch) => {
 		  if(!isMatch) { return done(null, false); }
 		  return done(null, true);
 	  });
-	}).catch(function(err){
+	}).catch((err) {
 		console.error(err);
 	})
 });
@@ -23,8 +23,8 @@ const jwtOptions = {
 	secretOrKey: config.secret
 };
 
-const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {	
-	User.where('id', payload.sub).fetch().then(function(user) {
+const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {	
+	User.where('id', payload.sub).fetch().then((user) => {
 		if (user) {
 			done(user);
 		} else {

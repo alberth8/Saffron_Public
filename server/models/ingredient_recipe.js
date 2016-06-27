@@ -8,13 +8,13 @@ const Ingredient = require('./ingredient');
 const Ingredient_Recipe = db.Model.extend({
   tableName: 'ingredients_recipes',
 
-  recipe: function () {
-    return this.belongsTo(Recipe);
+  recipe: () => {
+    this.belongsTo(Recipe);
   },
 
-  ingredient: function() {
-      return this.belongsTo(Ingredient);
-  }
+  ingredient: () => {
+    this.belongsTo(Ingredient);
+  },
 });
 
 module.exports = Ingredient_Recipe;

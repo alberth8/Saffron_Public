@@ -17,6 +17,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    camelcase: [1, {properties: "always"}],
     "quotes": [2, "single"],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
@@ -24,5 +25,5 @@
   },
   "plugins": [
     "react"
-  ]
+  ],
 }

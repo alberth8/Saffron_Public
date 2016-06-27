@@ -1,5 +1,5 @@
-var db = require('../db/schema');
-var Recipe_User = require('../models/recipe_user.js');
+const db = require('../db/schema');
+const Recipe_User = require('../models/recipe_user.js');
 
 // instatiate collection
 const Recipes_Users = new db.Collection();

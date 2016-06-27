@@ -1,5 +1,5 @@
-var db = require('../db/schema');
-var Ingredient_Recipe = require('../models/ingredient_recipe.js');
+const db = require('../db/schema');
+const Ingredient_Recipe = require('../models/ingredient_recipe.js');
 
 // instatiate collection
 const Ingredients_Recipes = new db.Collection();
