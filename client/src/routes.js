@@ -16,6 +16,6 @@ export default (
     <Route path="profile" component={requireAuth(ProfilePage)} />
     <Route path="ingredients" component={IngredientsLayout} />
     <Route path="recipes" component={Recipes} />
-    <Route path="addrecipes" component={AddRecipeForm} />
+    <Route path="addrecipe" component={AddRecipeForm} />
   </Route>
 );

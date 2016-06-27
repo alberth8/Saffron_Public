@@ -83,11 +83,12 @@ module.exports = {
                       ingredient: ing,
                     }) // returns newly created model (see following)
                     .then((ingredientModel) => { // similarly, update join table w/ recipeId
+                      console.log('>>>>>> RECIPEID:', recipeId, 'OR IS IT....', recId);
                       ingredientId = ingredientModel.attributes.id;
                       // TODO: Clean up by adding helper function for inserting in to join table
                       Ingredients_Recipes.create({
                         ingredient_id: ingredientId,
-                        recipe_id: recId,
+                        recipe_id: recipeId,
                       }).then((ingredient_recipe) => {
                         console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
                         res.status(200).end();
