@@ -32,10 +32,13 @@ class Navbar extends React.Component {
               <Link to="/" onClick={this.onLogout} >Logout</Link>
               : <Link to="login">Login</Link>}
           </li>
-           {!	this.props.authenticated ?
-             <li className="nav-item">
-               <Link to="signup">Signup</Link>
-             </li> : null}
+            {!	this.props.authenticated ?
+              <li className="nav-item">
+                <Link to="signup">Signup</Link>
+              </li> : null}
+          <li className="nav-item">
+            <Link to="addrecipe">Add Recipe</Link>
+          </li>
         </ul>
       </nav>
     );

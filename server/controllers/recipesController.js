@@ -7,6 +7,6 @@
 // Shows the recipes which contain all
 // Note: filtering (re-sorting) should be done with redux store
 module.exports = {
-  getMatchedRecipes: function (req, res) {
-  }
-}
+  // getMatchedRecipes: function (req, res) {
+  // }
+};

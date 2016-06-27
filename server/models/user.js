@@ -1,38 +1,40 @@
 const db = require('../db/schema');
 const bcrypt = require('bcrypt-nodejs');
 const Promise = require('bluebird');
-const Recipe = require('./recipe');
+// const Recipe = require('./recipe');
+const Recipe_User = require('./recipe_user');
+const Ingredient_User = require('./ingredient_user');
 
 const User = db.Model.extend({
 
   tableName: 'users',
 
-  initialize: function() {
+  initialize: () => {
     this.on('creating', this.hashPassword);
   },
 
-  comparePassword: function(attemptedPassword, callback) {
-    bcrypt.compare(attemptedPassword, this.get('password'), function(err, isMatch) {
+  comparePassword: (attemptedPassword, callback) => {
+    bcrypt.compare(attemptedPassword, this.get('password'), (err, isMatch) => {
       callback(isMatch);
     });
   },
-  
-  hashPassword: function() {
-    var cipher = Promise.promisify(bcrypt.hash);
-    return cipher(this.get('password'), null, null).bind(this)
-      .then(function(hash) {
+
+  hashPassword: () => {
+    const cipher = Promise.promisify(bcrypt.hash);
+    cipher(this.get('password'), null, null).bind(this)
+      .then((hash) => {
         this.set('password', hash);
       });
   },
 
-  recipe: () => {
-    this.belongsToMany('Recipe');
+  ingredient_user: () => {
+    this.hasMany(Ingredient_User);
   },
 
-  ingredient: () => {
-    this.belongsToMany('Ingredient');
-  }
+  recipe_user: () => {
+    this.hasMany(Recipe_User);
+  },
 });
 
-
-module.exports = db.model('User', User);
+module.exports = User;
+// module.exports = db.model('User', User);

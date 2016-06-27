@@ -81,3 +81,15 @@ export function sendIngredientsToServer(selectedIngredients) {
       });
   };
 }
+
+// Post recipe to db. Used in addRecipeForm
+export function addRecipe(addRecipeObj) {
+  console.log('addRecipeObj:', addRecipeObj);
+  return () => {
+    axios.post('/api/addrecipe', addRecipeObj).then((response) => {
+      console.log('THEN > RESPONSE', response);
+    }).catch((error) => {
+      console.log('ERROR:', error);
+    });
+  };
+}
