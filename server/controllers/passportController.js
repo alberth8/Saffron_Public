@@ -9,11 +9,13 @@ const bcrypt = require('bcrypt-nodejs');
 const localOption = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOption, (email, password, done) => {
 	User.where('email', email).fetch().then((user) => {
-	  user.comparePassword(password, (isMatch) => {
-		  if(!isMatch) { return done(null, false); }
-		  return done(null, true);
-	  });
-	}).catch((err) {
+	 user.comparePassword(password, (isMatch) => {
+		if (!isMatch) {
+			return done(null, false); 
+		}
+			return done(null, true);
+		});
+	}).catch((err) => {
 		console.error(err);
 	})
 });
