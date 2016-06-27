@@ -15,4 +15,4 @@ client/public/webpack*
 client/public/*.hot*
 
 # Environment Configuration
-env/dev.env
+server/config/dev.env
