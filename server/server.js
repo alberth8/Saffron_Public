@@ -4,6 +4,7 @@ const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
 const userProfileRoutes = require('./routes/userProfileRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
+const recRoutes = require('./routes/recRoutes.js');
 
 // morgan, body-parser
 require('./config/init.js')(app, express);
@@ -13,6 +14,7 @@ app.use(express.static(__dirname + '/../client/public/'));
 app.set('port', process.env.PORT || 3000);
 
 // create routes per page
+recRoutes(app);
 ingredientsRoutes(app);
 recipesRoutes(app);
 userProfileRoutes(app);
