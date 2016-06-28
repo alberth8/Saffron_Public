@@ -9,17 +9,17 @@ const User = db.Model.extend({
 
   tableName: 'users',
 
-  initialize: () => {
+  initialize: function () {
     this.on('creating', this.hashPassword);
   },
 
-  comparePassword: (attemptedPassword, callback) => {
+  comparePassword: function (attemptedPassword, callback) {
     bcrypt.compare(attemptedPassword, this.get('password'), (err, isMatch) => {
       callback(isMatch);
     });
   },
 
-  hashPassword: () => {
+  hashPassword: function () {
     const cipher = Promise.promisify(bcrypt.hash);
     cipher(this.get('password'), null, null).bind(this)
       .then((hash) => {
@@ -27,11 +27,11 @@ const User = db.Model.extend({
       });
   },
 
-  ingredient_user: () => {
+  ingredient_user: function () {
     this.hasMany(Ingredient_User);
   },
 
-  recipe_user: () => {
+  recipe_user: function () {
     this.hasMany(Recipe_User);
   },
 });

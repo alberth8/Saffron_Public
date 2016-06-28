@@ -16,6 +16,5 @@ module.exports = (app, express) => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
-  // serve static files
   app.use(express.static(`${__dirname} /../../client/public/`));
 };
