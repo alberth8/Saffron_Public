@@ -7,7 +7,6 @@ process.stderr.on('data', (data) => {
 });
 
 const express = require('express');
-const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
 const addRecipeRoutes = require('./routes/addRecipeRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
