@@ -15,7 +15,7 @@ class Login extends React.Component {
   onLogin() {
     const email = this.state.email;
     const password = this.state.password;
-    this.props.userInfo(email, password);
+    this.props.userInfo(email);
     this.props.loginUser(email, password);
     this.setState({
       email: '',

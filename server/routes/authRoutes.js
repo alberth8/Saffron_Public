@@ -12,4 +12,5 @@ module.exports = function (app) {
   });
   app.post('/api/signup', authController.signup);
   app.post('/login', requireSignin, authController.login);
+  app.post('/api/userInfo', authController.userInfo);
 };

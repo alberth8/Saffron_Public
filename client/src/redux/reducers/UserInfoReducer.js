@@ -1,7 +1,7 @@
-export default function (state = '', action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case 'USER_INFO':
-      return action.email;
+      return action.user;
     default:
       return state;
   }
