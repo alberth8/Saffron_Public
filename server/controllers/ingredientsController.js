@@ -41,6 +41,7 @@ module.exports = {
                 // if the user hasn't saved this ingredient list before, add it to the collection
                 if (alreadySaved === false &&
                   ingredientIdArray.length === ingredients.length) {
+                  
                   ingredientIdArray.forEach((ingId) => {
                     Ingredient_UserCollection.create({
                       ingredient_id: ingId,

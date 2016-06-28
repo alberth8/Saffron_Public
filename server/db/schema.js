@@ -91,6 +91,16 @@ db.knex.schema.hasTable('recipes_users').then((exists) => {
   }
 });
 
+db.knex.schema.hasTable('user_saved_ingredients').then((exists) => {
+  if (!exists) {
+    db.knex.schema.createTable('user_saved_ingredients', (recipe) => {
+      recipe.increments('id').primary();
+    }).then((table) => {
+      console.log('Created table `user_saved_ingredients`', table);
+    });
+  }
+});
+
 // User's saved sets
 db.knex.schema.hasTable('ingredients_users').then((exists) => {
   if (!exists) {
