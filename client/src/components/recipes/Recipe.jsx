@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-// import { connect } from 'react-redux';
-// import axios from 'axios';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Recipe extends React.Component {
   constructor(props) {
@@ -10,11 +10,20 @@ class Recipe extends React.Component {
     };
   }
 
-  saveFav() {
-    this.setState({
-      faved: true,
+  saveFav(e) {
+    e.preventDefault();
+    console.log(this.props.recipe.url);
+    console.log(this.props.user.id);
+    axios.post('/api/saveFav', {
+      url: this.props.url,
+      user: this.props.user.id,
+    }).then(() => {
+      this.setState({
+        faved: true,
+      });
+    }).catch((response) => {
+      console.log(response);
     });
-    // axios.post('/api/saveFav', {})
   }
 
 
@@ -26,7 +35,9 @@ class Recipe extends React.Component {
             <h3>Name: {this.props.recipe.name}</h3>
             <img alt="error" src={this.props.recipe.photo} />
           </div>
-          <button onClick={this.saveFav}>heart</button>
+          {!this.state.faved ?
+            <button onClick={(e) => { this.saveFav(e); }}>heart</button>
+          : null}
         </li>
       </div>
     );
@@ -35,19 +46,16 @@ class Recipe extends React.Component {
 }
 
 
-// function mapStateToProps(state) {
-//   return {
-//     recipes: state.recipes,
-    // recipeName: state.recipe.name,
-    // recipeUrl: state.recipe.url,
-    // recipePhoto: state.recipe.photo,
-    // recipeLikes: state.recipe.likes
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
 
 Recipe.propTypes = {
   recipe: PropTypes.object,
+  url: PropTypes.string,
+  user: PropTypes.object,
 };
 
-export default Recipe;
-// export default connect(mapStateToProps)(Recipe);
+export default connect(mapStateToProps)(Recipe);
