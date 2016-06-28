@@ -7,7 +7,6 @@ process.stderr.on('data', (data) => {
 });
 
 const express = require('express');
-const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
 const addRecipeRoutes = require('./routes/addRecipeRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
@@ -15,12 +14,12 @@ const userProfileRoutes = require('./routes/userProfileRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const recRoutes = require('./routes/recRoutes.js');
 
+const app = express();
 // morgan, body-parser, static files
 require('./config/init.js')(app, express);
 
 // set port
 app.set('port', process.env.PORT || 3000);
-
 
 // create routes per page
 recRoutes(app);
