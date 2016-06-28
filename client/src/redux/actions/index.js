@@ -94,6 +94,7 @@ export function updateSuggestedIngredients(suggestedIngredients) {
 
 export function sendIngredientsToServer(selectedIngredients) {
   return (dispatch) => {
+    console.log(selectedIngredients);
     axios.post('/api/updateIngredients', { selectedIngredients })
       .then((response) => {
       // update selected, suggested and receipes w/ response

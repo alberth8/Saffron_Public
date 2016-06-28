@@ -8,13 +8,13 @@
 
 module.exports = {
   updateIngredients: (req, res) => {
-    const ingredients = req.body.ingredients;
+    const ingredients = req.body.selectedIngredients;
+    console.log('ingredients controller!!!!', ingredients);
     res.send('POST to /api/ingredients, this is ingredients');
-    console.log('ingredients controller!!!!', ingredients, req, res);
   },
   getIngredients: (req, res) => {
-    const ingredients = req.body.ingredients;
-    res.send('get to /api/updateingredients, this is ingredients');
+    const ingredients = req.body.selectedIngredients;
     console.log('GET: ', ingredients);
+    res.send('get to /api/updateingredients, this is ingredients');
   },
 };

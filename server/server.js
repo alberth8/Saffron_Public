@@ -7,6 +7,7 @@ process.stderr.on('data', (data) => {
 });
 
 const express = require('express');
+const app = express();
 const ingredientsRoutes = require('./routes/ingredientsRoutes.js');
 const addRecipeRoutes = require('./routes/addRecipeRoutes.js');
 const recipesRoutes = require('./routes/recipesRoutes.js');
@@ -19,6 +20,7 @@ const app = express();
 require('./config/init.js')(app, express);
 
 // set port
+console.log(process.env.PORT);
 app.set('port', process.env.PORT || 3000);
 
 // create routes per page
