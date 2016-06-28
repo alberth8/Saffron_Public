@@ -21,4 +21,14 @@ module.exports = {
       console.error(err);
     });
   },
+
+  getFavs: function (req, res) {
+    const userId = req.body.user;
+    RecipesUsers.where('user_id', userId).fetchAll().then((favs) => {
+      res.status(200).send(favs.attributes);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  },
 };
