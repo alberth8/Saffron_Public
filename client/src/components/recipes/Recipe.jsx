@@ -1,17 +1,38 @@
 import React, { PropTypes } from 'react';
 // import { connect } from 'react-redux';
+// import axios from 'axios';
+
+class Recipe extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      faved: false,
+    };
+  }
+
+  saveFav() {
+    this.setState({
+      faved: true,
+    });
+    // axios.post('/api/saveFav', {})
+  }
 
 
-const Recipe = (props) => (
-  <div>
-    <li>
+  render() {
+    return (
       <div>
-        <h3>Name: {props.recipe.name}</h3>
-        <img alt="error" src={props.recipe.photo} />
+        <li>
+          <div>
+            <h3>Name: {this.props.recipe.name}</h3>
+            <img alt="error" src={this.props.recipe.photo} />
+          </div>
+          <button onClick={this.saveFav}>heart</button>
+        </li>
       </div>
-    </li>
-  </div>
-);
+    );
+  }
+
+}
 
 
 // function mapStateToProps(state) {
@@ -28,6 +49,5 @@ Recipe.propTypes = {
   recipe: PropTypes.object,
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
-// export default connect(mapStateToProps)(Recipe);
 export default Recipe;
+// export default connect(mapStateToProps)(Recipe);

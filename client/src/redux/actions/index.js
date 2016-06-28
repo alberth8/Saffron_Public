@@ -46,12 +46,33 @@ export function signoutUser() {
 
 export function userInfo(email) {
   return (dispatch) => {
-    dispatch({
-      type: 'USER_INFO',
-      email,
+    axios.post('/api/userInfo', { email })
+    .then((response) => {
+      dispatch({
+        type: 'USER_INFO',
+        user: {
+          id: response.data.userId,
+          email: response.data.userEmail,
+        },
+      });
     });
   };
 }
+
+// export function saveFav() {
+//   return (dispatch) => {
+//     axios.post('/api/saveFav', {})
+//     .then((response) => {
+//       dispatch({
+//         type: 'FAVED',
+//       });
+//     }).catch((respone) => {
+//       dispatch({
+//         type: 'FAVED_ERROR',
+//       });
+//     });
+//   };
+// }
 
 // these are our actions
 export function updateSuggestedIngredients(suggestedIngredients) {

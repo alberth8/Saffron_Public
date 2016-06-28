@@ -39,4 +39,16 @@ module.exports = {
     res.send({ token: token(req.user) });
   },
 
+  userInfo: (req, res) => {
+    const email = req.body.email;
+    User.where('email', email).fetch().then((user) => {
+      res.status(200).send({
+        userId: user.attributes.id,
+        userEmail: email,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  },
 };
