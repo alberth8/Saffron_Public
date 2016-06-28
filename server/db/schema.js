@@ -43,6 +43,13 @@ db.knex.schema.hasTable('recipes').then((exists) => {
   }
 });
 
+db.knex
+
+// want to know what's associated together
+
+set.increments('id').primary();
+
+
 db.knex.schema.hasTable('ingredients').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('ingredients', (ingredient) => {
@@ -88,11 +95,12 @@ db.knex.schema.hasTable('recipes_users').then((exists) => {
 db.knex.schema.hasTable('ingredients_users').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('ingredients_users', (rec_user) => {
-      rec_user.increments('id').primary();
+      rec_user.increments('id').primary().comment('keep id in case needed in future');
       rec_user.integer('ingredient_id').unsigned().references('id')
               .inTable('ingredients');
       rec_user.integer('user_id').unsigned().references('id')
               .inTable('users');
+      rec_user.integer('set_id').unique().notNullable();
     }).then((table) => {
       console.log('Created table `ingredients_users`', table);
     });
