@@ -38,7 +38,7 @@ class ProfilePage extends React.Component {
   }
 
   renderFavs() {
-    if (this.state.favRecipes > 4 && this.state.showAll) {
+    if (this.state.favRecipes.length > 4 && this.state.showAll) {
       return (
         <ul>
           {this.state.favRecipes.map((recipe, index) =>
@@ -49,9 +49,18 @@ class ProfilePage extends React.Component {
     }
     return (
       <ul>
-        {this.state.favRecipes.map((recipe, index) =>
-          <FavRecipes favRecipe={recipe} key={index} />
-        )}
+        <li>
+          <h3>{this.state.favRecipes[0].recipeTitle}</h3>
+        </li>
+        <li>
+          <h3>{this.state.favRecipes[1].recipeTitle}</h3>
+        </li>
+        <li>
+          <h3>{this.state.favRecipes[2].recipeTitle}</h3>
+        </li>
+        <li>
+          <h3>{this.state.favRecipes[3].recipeTitle}</h3>
+        </li>
       </ul>
       );
   }
