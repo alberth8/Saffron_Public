@@ -12,8 +12,6 @@ class Recipe extends React.Component {
 
   saveFav(e) {
     e.preventDefault();
-    console.log(this.props.recipe.url);
-    console.log(this.props.user.id);
     axios.post('/api/saveFav', {
       url: this.props.url,
       user: this.props.user.id,
