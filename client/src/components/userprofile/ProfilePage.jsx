@@ -10,9 +10,11 @@ class ProfilePage extends React.Component {
       favRecipes: null,
       showAll: false,
     };
+    this.toggleFavs = this.toggleFavs.bind(this);
+    this.renderFavs = this.renderFavs.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios.post('/api/getFavs', { user: this.props.user.id })
     .then((response) => {
       this.setState({
@@ -58,8 +60,10 @@ class ProfilePage extends React.Component {
     return (
       <div>
         <h3>Your Favorites</h3>
-        {this.renderFavs}
-        {this.state.showAll ?
+        {this.state.favRecipes ?
+          this.renderFavs()
+          : null}
+        {!this.state.showAll ?
           <button onClick={this.toggleFavs}>Show all</button>
           : <button onClick={this.toggleFavs}>Close</button>
         }

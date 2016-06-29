@@ -23,12 +23,24 @@ module.exports = {
   },
 
   getFavs: function (req, res) {
+    let results = [];
+    let i = 0;
     const userId = req.body.user;
     RecipesUsers.where('user_id', userId).fetchAll().then((favs) => {
-      res.status(200).send(favs.attributes);
+      favs.models.forEach((favRecipe) => {
+        Recipe.where('id', favRecipe.attributes.recipe_id).fetch().then((recipeInfo) => {
+          results.push(recipeInfo.attributes);
+          i++;
+          if (i === favs.length) {
+          	res.status(200).send(results);
+          }
+        });
+      });
     })
     .catch((err) => {
       console.error(err);
-    });
+    })
+
   },
+
 };
