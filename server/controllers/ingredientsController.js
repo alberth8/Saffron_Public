@@ -7,6 +7,9 @@ const Ingredient_UserCollection = require('../collections/ingredients_users.js')
 const _ = require('lodash');
 const async = require('async');
 
+// this function finds the largest set ID in the user ingredients table
+// with a slight change to schema design, we could probably eliminate this
+// function
 const findMaxSavedIngredientID = (callback) => {
   let maxSetId = 0;
   Ingredient_UserModel.fetchAll()
@@ -18,17 +21,19 @@ const findMaxSavedIngredientID = (callback) => {
   });
 };
 
-const findOrAddIngredient = (ingredientArray, user_id, callback) => {
+// function takes an array of ingredient as strings, and
+// returns an array of ingredientIds to the callback
+const findOrAddIngredient = (ingredientArray, callback) => {
   const ingredientIdArray = [];
   async.each(ingredientArray, (ing, cb) => {
     IngredientModel.where({ ingredient: ing }).fetch()
     .then((foundModel) => {
-      if (foundModel) {
+      if (foundModel) {  // if ingredient found, push into array
         console.log('Model Found, extracting id...');
         ingredientIdArray.push(foundModel.attributes.id);
       } else { // if ingredient not in database,
         IngredientsCollection.create({ ingredient: ing })
-          .then((model) => {
+          .then((model) => { // push ingredient id into array
             console.log('Ingredient added...');
             ingredientIdArray.push(model.attributes.id);
           })
@@ -40,17 +45,18 @@ const findOrAddIngredient = (ingredientArray, user_id, callback) => {
   }, () => { callback(ingredientIdArray); });
 };
 
+// function takes userID, ingredientID array, and setID
+// saves each of the ingredients asynchronously into the
+// user ingredients table with the same setId
 const findAndGroup = (user_id, ingredientIdArray, set_id) => {
   let ma = [];
   Ingredient_UserModel.where({ user_id }).fetchAll()
-    .then((m) => {
+    .then((m) => { // find all entries in the user ingredient table that match our user ID
       async.each(m.models, (a, cb) => {
-        ma.push(a.attributes);
+        ma.push(a.attributes); // push each row into an array
         cb(null);
       }, (() => {
-        ma = _.groupBy(ma, 'set_id');
-        // console.log('filtering for all arrays that are length: ', ingredientIdArray.length);
-        // ma = _.filter(ma, (d) => (d.length === ingredientIdArray.length));
+        ma = _.groupBy(ma, 'set_id'); // regroup the arrays by set id
         let uniqueTest = true;
         _.forEach(ma, (b) => { // iterate over the sub arrays
           const f = [];
