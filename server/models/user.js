@@ -9,7 +9,7 @@ const User = db.Model.extend({
 
   tableName: 'users',
 
-  initialize: function () {
+  initialize: function () {    
     this.on('creating', this.hashPassword);
   },
 
@@ -21,8 +21,8 @@ const User = db.Model.extend({
 
   hashPassword: function () {
     const cipher = Promise.promisify(bcrypt.hash);
-    cipher(this.get('password'), null, null).bind(this)
-      .then((hash) => {
+    return cipher(this.get('password'), null, null).bind(this)
+      .then(function (hash) {
         this.set('password', hash);
       });
   },
