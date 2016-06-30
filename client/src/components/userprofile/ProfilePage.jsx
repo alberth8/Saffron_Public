@@ -48,7 +48,7 @@ class ProfilePage extends React.Component {
       );
     }
 
-    if (this.state.favRecipes.length > 4 && !this.state.showAll) {
+    if (this.state.favRecipes.length >= 4 && !this.state.showAll) {
       return (
         <ul>
           <FavRecipes favRecipe={this.state.favRecipes[0]} />
