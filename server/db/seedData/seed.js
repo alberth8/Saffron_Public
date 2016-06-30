@@ -1,11 +1,12 @@
-const IngredientModel = require('../models/ingredient.js');
-const IngredientsCollection = require('../collections/ingredients.js');
-const RecipeModel = require('../models/recipe.js');
-const RecipeCollection = require('../collections/recipes.js');
-const IngRecCollection = require('../collection/ingredients_recipes.js');
+const IngredientModel = require('../../models/ingredient.js');
+const IngredientsCollection = require('../../collections/ingredients.js');
+const RecipeModel = require('../../models/recipe.js');
+const RecipeCollection = require('../../collections/recipes.js');
+const IngRecCollection = require('../../collections/ingredients_recipes.js');
 
 const async = require('async');
 const data = require('./seed.json');
+
 // takes an array of text ingredients, saves or finds them,
 // returns an array of ingredient ids
 const findOrSaveIngredient = (ingredientArray, callback) => {
@@ -14,7 +15,7 @@ const findOrSaveIngredient = (ingredientArray, callback) => {
     IngredientModel.where({ ingredient: ing }).fetch()
     .then((foundModel) => {
       if (foundModel) {
-        console.log('Model Found, extracting id...');
+        console.log('Ingredient found, extracting id...');
         ingredientIdArray.push(foundModel.attributes.id);
       } else { // if ingredient not in database,
         IngredientsCollection.create({ ingredient: ing })
@@ -34,20 +35,21 @@ const findOrSaveIngredient = (ingredientArray, callback) => {
 // saves recipe and/or returns a recipe ID to a callback
 const findOrSaveRecipe = (recipeObject, callback) => {
   let recipeId;
-  RecipeModel.where({ title: recipeObject.title }).fetch()
+  RecipeModel.where({ recipeTitle: recipeObject.title }).fetch()
   .then((foundModel) => { // if the recipe is found, send back it's ID
     if (foundModel) {
-      recipeId = foundModel.attributes.recipe_id;
+      console.log('Recipe found...');
+      recipeId = foundModel.attributes.id;
       callback(recipeId);
     } else { // if the recipe isn't found, save it, then return the ID
       RecipeCollection.create({
-        title: recipeObject.title,
-        url: recipeObject.url,
-        imgURL: recipeObject.imgURL,
+        recipeTitle: recipeObject.title,
+        recipeUrl: recipeObject.url,
+        recipeImgUrl: recipeObject.imgURL,
       })
       .then((model) => {
         console.log('Recipe added...');
-        recipeId = model.attributes.recipe_id;
+        recipeId = model.attributes.id;
         callback(recipeId);
       });
     }
@@ -67,8 +69,8 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
 };
 
 module.exports = {
-  updateIngredients: (dataJSON) => {
-    async.each(dataJSON, (recipe, cb) => {
+  seedDatabase: () => {
+    async.each(data, (recipe, cb) => {
       findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
         findOrSaveRecipe(recipe, (recipe_id) => {
           saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
@@ -77,5 +79,8 @@ module.exports = {
         });
       });
     });
+    // res.send('GET to /api/seed');
   },
 };
+
+module.exports.seedDatabase();
