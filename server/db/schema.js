@@ -74,10 +74,9 @@ db.knex.schema.hasTable('recipes_users').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('recipes_users', (rec_user) => {
       rec_user.increments('id').primary();
-      rec_user.integer('recipe_id').unsigned().references('id')
-              .inTable('recipes');
-      rec_user.integer('user_id').unsigned().references('id')
-              .inTable('users');
+      rec_user.integer('recipe_id');
+      rec_user.integer('user_id');
+      rec_user.string('recipeTitle', 400);
     }).then((table) => {
       console.log('Created table `recipes_users`', table);
     });

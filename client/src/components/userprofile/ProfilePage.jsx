@@ -47,22 +47,28 @@ class ProfilePage extends React.Component {
         </ul>
       );
     }
-    return (
-      <ul>
-        <li>
-          <h3>{this.state.favRecipes[0].recipeTitle}</h3>
-        </li>
-        <li>
-          <h3>{this.state.favRecipes[1].recipeTitle}</h3>
-        </li>
-        <li>
-          <h3>{this.state.favRecipes[2].recipeTitle}</h3>
-        </li>
-        <li>
-          <h3>{this.state.favRecipes[3].recipeTitle}</h3>
-        </li>
-      </ul>
+
+    if (this.state.favRecipes.length > 4 && !this.state.showAll) {
+      return (
+        <ul>
+          <FavRecipes favRecipe={this.state.favRecipes[0]} />
+          <FavRecipes favRecipe={this.state.favRecipes[1]} />
+          <FavRecipes favRecipe={this.state.favRecipes[2]} />
+          <FavRecipes favRecipe={this.state.favRecipes[3]} />
+        </ul>
       );
+    }
+
+    if (this.state.favRecipes.length < 4) {
+      return (
+        <ul>
+          {this.state.favRecipes.map((recipe, index) =>
+            <FavRecipes favRecipe={recipe} key={index} />
+          )}
+        </ul>
+      );
+    }
+    return null;
   }
 
   render() {
