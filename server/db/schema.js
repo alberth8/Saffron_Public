@@ -43,13 +43,6 @@ db.knex.schema.hasTable('recipes').then((exists) => {
   }
 });
 
-db.knex
-
-// want to know what's associated together
-
-set.increments('id').primary();
-
-
 db.knex.schema.hasTable('ingredients').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('ingredients', (ingredient) => {
@@ -100,7 +93,7 @@ db.knex.schema.hasTable('ingredients_users').then((exists) => {
               .inTable('ingredients');
       rec_user.integer('user_id').unsigned().references('id')
               .inTable('users');
-      rec_user.integer('set_id').unique().notNullable();
+      rec_user.integer('set_id').notNullable();
     }).then((table) => {
       console.log('Created table `ingredients_users`', table);
     });

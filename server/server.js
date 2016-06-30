@@ -19,6 +19,7 @@ const app = express();
 require('./config/init.js')(app, express);
 
 // set port
+console.log(process.env.PORT);
 app.set('port', process.env.PORT || 3000);
 
 // create routes per page

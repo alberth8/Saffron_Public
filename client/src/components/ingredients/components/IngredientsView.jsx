@@ -37,7 +37,7 @@ class IngredientsView extends Component {
     });
   }
   onSubmitIngredients() {
-    this.props.sendIngredientsToServer(this.state.selectedIngredients);
+    this.props.sendIngredientsToServer(this.state.selectedIngredients, this.props.user.id);
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
     return (
@@ -83,9 +83,11 @@ class IngredientsView extends Component {
 
 const mapStateToProps = (state) => ({
   suggestedIngredients: state.suggestedIngredients,
+  user: state.user,
 });
 
 IngredientsView.propTypes = {
+  user: PropTypes.object,
   sendIngredientsToServer: PropTypes.func,
   updateSuggestedIngredients: PropTypes.func,
   suggestedIngredients: PropTypes.array,
