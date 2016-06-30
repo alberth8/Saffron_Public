@@ -23,8 +23,6 @@ const User = db.Model.extend({
     const cipher = Promise.promisify(bcrypt.hash);
     return cipher(this.get('password'), null, null).bind(this)
       .then(function (hash) {
-        console.log(this.set);
-        // this.set('password', 'hello');
         this.set('password', hash);
       });
   },
