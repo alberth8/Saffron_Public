@@ -2,9 +2,9 @@ const knex = require('knex')({
   client: 'mysql',
   connection: {
     host: '127.0.0.1',
-    user: process.env.DB_USER,
-    password: process.env.DB_PW,
-    database: process.env.APP,
+    user: 'root',
+    password: '',
+    database: 'saffron',
     charset: 'utf8',
   },
 });
@@ -33,10 +33,10 @@ db.knex.schema.hasTable('recipes').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('recipes', (recipe) => {
       recipe.increments('id').primary();
-      recipe.string('recipeTitle', 100);
-      recipe.string('recipeUrl', 300).unique()
+      recipe.string('recipeTitle', 300);
+      recipe.string('recipeUrl', 400).unique()
             .comment('Recipes must not be duplicated in db. Duplicate titles and images are okay.');
-      recipe.string('recipeImgUrl', 300);
+      recipe.string('recipeImgUrl', 400);
     }).then((table) => {
       console.log('Created table `recipes`', table);
     });

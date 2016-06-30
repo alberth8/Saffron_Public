@@ -28,6 +28,13 @@ export function signupUser(email, password) {
     axios.post('/api/signup', { email, password })
     .then((response) => {
       dispatch({
+        type: 'USER_INFO',
+        user: {
+          id: response.data.userId,
+          email: response.data.userEmail,
+        },
+      });
+      dispatch({
         type: 'AUTH_USER',
       });
       localStorage.setItem('token', response.data.token);

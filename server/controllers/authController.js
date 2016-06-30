@@ -27,7 +27,11 @@ module.exports = {
       return res.send({ error: 'Email already has a account' });
     })
     .then((newUser) => {
-      res.json({ token: token(newUser.attributes) });
+      res.json({
+        token: token(newUser.attributes),
+        userId: newUser.id,
+        email: newUser.email,
+      });
     })
     .catch((err) => {
       console.error(err);

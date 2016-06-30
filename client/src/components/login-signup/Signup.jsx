@@ -15,7 +15,6 @@ class SignUp extends React.Component {
   onSignup() {
     const email = this.state.email;
     const password = this.state.password;
-    this.props.userInfo(email, password);
     this.props.signupUser(email, password);
     this.setState({
       email: '',
