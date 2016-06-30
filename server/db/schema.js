@@ -93,7 +93,7 @@ db.knex.schema.hasTable('ingredients_users').then((exists) => {
               .inTable('ingredients');
       rec_user.integer('user_id').unsigned().references('id')
               .inTable('users');
-      rec_user.integer('set_id').unique().notNullable();
+      rec_user.integer('set_id').notNullable();
     }).then((table) => {
       console.log('Created table `ingredients_users`', table);
     });
