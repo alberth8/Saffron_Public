@@ -13,7 +13,7 @@ const recipesRoutes = require('./routes/recipesRoutes.js');
 const userProfileRoutes = require('./routes/userProfileRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const recRoutes = require('./routes/recRoutes.js');
-const seedRoute = require('./routes/seedRoute.js');
+// const seedRoute = require('./routes/seedRoute.js');
 
 const app = express();
 // morgan, body-parser, static files
@@ -30,7 +30,7 @@ recipesRoutes(app);
 userProfileRoutes(app);
 authRoutes(app);
 addRecipeRoutes(app);
-seedRoute(app);
+// seedRoute(app);
 
 // wildcard route
 app.get('/*', (req, res) => res.redirect('/'));

@@ -4,6 +4,8 @@ const IngredientModel = require('../models/ingredient.js');
 const Ingredient_UserModel = require('../models/ingredient_user.js');
 const IngredientsCollection = require('../collections/ingredients.js');
 const Ingredient_UserCollection = require('../collections/ingredients_users.js');
+const IngredientRecipeModel = require('../models/ingredient_recipe.js');
+
 const _ = require('lodash');
 const async = require('async');
 
@@ -29,12 +31,12 @@ const findOrAddIngredient = (ingredientArray, callback) => {
     IngredientModel.where({ ingredient: ing }).fetch()
     .then((foundModel) => {
       if (foundModel) {  // if ingredient found, push into array
-        console.log('Model Found, extracting id...');
+        console.log('Ingredient found, extracting id...');
         ingredientIdArray.push(foundModel.attributes.id);
       } else { // if ingredient not in database,
         IngredientsCollection.create({ ingredient: ing })
           .then((model) => { // push ingredient id into array
-            console.log('Ingredient added...');
+            console.log('Ingredient added to database...');
             ingredientIdArray.push(model.attributes.id);
           })
           .catch((e) => { console.log(e); });
@@ -48,7 +50,7 @@ const findOrAddIngredient = (ingredientArray, callback) => {
 // function takes userID, ingredientID array, and setID
 // saves each of the ingredients asynchronously into the
 // user ingredients table with the same setId
-const findAndGroup = (user_id, ingredientIdArray, set_id) => {
+const findAndGroup = (user_id, ingredientIdArray, set_id, callback) => {
   let ma = [];
   Ingredient_UserModel.where({ user_id }).fetchAll()
     .then((m) => { // find all entries in the user ingredient table that match our user ID
@@ -68,6 +70,7 @@ const findAndGroup = (user_id, ingredientIdArray, set_id) => {
           if (_.isEqual(f, ingredientIdArray)) { // test for array equality
             uniqueTest = false;
             console.log('Ingredient array already saved in user ingredient table');
+            callback();
           }
         });
         if (uniqueTest) { // if the ingredient set is unique, save to the database
@@ -79,10 +82,32 @@ const findAndGroup = (user_id, ingredientIdArray, set_id) => {
               set_id,
             });
             cb(null);
-          }, () => { console.log('User ingredient set saved!'); });
+          }, () => { callback(); });
         }
       })); }
     );
+};
+
+// const getSuggestedIngredients = (ingredientIdArray) => {
+//   // given a list recipes find all the OTHER ingredients
+//   // those recipes contain. Then sum those other ingredients, and return
+//   // the top 10 most common next ingredients
+// };
+
+  // given a list of ingredients, find all the recipes
+  // that contain all of those ingredients
+const getMatchingRecipes = (ingredientIdArray) => {
+  console.log('inGetMatchingRecipes');
+  // const recipes = {};
+  IngredientRecipeModel.fetchAll()
+    .then((r) => { console.log(r.models); })
+    // (r) => { // get everything from the database
+    //   async.each(r.models, (z, cb) => {
+    //     // table.push[](a.attributes); // push each row into an array
+    //     cb(null);
+    //   }, (() => { console.log(r.models); })
+    // ); })
+    .catch((e) => { console.error(e); });
 };
 
 module.exports = {
@@ -90,9 +115,9 @@ module.exports = {
     const ingredients = req.body.selectedIngredients;
     const userId = req.body.userID;
     findMaxSavedIngredientID((maxSetId) => {
-      findOrAddIngredient(ingredients, userId, (ingredientIdArray) => {
+      findOrAddIngredient(ingredients, (ingredientIdArray) => {
         findAndGroup(userId, ingredientIdArray, maxSetId, () => {
-          // do something
+          getMatchingRecipes(ingredientIdArray);
         });
       });
     });

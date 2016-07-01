@@ -3,6 +3,7 @@ const IngredientsCollection = require('../../collections/ingredients.js');
 const RecipeModel = require('../../models/recipe.js');
 const RecipeCollection = require('../../collections/recipes.js');
 const IngRecCollection = require('../../collections/ingredients_recipes.js');
+const IngRecModel = require('../../models/ingredient_recipe.js');
 
 const async = require('async');
 const data = require('./seed.json');
@@ -58,12 +59,19 @@ const findOrSaveRecipe = (recipeObject, callback) => {
 
 const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
   async.each(ingredientIdArray, (ingredient_id, cb) => {
-    IngRecCollection.create({
-      ingredient_id,
-      recipe_id,
-    })
-    .then((model) => {
-      cb(model);
+    IngRecModel.where({ recipe_id, ingredient_id }).fetch()
+    .then((foundRecipe) => {
+      if (foundRecipe) {
+        console.log('Ingredient_Recipe found skipping save...');
+      } else {
+        IngRecCollection.create({
+          ingredient_id,
+          recipe_id,
+        })
+        .then((model) => {
+          cb(model);
+        });
+      }
     });
   }, () => { callback(); });
 };
