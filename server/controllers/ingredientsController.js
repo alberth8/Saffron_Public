@@ -100,13 +100,11 @@ const getMatchingRecipes = (ingredientIdArray) => {
   console.log('inGetMatchingRecipes');
   // const recipes = {};
   IngredientRecipeModel.fetchAll()
-    .then((r) => { console.log(r.models); })
-    // (r) => { // get everything from the database
-    //   async.each(r.models, (z, cb) => {
-    //     // table.push[](a.attributes); // push each row into an array
-    //     cb(null);
-    //   }, (() => { console.log(r.models); })
-    // ); })
+    .then((r) => {
+      for (let i = 0; i < r.models.length; i++) {
+        console.log(r.models[i].attributes);
+      }
+    })
     .catch((e) => { console.error(e); });
 };
 
