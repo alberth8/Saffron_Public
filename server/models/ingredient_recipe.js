@@ -1,9 +1,7 @@
 const db = require('../db/schema.js');
 // don't need to assign the following two requires to variables
 const Recipe = require('./recipe');
-// require('./user');
 const Ingredient = require('./ingredient');
-// require('./ingredient');
 
 const Ingredient_Recipe = db.Model.extend({
   tableName: 'ingredients_recipes',
@@ -18,4 +16,3 @@ const Ingredient_Recipe = db.Model.extend({
 });
 
 module.exports = Ingredient_Recipe;
-// module.exports = db.model('Recipe', Recipe);

@@ -10,6 +10,7 @@ export default combineReducers({
   // ...sharedReducers,
   user: userInfoReducer,
   suggestedIngredients: ingredientsReducer,
+  recipes: ingredientsReducer,
   authenticated: authReducer,
   authErrorMessage: authErrorReducer,
   form: formReducer,

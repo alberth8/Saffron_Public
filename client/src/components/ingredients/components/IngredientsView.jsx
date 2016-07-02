@@ -7,7 +7,7 @@ class IngredientsView extends Component {
     super(props);
     this.state = {
       ingredient: '',
-      selectedIngredients: ['egg', 'milk', 'honey'],
+      selectedIngredients: ['salt', 'sugar', 'cream'],
     };
   }
   // when the user types in the input box, capture that text in e.target.value

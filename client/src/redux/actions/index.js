@@ -81,9 +81,7 @@ export function userInfo(email) {
 //   };
 // }
 
-// these are our actions
 export function updateSuggestedIngredients(suggestedIngredients) {
-  console.log(suggestedIngredients);
   return (dispatch) => {
     dispatch({
       type: 'UPDATE_SUGGESTED_INGREDIENTS',
@@ -96,12 +94,10 @@ export function sendIngredientsToServer(selectedIngredients, userID) {
   return (dispatch) => {
     axios.post('/api/updateIngredients', { selectedIngredients, userID })
       .then((response) => {
-      // update selected, suggested and receipes w/ response
         console.log('index.js response: ', response.data);
         dispatch({
           type: 'UPDATE_INGREDIENTS',
-          selectedIngredients: response.data.selectedingredients,
-          suggestedIngredients: response.data.suggestedIngredients,
+          recipes: response.data.recipes,
         });
       })
       .catch((error) => {
