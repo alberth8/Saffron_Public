@@ -5,6 +5,8 @@ const Ingredient_UserModel = require('../models/ingredient_user.js');
 const IngredientsCollection = require('../collections/ingredients.js');
 const Ingredient_UserCollection = require('../collections/ingredients_users.js');
 const IngredientRecipeModel = require('../models/ingredient_recipe.js');
+const IngredientsRecipesCollection = require('../collections/ingredients_recipes.js');
+const RecipesCollection = require('../collections/recipes.js');
 
 const _ = require('lodash');
 const async = require('async');
@@ -88,33 +90,52 @@ const findAndGroup = (user_id, ingredientIdArray, set_id, callback) => {
     );
 };
 
-// const getSuggestedIngredients = (ingredientIdArray) => {
-//   // given a list recipes find all the OTHER ingredients
-//   // those recipes contain. Then sum those other ingredients, and return
-//   // the top 10 most common next ingredients
-// };
-
-  // given a list of ingredients, find all the recipes
-  // that contain all of those ingredients
-
-const getMatchingRecipes = (ingredientIdArray, callback) => {
-  console.log('inGetMatchingRecipes');
-  IngredientRecipeModel.fetchAll()
-  .then((m) => {
-    const ma = {};
-    m.models.forEach((a) => {
-      if (!ma[a.attributes.recipe_id]) {
-        ma[a.attributes.recipe_id] = [a.attributes.ingredient_id];
-      } else {
-        ma[a.attributes.recipe_id].push(a.attributes.ingredient_id);
+const getRecipeIds = (ingredientsIdArray, callback) => {
+  IngredientsRecipesCollection.query((qb) => {
+    qb.whereIn('ingredient_id', ingredientsIdArray);
+  }).fetch()
+  .then((foundRecipe) => {
+    if (foundRecipe) {
+      const storage = {};
+      for (let i = 0; i < foundRecipe.models.length; i++) {
+        const rId = foundRecipe.models[i].attributes.recipe_id;
+        const iId = foundRecipe.models[i].attributes.ingredient_id;
+        if (storage[rId]) {
+          storage[rId].push(iId);
+        } else {
+          storage[rId] = [iId];
+        }
       }
-    });
+      const recipeIds = [];
+      Object.keys(storage).forEach((recipe) => {
+        if (storage[recipe].length !== ingredientsIdArray.length) {
+          delete storage[recipe];
+        } else {
+          recipeIds.push(recipe);
+        }
+      });
+      callback(recipeIds);
+    } else {
+      console.log('no results');
+    }
   })
-  .then(() => {
-    callback(dummyData);
-  }
-    )
-    .catch((e) => { console.error(e); });
+  .catch((err) => {
+    console.log(err);
+    callback('Error in getting recipe ids');
+  });
+};
+
+const getRecipeData = (recipeIds, callback) => {
+  const storage = [];
+  RecipesCollection.query((q) => {
+    q.whereIn('id', recipeIds);
+  }).fetch()
+  .then((recipes) => {
+    for (let i = 0; i < recipes.models.length; i++) {
+      storage.push(recipes.models[i].attributes);
+    }
+    callback(storage);
+  });
 };
 
 module.exports = {
@@ -124,9 +145,12 @@ module.exports = {
     findMaxSavedIngredientID((maxSetId) => {
       findOrAddIngredient(ingredients, (ingredientIdArray) => {
         findAndGroup(userId, ingredientIdArray, maxSetId, () => {
-          getMatchingRecipes(ingredientIdArray, (recipes) => {
-            res.status(200).send({
-              recipelist: recipes,
+          getRecipeIds(ingredientIdArray, (recipeIds) => {
+            getRecipeData(recipeIds, (recipeData) => {
+              console.log(recipeData);
+              res.status(200).send({
+                recipes: recipeData,
+              });
             });
           });
         });

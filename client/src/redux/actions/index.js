@@ -94,15 +94,10 @@ export function sendIngredientsToServer(selectedIngredients, userID) {
   return (dispatch) => {
     axios.post('/api/updateIngredients', { selectedIngredients, userID })
       .then((response) => {
-      // update selected, suggested and receipes w/ response
         console.log('index.js response: ', response.data);
         dispatch({
           type: 'UPDATE_INGREDIENTS',
-          recipes: response.data.recipelist,
-          selectedIngredients: ['flour', 'water', 'kiwis'],
-          suggestedIngredients: ['soda water', 'eels', 'baking powder', 'ketchup'],
-          // selectedIngredients: response.data.selectedingredients,
-          // suggestedIngredients: response.data.suggestedIngredients,
+          recipes: response.data.recipes,
         });
       })
       .catch((error) => {
