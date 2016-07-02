@@ -17,7 +17,7 @@ const findOrSaveIngredient = (ingredientArray, callback) => {
     .then((foundModel) => {
       if (foundModel) {
         console.log('Ingredient found, extracting id...');
-        ingredientIdArray.push(foundModel);
+        ingredientIdArray.push(foundModel.attributes.id);
       } else { // if ingredient not in database,
         IngredientsCollection.create({ ingredient: ing })
           .then((model) => {
@@ -34,26 +34,22 @@ const findOrSaveIngredient = (ingredientArray, callback) => {
 
 // takes a recipe object, checks whether its in the databse
 // saves recipe and/or returns a recipe ID to a callback
-const findOrSaveRecipe = (recipeObject, IA, callback) => {
+const findOrSaveRecipe = (recipeObject, callback) => {
   let recipeId;
   RecipeModel.where({ recipeTitle: recipeObject.title }).fetch()
   .then((foundModel) => { // if the recipe is found, send back it's ID
     if (foundModel) {
-      // console.log('Recipe found...');
+      console.log('Recipe found...');
       recipeId = foundModel.attributes.id;
-      foundModel.ingredients().attach(IA);
-      console.log(foundModel.relations);
       callback(recipeId);
     } else { // if the recipe isn't found, save it, then return the ID
       RecipeCollection.create({
         recipeTitle: recipeObject.title,
         recipeUrl: recipeObject.url,
-        recipeImgUrl: recipeObject.imgURL,
-      }).attach(IA)
+        recipeImgUrl: recipeObject.imgUrl,
+      })
       .then((model) => {
         console.log('Recipe added...');
-        model.ingredients().attach(IA);
-        console.log(model.relations);
         recipeId = model.attributes.id;
         callback(recipeId);
       });
@@ -74,9 +70,11 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
         })
         .then((model) => {
           cb(model);
-        });
+        })
+        .catch((e) => { console.log(e); });
       }
-    });
+    })
+    .catch((e) => { console.log(e); });
   }, () => { callback(); });
 };
 
@@ -84,16 +82,14 @@ module.exports = {
   seedDatabase: () => {
     async.each(data, (recipe, cb) => {
       findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
-        console.log(ingredientIdArray);
-        findOrSaveRecipe(recipe, ingredientIdArray, (recipe_id) => {
+        findOrSaveRecipe(recipe, (recipe_id) => {
           saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
             cb(null);
           });
         });
       });
     });
-    // res.send('GET to /api/seed');
   },
 };
 
-module.exports.findRecipe();
+module.exports.seedDatabase();
