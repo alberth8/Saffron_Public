@@ -5,7 +5,6 @@ const knex = require('knex')({
     user: process.env.DB_USER,
     password: process.env.DB_PW,
     database: process.env.APP,
-    port: process.env.PORT,
     charset: 'utf8',
   },
 });
