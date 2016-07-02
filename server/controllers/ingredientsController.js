@@ -4,13 +4,12 @@ const IngredientModel = require('../models/ingredient.js');
 const Ingredient_UserModel = require('../models/ingredient_user.js');
 const IngredientsCollection = require('../collections/ingredients.js');
 const Ingredient_UserCollection = require('../collections/ingredients_users.js');
-const IngredientRecipeModel = require('../models/ingredient_recipe.js');
 const IngredientsRecipesCollection = require('../collections/ingredients_recipes.js');
 const RecipesCollection = require('../collections/recipes.js');
 
 const _ = require('lodash');
 const async = require('async');
-const dummyData = require('../db/seedData/example.json');
+
 // this function finds the largest set ID in the user ingredients table
 // with a slight change to schema design, we could probably eliminate this
 // function

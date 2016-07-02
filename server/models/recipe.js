@@ -13,17 +13,6 @@ const Recipe = db.Model.extend({
     this.hasMany(Ingredient)
   ),
 
-  insertRecipe: (recipeObject) => {
-    console.log(recipeObject);
-    return db.transaction(() => (
-      new Recipe({
-        recipeTitle: recipeObject.title,
-        recipeUrl: recipeObject.url,
-        recipeImgUrl: recipeObject.imgURL,
-      })
-    ))
-    .save();
-  },
 });
 
 module.exports = Recipe;

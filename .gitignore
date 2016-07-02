@@ -10,7 +10,7 @@ bower_components/
 build/
 dist/
 server/config/dev.env
-db/seedData/seed.json
+server/db/seedData/seed.json
 
 # Webpack
 client/public/webpack*
