@@ -1,12 +1,11 @@
-// import { Ingredient } from '../models/ingredient';
-// import { Ingredients } from '../collections/ingredients';
 const IngredientModel = require('../models/ingredient.js');
-const Ingredient_UserModel = require('../models/ingredient_user.js');
+const IngredientUserModel = require('../models/ingredient_user.js');
 const IngredientsCollection = require('../collections/ingredients.js');
-const Ingredient_UserCollection = require('../collections/ingredients_users.js');
+const IngredientUserCollection = require('../collections/ingredients_users.js');
 const IngredientsRecipesCollection = require('../collections/ingredients_recipes.js');
 const RecipesCollection = require('../collections/recipes.js');
 
+// dependencies
 const _ = require('lodash');
 const async = require('async');
 
@@ -15,7 +14,7 @@ const async = require('async');
 // function
 const findMaxSavedIngredientID = (callback) => {
   let maxSetId = 0;
-  Ingredient_UserModel.fetchAll()
+  IngredientUserModel.fetchAll()
   .then((foundModels) => {
     async.each(foundModels.models, (iuModel, cb) => {
       maxSetId = Math.max(maxSetId, iuModel.attributes.set_id);
@@ -53,7 +52,7 @@ const findOrAddIngredient = (ingredientArray, callback) => {
 // user ingredients table with the same setId
 const findAndGroup = (user_id, ingredientIdArray, set_id, callback) => {
   let ma = [];
-  Ingredient_UserModel.where({ user_id }).fetchAll()
+  IngredientUserModel.where({ user_id }).fetchAll()
     .then((m) => { // find all entries in the user ingredient table that match our user ID
       async.each(m.models, (a, cb) => {
         ma.push(a.attributes); // push each row into an array
@@ -77,7 +76,7 @@ const findAndGroup = (user_id, ingredientIdArray, set_id, callback) => {
         if (uniqueTest) { // if the ingredient set is unique, save to the database
           async.each(ingredientIdArray, (ing, cb) => {
             console.log('Saving ingredient_user....', ing, set_id);
-            Ingredient_UserCollection.create({
+            IngredientUserCollection.create({
               ingredient_id: ing,
               user_id,
               set_id,
