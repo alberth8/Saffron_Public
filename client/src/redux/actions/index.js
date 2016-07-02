@@ -81,9 +81,7 @@ export function userInfo(email) {
 //   };
 // }
 
-// these are our actions
 export function updateSuggestedIngredients(suggestedIngredients) {
-  console.log(suggestedIngredients);
   return (dispatch) => {
     dispatch({
       type: 'UPDATE_SUGGESTED_INGREDIENTS',
@@ -100,8 +98,11 @@ export function sendIngredientsToServer(selectedIngredients, userID) {
         console.log('index.js response: ', response.data);
         dispatch({
           type: 'UPDATE_INGREDIENTS',
-          selectedIngredients: response.data.selectedingredients,
-          suggestedIngredients: response.data.suggestedIngredients,
+          recipes: response.data.recipelist,
+          selectedIngredients: ['flour', 'water', 'kiwis'],
+          suggestedIngredients: ['soda water', 'eels', 'baking powder', 'ketchup'],
+          // selectedIngredients: response.data.selectedingredients,
+          // suggestedIngredients: response.data.suggestedIngredients,
         });
       })
       .catch((error) => {

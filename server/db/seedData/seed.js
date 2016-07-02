@@ -4,10 +4,45 @@ const RecipeModel = require('../../models/recipe.js');
 const RecipeCollection = require('../../collections/recipes.js');
 const IngRecCollection = require('../../collections/ingredients_recipes.js');
 const IngRecModel = require('../../models/ingredient_recipe.js');
+const db = require('../../db/schema.js');
 
+const Promise = require('bluebird');
 const async = require('async');
 const data = require('./seed.json');
 
+const seedTheBase = (recipeObject) => {
+  db.transaction(() => {
+    return new RecipeModel({
+      recipeTitle: recipeObject.title,
+      recipeUrl: recipeObject.url,
+      recipeImgUrl: recipeObject.imgURL,
+    });
+  });
+  //   .save()
+  //   .tap((recipe) => {
+  //     return Promise.map(recipeObject.ingredients,
+  //       (ingredient) => {
+  //         IngredientModel.where({ ingredient }).fetch()
+  //         .then((ingredientFound) => {
+  //           if (ingredientFound) {
+  //             console.log('Ingredient found, extracting id...');
+  //             recipe.ingredients().attach(ingredientFound);
+  //             return ingredientFound;
+  //           } else { // if ingredient not in database,
+  //             new IngredientModel(ingredient).save()
+  //               .then((ingredientCreated) => {
+  //                 console.log('Saved new ingredient: ', ingredientCreated);
+  //                 recipe.ingredients().attach(ingredientCreated);
+  //                 return ingredientCreated;
+  //               });
+  //           }
+  //         });
+  //       });
+  //   });
+  // })
+  // .then((recipe) => { console.log(recipe); })
+  // .catch((err) => { console.error(err); });
+};
 // takes an array of text ingredients, saves or finds them,
 // returns an array of ingredient ids
 const findOrSaveIngredient = (ingredientArray, callback) => {
@@ -78,15 +113,18 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
 
 module.exports = {
   seedDatabase: () => {
-    async.each(data, (recipe, cb) => {
-      findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
-        findOrSaveRecipe(recipe, (recipe_id) => {
-          saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
-            cb(null);
-          });
-        });
-      });
-    });
+    for (let i = 0; i < data.length; i++) {
+      seedTheBase(data[i]);
+    } 
+    // async.each(data, (recipe, cb) => {
+    //   findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
+    //     findOrSaveRecipe(recipe, (recipe_id) => {
+    //       saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
+    //         cb(null);
+    //       });
+    //     });
+    //   });
+    // });
     // res.send('GET to /api/seed');
   },
 };

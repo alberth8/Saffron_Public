@@ -8,7 +8,7 @@ const IngredientRecipeModel = require('../models/ingredient_recipe.js');
 
 const _ = require('lodash');
 const async = require('async');
-
+const dummyData = require('../db/seedData/example.json');
 // this function finds the largest set ID in the user ingredients table
 // with a slight change to schema design, we could probably eliminate this
 // function
@@ -96,15 +96,24 @@ const findAndGroup = (user_id, ingredientIdArray, set_id, callback) => {
 
   // given a list of ingredients, find all the recipes
   // that contain all of those ingredients
-const getMatchingRecipes = (ingredientIdArray) => {
+
+const getMatchingRecipes = (ingredientIdArray, callback) => {
   console.log('inGetMatchingRecipes');
-  // const recipes = {};
   IngredientRecipeModel.fetchAll()
-    .then((r) => {
-      for (let i = 0; i < r.models.length; i++) {
-        console.log(r.models[i].attributes);
+  .then((m) => {
+    const ma = {};
+    m.models.forEach((a) => {
+      if (!ma[a.attributes.recipe_id]) {
+        ma[a.attributes.recipe_id] = [a.attributes.ingredient_id];
+      } else {
+        ma[a.attributes.recipe_id].push(a.attributes.ingredient_id);
       }
-    })
+    });
+  })
+  .then(() => {
+    callback(dummyData);
+  }
+    )
     .catch((e) => { console.error(e); });
 };
 
@@ -115,10 +124,13 @@ module.exports = {
     findMaxSavedIngredientID((maxSetId) => {
       findOrAddIngredient(ingredients, (ingredientIdArray) => {
         findAndGroup(userId, ingredientIdArray, maxSetId, () => {
-          getMatchingRecipes(ingredientIdArray);
+          getMatchingRecipes(ingredientIdArray, (recipes) => {
+            res.status(200).send({
+              recipelist: recipes,
+            });
+          });
         });
       });
     });
-    res.send('POST to /api/ingredients, this is ingredients');
   },
 };
