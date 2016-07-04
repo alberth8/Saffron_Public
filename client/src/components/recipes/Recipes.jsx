@@ -1,28 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Recipe from './Recipe.jsx';
 
-const Recipes = () => {
-  const testData = {
-    recipes: [
-      {
-        name: 'Pea Soup',
-        photo: 'http://www.101cookbooks.com/mt-static/images/food/split_pea_soup_recipe.jpg',
-        url: 'http://www.101cookbooks.com/archives/vegetarian-split-pea-soup-recipe.html',
-      },
-      {
-        name: 'Pea Soup',
-        photo: 'http://www.101cookbooks.com/mt-static/images/food/split_pea_soup_recipe.jpg',
-        url: 'http://www.101cookbooks.com/archives/vegetarian-split-pea-soup-recipe.html',
-      },
-    ],
-  };
-
+const Recipes = ({ recipes }) => {
+  console.log('hi');
   return (
     <div>
       <ul>
-        {testData.recipes.map((recipe, i) =>
-          <a href={testData.recipes[i].url} key={i} target="_blank">
+        {recipes.map((recipe, i) =>
+          <a href={recipe.recipeUrl} key={i} target="_blank">
             <Recipe recipe={recipe} key={i} />
           </a>
         )}
@@ -31,17 +17,14 @@ const Recipes = () => {
   );
 };
 
+Recipes.propTypes = {
+  recipes: PropTypes.object,
+};
 
-// function mapStateToProps(state) {
+function mapStateToProps(state) {
+  return {
+    recipes: state.recipes,
+  };
+}
 
-//   return {
-    // recipes: state.recipes,
-    // recipeName: state.recipe.name,
-    // recipeUrl: state.recipe.url,
-    // recipePhoto: state.recipe.photo,
-    // recipeLikes: state.recipe.likes
-//   }
-
-// }
-
-export default connect(null)(Recipes);
+export default connect(mapStateToProps)(Recipes);

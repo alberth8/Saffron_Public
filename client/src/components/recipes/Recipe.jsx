@@ -13,7 +13,7 @@ class Recipe extends React.Component {
   saveFav(e) {
     e.preventDefault();
     axios.post('/api/saveFav', {
-      url: this.props.url,
+      url: this.props.recipeUrl,
       user: this.props.user.id,
     }).then(() => {
       this.setState({
@@ -24,14 +24,13 @@ class Recipe extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div>
         <li>
           <div>
-            <h3>Name: {this.props.recipe.name}</h3>
-            <img alt="error" src={this.props.recipe.photo} />
+            <h3>Name: {this.props.recipe.recipeTitle}</h3>
+            <img alt="error" src={this.props.recipe.recipeImgUrl} />
           </div>
           {!this.state.faved ?
             <button onClick={(e) => { this.saveFav(e); }}>heart</button>
@@ -40,9 +39,7 @@ class Recipe extends React.Component {
       </div>
     );
   }
-
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -52,7 +49,7 @@ function mapStateToProps(state) {
 
 Recipe.propTypes = {
   recipe: PropTypes.object,
-  url: PropTypes.string,
+  recipeUrl: PropTypes.string,
   user: PropTypes.object,
 };
 
