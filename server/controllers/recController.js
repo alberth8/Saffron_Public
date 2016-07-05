@@ -2,7 +2,7 @@ const FavRecipes = require('../models/recipe_user.js');
 
 // sends database data to recommendation engine, so it can make recommendations
 module.exports = {
-  // gets data from recipe_users table 
+  // gets data from recipe_users table
   fetchData: (req, res) => {
     const getRecords = (callback) => {
       let recordsList;
@@ -21,7 +21,6 @@ module.exports = {
       recordsList.forEach((record) => {
         if (favRecipesCount[record.attributes.recipeTitle] === undefined) {
           favRecipesCount[record.attributes.recipeTitle] = 1;
-
         } else {
           favRecipesCount[record.attributes.recipeTitle]++;
         }

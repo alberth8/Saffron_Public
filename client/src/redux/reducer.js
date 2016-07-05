@@ -5,9 +5,11 @@ import authReducer from './reducers/AuthReducer.js';
 import userInfoReducer from './reducers/UserInfoReducer.js';
 import authErrorReducer from './reducers/AuthErrorReducer.js';
 import ingredientsReducer from './reducers/ingredientsReducer.js';
+import RecommendationReduce from './reducers/RecommendationReducer.js';
 
 export default combineReducers({
   // ...sharedReducers,
+  recom: RecommendationReduce,
   user: userInfoReducer,
   suggestedIngredients: ingredientsReducer,
   authenticated: authReducer,

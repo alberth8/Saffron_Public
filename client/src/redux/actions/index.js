@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-// const URL = 'http://localhost:3500/';
+const URL = 'http://localhost:3500/';
 
 // send back error is signup/login fail
 export function authError(error) {
@@ -9,7 +9,7 @@ export function authError(error) {
     payload: error,
   };
 }
-// verify password and login user in 
+// verify password and login user in
 export function loginUser(email, password) {
   return (dispatch) => {
     axios.post('/login', { email, password })
@@ -68,27 +68,50 @@ export function userInfo(email) {
   };
 }
 
-// export function getRecommondation(user) {
-//   return (dispatch) => {
-//     axios.post(URL + 'recommondation', { user }).then((response) => {
-//       dispatch({
-//         type: 'RECOMMONDATION',
-//         recom: response.data,
-//       });
-//     });
-//   };
-// }
-
-// export function popular() {
-//   return (dispatch) => {
-//     axios.get(URL + 'popular').then((response) => {
-//       dispatch({
-//         type: 'POPULAR',
-//         pop: response.data,
-//       });
-//     });
-//   };
-// }
+// call to get recommondations
+export function getRecommondation(user) {
+  return (dispatch) => {
+    axios.post(`${URL}recommondation`, { user }).then((response) => {
+      axios.post('/api/getRecipeInfo', {
+        first: response.data.first,
+        second: response.data.second,
+        third: response.data.third,
+        fourth: response.data.fourth,
+      }).then((recRecipes) => {
+        dispatch({
+          type: 'RECOMMONDATION',
+          recom: recRecipes.data,
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+}
+// call to get popular items
+export function popular() {
+  return (dispatch) => {
+    axios.get(`${URL}popular`).then((response) => {
+      axios.post('/api/getRecipeInfo', {
+        first: response.data.first,
+        second: response.data.second,
+        third: response.data.third,
+        fourth: response.data.fourth,
+      }).then((popRecipes) => {
+        dispatch({
+          type: 'POPULAR',
+          pop: popRecipes.data,
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+}
 // export function saveFav() {
 //   return (dispatch) => {
 //     axios.post('/api/saveFav', {})

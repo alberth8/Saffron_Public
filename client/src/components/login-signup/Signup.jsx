@@ -26,7 +26,7 @@ class SignUp extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
-      this.signupUser.on(email, password);
+      this.props.signupUser(email, password);
       this.props.userInfo(email, password);
     }
   }

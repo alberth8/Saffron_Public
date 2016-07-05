@@ -40,7 +40,7 @@ module.exports = {
     return null;
   },
 
-  // after passportController verifys user sends a token to user  
+  // after passportController verifys user sends a token to user
   login: (req, res) => {
     res.send({ token: token(req.user) });
   },

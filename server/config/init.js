@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
 // Good for once we add webpack
 // const webpackConfig = require('../../webpack.config.js');
 // const webpack = require('webpack');
