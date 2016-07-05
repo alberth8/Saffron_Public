@@ -1,5 +1,6 @@
 const Recipe = require('../models/recipe.js');
 const RecipesUsers = require('../models/recipe_user.js');
+const async = require('async');
 // Note to team: try to do these relationally. If not,
 // make use of the req object to obtain userID
 
@@ -39,8 +40,26 @@ module.exports = {
     })
     .catch((err) => {
       console.error(err);
-    })
-
+    });
   },
+
+    getRecipeInfo: function (req, res) {
+      const recipes = [
+        req.body.first,
+        req.body.second,
+        req.body.third,
+        req.body.fourth,
+      ];
+      let results = [];
+      async.each(recipes, (rescipe, cb) => {
+        Recipe.where('recipeTitle', rescipe).fetch().then((recipeObj) => {
+          if (recipeObj) {
+            results.push(recipeObj.attributes);
+          }
+          cb();
+        });
+      }, () => { res.status(200).send(results); });
+    },
+
 
 };

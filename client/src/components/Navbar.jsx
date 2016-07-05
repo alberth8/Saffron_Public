@@ -49,6 +49,7 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => ({
   authenticated: state.authenticated,
   user: state.user,
+  recom: state.recom,
 });
 
 Navbar.propTypes = {

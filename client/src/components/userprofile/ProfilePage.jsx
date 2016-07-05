@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import FavRecipes from './FavRecipes.jsx';
+import RecommendedRecipes from './RecommendedRecipes.jsx';
+import * as actions from '../../redux/actions/index.js';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -13,31 +15,25 @@ class ProfilePage extends React.Component {
       newPass: '',
     };
     this.toggleFavs = this.toggleFavs.bind(this);
-    this.toggleNewPass = this.toggleNewPass.bind(this);
     this.renderFavs = this.renderFavs.bind(this);
   }
 
   componentWillMount() {
     axios.post('/api/getFavs', { user: this.props.user.id })
     .then((response) => {
+      console.log(response.data);
       this.setState({
         favRecipes: response.data,
       });
     }).catch((response) => {
       console.log(response);
     });
-  }
-
-  onPasswordChange(e) {
-    this.setState({
-      newPass: e.target.value,
-    });
-  }
-
-  onKeyPress() {
+    this.props.getRecommondation(this.props.user.id);
+    this.props.popular();
   }
 
   toggleFavs() {
+    console.log(this.props.recom);
     if (this.state.showAll) {
       this.setState({
         showAll: false,
@@ -47,21 +43,6 @@ class ProfilePage extends React.Component {
         showAll: true,
       });
     }
-  }
-
-  toggleNewPass() {
-    if (this.state.changePass) {
-      this.setState({
-        changePass: false,
-      });
-    } else {
-      this.setState({
-        changePass: true,
-      });
-    }
-  }
-
-  changePassword() {
   }
 
   renderFavs() {
@@ -101,25 +82,6 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <button onClick={this.toggleNewPass}>Change password</button>
-          {this.state.changePass ?
-            <div>
-              <form>
-                <fieldset>
-                  <label>New Password</label>
-                  <input
-                    type="text"
-                    value={this.state.newPass}
-                    onChange={(e) => { this.onPasswordChange(e); }}
-                    onKeyDown={(e) => { this.onKeyPress(e); }}
-                  />
-                </fieldset>
-              </form>
-              <button onClick={this.changePassword}>Change password</button>
-            </div>
-          : null}
-        </div>
         <h3>Your Favorites</h3>
         {this.state.favRecipes ?
           this.renderFavs()
@@ -128,10 +90,26 @@ class ProfilePage extends React.Component {
           <button onClick={this.toggleFavs}>Show all</button>
           : <button onClick={this.toggleFavs}>Close</button>
         }
-        <h3>Recommendations</h3>
-        <h3>Most Popular</h3>
+        {Object.keys(this.props.recom).length > 0 ?
+          <div>
+            <h3>Recommendations</h3>
+            <ul>
+              {this.props.recom.map((recipe, index) =>
+                <RecommendedRecipes recRecipe={recipe} key={index} />
+              )}
+            </ul>
+          </div>
+        : null}
+        <div>
+          <h3>Popular Recipes</h3>
+          <ul>
+            {this.props.pop.map((recipe, index) =>
+              <RecommendedRecipes popRecipe={recipe} key={index} />
+            )}
+          </ul>
+        </div>
       </div>
-		);
+    );
   }
 
 }
@@ -139,12 +117,18 @@ class ProfilePage extends React.Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    recom: state.recom,
+    pop: state.pop,
   };
 }
 
 ProfilePage.propTypes = {
   user: PropTypes.object,
+  getRecommondation: PropTypes.func,
+  popular: PropTypes.func,
+  recom: PropTypes.object,
+  pop: PropTypes.object,
 };
 
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps, actions)(ProfilePage);

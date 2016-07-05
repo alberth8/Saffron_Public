@@ -17,7 +17,6 @@ db.plugin('registry');
 
 // Define schema below. Relationships described in models.
 db.knex.schema.hasTable('users').then((exists) => {
-  console.log('hello');
   if (!exists) {
     db.knex.schema.createTable('users', (user) => {
       user.increments('id').primary();
