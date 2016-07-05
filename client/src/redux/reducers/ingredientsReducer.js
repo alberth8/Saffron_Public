@@ -1,13 +1,33 @@
-export default function (state = ['oranges', 'pears', 'tofu'], action) {
-  switch (action.type) {
-    case 'UPDATE_SUGGESTED_INGREDIENTS':
-      return action.suggestedIngredients;
-    case 'UPDATE_INGREDIENTS':
-      return action.recipes;
-    case 'SEND_INGREDIENTS_TO_SERVER':
-      return action.sendIngredientsToServer;
+const ingredientsRecipes = {
+  recipeReducer: (state = [], action) => {
+    switch (action.type) {
+      case 'UPDATE_RECIPES':
+        return action.recipes;
 
-    default:
-      return state;
-  }
-}
+      default:
+        return state;
+    }
+  },
+
+  selectedIngredientsReducer: (state = ['eggs', 'sugar'], action) => {
+    switch (action.type) {
+      case 'UPDATE_SELECTED_INGREDIENTS':
+        return action.selectedIngredients;
+
+      default:
+        return state;
+    }
+  },
+
+  suggestedIngredientsReducer: (state = [['flour', 3], ['butter', 2]], action) => {
+    switch (action.type) {
+      case 'UPDATE_SUGGESTED_INGREDIENTS':
+        return action.suggestedIngredients;
+
+      default:
+        return state;
+    }
+  },
+};
+
+export default ingredientsRecipes;
