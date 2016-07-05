@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+// const URL = 'http://localhost:3500/';
 
+// send back error is signup/login fail
 export function authError(error) {
   return {
     type: 'AUTH_ERROR',
     payload: error,
   };
 }
-
+// verify password and login user in 
 export function loginUser(email, password) {
   return (dispatch) => {
     axios.post('/login', { email, password })
@@ -22,7 +24,7 @@ export function loginUser(email, password) {
     });
   };
 }
-
+// signup user and hash password
 export function signupUser(email, password) {
   return (dispatch) => {
     axios.post('/api/signup', { email, password })
@@ -44,13 +46,13 @@ export function signupUser(email, password) {
     });
   };
 }
-
+// siging user out and destroying token
 export function signoutUser() {
   localStorage.removeItem('token');
 
   return { type: 'UNAUTH_USER' };
 }
-
+// getting user id to use for other
 export function userInfo(email) {
   return (dispatch) => {
     axios.post('/api/userInfo', { email })
@@ -66,6 +68,27 @@ export function userInfo(email) {
   };
 }
 
+// export function getRecommondation(user) {
+//   return (dispatch) => {
+//     axios.post(URL + 'recommondation', { user }).then((response) => {
+//       dispatch({
+//         type: 'RECOMMONDATION',
+//         recom: response.data,
+//       });
+//     });
+//   };
+// }
+
+// export function popular() {
+//   return (dispatch) => {
+//     axios.get(URL + 'popular').then((response) => {
+//       dispatch({
+//         type: 'POPULAR',
+//         pop: response.data,
+//       });
+//     });
+//   };
+// }
 // export function saveFav() {
 //   return (dispatch) => {
 //     axios.post('/api/saveFav', {})
