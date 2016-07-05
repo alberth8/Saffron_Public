@@ -17,44 +17,29 @@ module.exports = {
     getRecords((recordsList) => {
       let results = {};
       let recipeNames = [];
-      let favRecipes = {};
+      let favRecipesCount = {};
       let userFavs = {};
+      
       recordsList.forEach((record) => {
-        if (results[record.attributes.recipeTitle] === undefined) {
-          results[record.attributes.recipeTitle] = {};
-          results[record.attributes.recipeTitle].id = record.attributes.recipe_id;
-          recipeNames.push(record.attributes.recipeTitle);
-        }
-      });
-      recipeNames.forEach((names) => {
-        for (const key in results) {
-          results[key][names] = 0;
-        }
-      });
-      recordsList.forEach((record) => {
-        if (favRecipes[record.attributes.recipeTitle] === undefined) {
-          favRecipes[record.attributes.recipeTitle] = [];
-          favRecipes[record.attributes.recipeTitle].push(record.attributes.user_id.toString());
+        if (favRecipesCount[record.attributes.recipeTitle] === undefined) {
+          favRecipesCount[record.attributes.recipeTitle] = 1;
         } else {
-          favRecipes[record.attributes.recipeTitle].push(record.attributes.user_id.toString());
+          favRecipesCount[record.attributes.recipeTitle]++;
         }
       });
       recordsList.forEach((userRecord) => {
         if (userFavs[userRecord.attributes.user_id] === undefined) {
-          userFavs[userRecord.attributes.user_id] = [];
-          userFavs[userRecord.attributes.user_id].push(userRecord.attributes.recipeTitle);
+          userFavs[userRecord.attributes.user_id] = {};
+          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle; 
         } else {
-          userFavs[userRecord.attributes.user_id].push(userRecord.attributes.recipeTitle);         
+          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle; 
         }
       });
-      for (const key in favRecipes) {
-        favRecipes[key].forEach((next) => {
-          userFavs[next].forEach((recipe) => {
-            results[key][recipe] ++;
-          })
-        })
-      }
-      res.send(results);
+      res.send({
+        recipeCount: favRecipesCount,
+        UserFavs: userFavs,
+      });
+      console.log(userFavs, favRecipesCount);
     })
   },
 };

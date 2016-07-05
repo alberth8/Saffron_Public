@@ -82,6 +82,8 @@ class ProfilePage extends React.Component {
           <button onClick={this.toggleFavs}>Show all</button>
           : <button onClick={this.toggleFavs}>Close</button>
         }
+        <h3>Recommendations</h3>
+        <h3>Most Popular</h3>
       </div>
 		);
   }
