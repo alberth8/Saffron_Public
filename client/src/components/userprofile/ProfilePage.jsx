@@ -9,8 +9,11 @@ class ProfilePage extends React.Component {
     this.state = {
       favRecipes: null,
       showAll: false,
+      changePass: false,
+      newPass: '',
     };
     this.toggleFavs = this.toggleFavs.bind(this);
+    this.toggleNewPass = this.toggleNewPass.bind(this);
     this.renderFavs = this.renderFavs.bind(this);
   }
 
@@ -25,6 +28,15 @@ class ProfilePage extends React.Component {
     });
   }
 
+  onPasswordChange(e) {
+    this.setState({
+      newPass: e.target.value,
+    });
+  }
+
+  onKeyPress() {
+  }
+
   toggleFavs() {
     if (this.state.showAll) {
       this.setState({
@@ -35,6 +47,21 @@ class ProfilePage extends React.Component {
         showAll: true,
       });
     }
+  }
+
+  toggleNewPass() {
+    if (this.state.changePass) {
+      this.setState({
+        changePass: false,
+      });
+    } else {
+      this.setState({
+        changePass: true,
+      });
+    }
+  }
+
+  changePassword() {
   }
 
   renderFavs() {
@@ -74,6 +101,25 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div>
+        <div>
+          <button onClick={this.toggleNewPass}>Change password</button>
+          {this.state.changePass ?
+            <div>
+              <form>
+                <fieldset>
+                  <label>New Password</label>
+                  <input
+                    type="text"
+                    value={this.state.newPass}
+                    onChange={(e) => { this.onPasswordChange(e); }}
+                    onKeyDown={(e) => { this.onKeyPress(e); }}
+                  />
+                </fieldset>
+              </form>
+              <button onClick={this.changePassword}>Change password</button>
+            </div>
+          : null}
+        </div>
         <h3>Your Favorites</h3>
         {this.state.favRecipes ?
           this.renderFavs()

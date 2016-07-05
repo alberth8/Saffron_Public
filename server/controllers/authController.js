@@ -11,6 +11,7 @@ function token(user) {
   }, config.secret);
 }
 
+// checks to see if user already exists. If not then creates a new user
 module.exports = {
   signup: (req, res) => {
     const userInfo = {
@@ -39,10 +40,12 @@ module.exports = {
     return null;
   },
 
+  // after passportController verifys user sends a token to user  
   login: (req, res) => {
     res.send({ token: token(req.user) });
   },
 
+  // fetchs user id to be used in other requests
   userInfo: (req, res) => {
     const email = req.body.email;
     User.where('email', email).fetch().then((user) => {

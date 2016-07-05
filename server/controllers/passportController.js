@@ -6,6 +6,7 @@ const User = require('../models/user.js');
 const config = require('../config/authConfig.js');
 const bcrypt = require('bcrypt-nodejs');
 
+// enables Auth on main website
 const localOption = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOption, (email, password, done) => {
 	User.where('email', email).fetch().then((user) => {
@@ -19,7 +20,7 @@ const localLogin = new LocalStrategy(localOption, (email, password, done) => {
 		console.error(err);
 	})
 });
-
+// enables cross domain Auth with token 
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: config.secret
