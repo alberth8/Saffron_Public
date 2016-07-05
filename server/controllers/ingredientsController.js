@@ -123,6 +123,64 @@ const getRecipeIds = (ingredientsIdArray, callback) => {
   });
 };
 
+// Given a set of recipes and selected ingredients, what are the most frequently
+// used OTHER ingredients?  This function solves for this question.
+// get recipes' ingredients, count those ingredients, return the top 10
+const getSuggestedIngredients = (recipeIdArray, ingredientIDArray, callback) => {
+  IngredientsRecipesCollection.query((qb) => { // find all ingredients given a list of recipes
+    qb.whereIn('recipe_id', recipeIdArray);
+  }).fetch()
+  .then((foundPair) => {
+    const storage = { ingredients: [] };
+    if (foundPair) { // if we find models, loop through and count
+      // ingredient frequency using a storage object
+      for (let i = 0; i < foundPair.models.length; i++) {
+        const iId = foundPair.models[i].attributes.ingredient_id;
+        if (ingredientIDArray.indexOf(iId) < 0) {
+          if (storage[iId] === undefined) { // have we seen this ingredient before?
+            storage[iId] = {
+              name: '',
+              count: 1,
+            };
+            storage.ingredients.push(iId);
+          } else {
+            storage[iId].count++;
+          }
+        }
+      }
+      IngredientsCollection.query((qb) => { // find all ingredients given a list of recipes
+        qb.whereIn('id', storage.ingredients);
+      }).fetch()
+      .then((ingredients) => {
+        const suggestedIngredients = [];
+        if (ingredients) {
+          for (let i = 0; i < ingredients.models.length; i++) {
+            storage[ingredients.models[i].attributes.id].name =
+            ingredients.models[i].attributes.ingredient;
+            suggestedIngredients.push([
+              ingredients.models[i].attributes.ingredient,
+              storage[ingredients.models[i].attributes.id].count,
+            ]);
+          }
+          suggestedIngredients.sort((a, b) => {
+            if (a[1] > b[1]) {
+              return -1;
+            }
+            if (a[1] < b[1]) {
+              return 1;
+            }
+            return 0;
+          });
+          callback(suggestedIngredients);
+        }
+      })
+      .catch((e) => (console.error(e)));
+    }
+  })
+  .catch((e) => (console.error(e)));
+};
+
+
 const getRecipeData = (recipeIds, callback) => {
   const storage = [];
   RecipesCollection.query((q) => {
@@ -144,10 +202,12 @@ module.exports = {
       findOrAddIngredient(ingredients, (ingredientIdArray) => {
         findAndGroup(userId, ingredientIdArray, maxSetId, () => {
           getRecipeIds(ingredientIdArray, (recipeIds) => {
-            getRecipeData(recipeIds, (recipeData) => {
-              console.log(recipeData);
-              res.status(200).send({
-                recipes: recipeData,
+            getSuggestedIngredients(recipeIds, ingredientIdArray, (suggestedIngredients) => {
+              getRecipeData(recipeIds, (recipeData) => {
+                res.status(200).send({
+                  recipes: recipeData,
+                  suggestedIngredients,
+                });
               });
             });
           });

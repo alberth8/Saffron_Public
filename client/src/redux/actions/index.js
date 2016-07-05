@@ -90,14 +90,26 @@ export function updateSuggestedIngredients(suggestedIngredients) {
   };
 }
 
+export function updateSelectedIngredients(selectedIngredients) {
+  return (dispatch) => {
+    dispatch({
+      type: 'UPDATE_SELECTED_INGREDIENTS',
+      selectedIngredients,
+    });
+  };
+}
+
 export function sendIngredientsToServer(selectedIngredients, userID) {
   return (dispatch) => {
     axios.post('/api/updateIngredients', { selectedIngredients, userID })
       .then((response) => {
-        console.log('index.js response: ', response.data);
         dispatch({
-          type: 'UPDATE_INGREDIENTS',
+          type: 'UPDATE_RECIPES',
           recipes: response.data.recipes,
+        });
+        dispatch({
+          type: 'UPDATE_SUGGESTED_INGREDIENTS',
+          suggestedIngredients: response.data.suggestedIngredients,
         });
       })
       .catch((error) => {
