@@ -7,14 +7,14 @@ import Recipes from './components/recipes/Recipes.jsx';
 import AddRecipeForm from './components/addRecipeForm/AddRecipeForm.jsx';
 import ProfilePage from './components/userprofile/ProfilePage.jsx';
 import requireAuth from './components/RequireAuth.jsx';
-import IngredientsLayout from './components/ingredients/IngredientsLayout.jsx';
+import IngredientsView from './components/ingredients/IngredientsView.jsx';
 
 export default (
   <Route path="/" component={App}>
     <Route path="login" component={Login} />
     <Route path="signup" component={Signup} />
     <Route path="profile" component={requireAuth(ProfilePage)} />
-    <Route path="ingredients" component={IngredientsLayout} />
+    <Route path="ingredients" component={IngredientsView} />
     <Route path="recipes" component={Recipes} />
     <Route path="addrecipe" component={requireAuth(AddRecipeForm)} />
   </Route>
