@@ -40,9 +40,11 @@ class IngredientsView extends Component {
         let newSuggested = this.props.suggestedIngredients.slice();
         newSuggested = newSuggested.splice(key, 1)[0][0];
         this.props.updateSelectedIngredients(
-          [...this.props.selectedIngredients, newSuggested]);
+          [...this.props.selectedIngredients, newSuggested],
+          () => (this.onSubmitIngredients));
       } else { // if key undefined, the added ingredient is from input box
-        this.props.updateSelectedIngredients([...this.props.selectedIngredients, addedIngredient]);
+        this.props.updateSelectedIngredients([...this.props.selectedIngredients, addedIngredient],
+          () => (this.onSubmitIngredients));
       }
     }
     this.setState({ ingredient: '' }, () => (this.onSubmitIngredients())); // reset input box to ''
@@ -50,8 +52,8 @@ class IngredientsView extends Component {
   onRemoveIngredient(addedIngredient, key) { // removes ingredient from user's selected ingredients
     const newState = this.props.selectedIngredients.slice();
     newState.splice(key, 1);
-    this.props.updateSelectedIngredients(newState);
-    this.onSubmitIngredients(); // get updated suggestions from database
+    this.props.updateSelectedIngredients(newState, () => (this.onSubmitIngredients));
+    // get updated suggestions from database
   }
   onSubmitIngredients() { // send ingredients to server
     this.props.sendIngredientsToServer(this.props.selectedIngredients, this.props.user.id);
