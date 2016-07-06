@@ -18,17 +18,17 @@ module.exports = {
       email: req.body.email,
       password: req.body.password,
     };
-    if (!userInfo.email || !userInfo.password) {
+    if (!userInfo.email || !userInfo.password) { // if user or password field is empty send back error
       return res.status(422).send({ error: 'You must provide email and password' });
     }
     User.where('email', userInfo.email).fetch().then((user) => {
-      if (!user) {
+      if (!user) { // if user does not exist then create new user
         return new User(userInfo).save();
       }
       return res.send({ error: 'Email already has a account' });
     })
     .then((newUser) => {
-      res.json({
+      res.json({ // sends a token to user after creating new user 
         token: token(newUser.attributes),
         userId: newUser.id,
         email: newUser.email,

@@ -22,7 +22,7 @@ module.exports = {
       console.error(err);
     });
   },
-
+  // gets the users favorite recipes and sends them to client
   getFavs: function (req, res) {
     let results = [];
     let i = 0;
@@ -33,7 +33,7 @@ module.exports = {
           results.push(recipeInfo.attributes);
           i++;
           if (i === favs.length) {
-          	res.status(200).send(results);
+            res.status(200).send(results);
           }
         });
       });
@@ -42,24 +42,24 @@ module.exports = {
       console.error(err);
     });
   },
-
-    getRecipeInfo: function (req, res) {
-      const recipes = [
-        req.body.first,
-        req.body.second,
-        req.body.third,
-        req.body.fourth,
-      ];
-      let results = [];
-      async.each(recipes, (rescipe, cb) => {
-        Recipe.where('recipeTitle', rescipe).fetch().then((recipeObj) => {
-          if (recipeObj) {
-            results.push(recipeObj.attributes);
-          }
-          cb();
-        });
-      }, () => { res.status(200).send(results); });
-    },
+  // gets the recipe details based on what is returned from recommendation engine
+  getRecipeInfo: (req, res) => {
+    const recipes = [
+      req.body.first,
+      req.body.second,
+      req.body.third,
+      req.body.fourth,
+    ];
+    let results = [];
+    async.each(recipes, (rescipe, cb) => {
+      Recipe.where('recipeTitle', rescipe).fetch().then((recipeObj) => {
+        if (recipeObj) {
+          results.push(recipeObj.attributes);
+        }
+        cb();
+      });
+    }, () => { res.status(200).send(results); });
+  },
 
 
 };

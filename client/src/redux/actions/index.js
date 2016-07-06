@@ -17,7 +17,9 @@ export function loginUser(email, password) {
       dispatch({
         type: 'AUTH_USER',
       });
+      // adds token to user
       localStorage.setItem('token', response.data.token);
+      // reroutes user to home page
       browserHistory.push('/');
     }).catch(() => {
       dispatch(authError('Must enter a valid email and password'));
@@ -39,7 +41,9 @@ export function signupUser(email, password) {
       dispatch({
         type: 'AUTH_USER',
       });
+      // adds token to user
       localStorage.setItem('token', response.data.token);
+      // reroutes user to home page
       browserHistory.push('/');
     }).catch((response) => {
       dispatch(authError(response.data));
@@ -52,6 +56,7 @@ export function signoutUser() {
 
   return { type: 'UNAUTH_USER' };
 }
+
 // getting user id to use for other
 export function userInfo(email) {
   return (dispatch) => {
@@ -71,7 +76,9 @@ export function userInfo(email) {
 // call to get recommondations
 export function getRecommondation(user) {
   return (dispatch) => {
+    // first gets recommondations from recommondation engine
     axios.post(`${URL}recommondation`, { user }).then((response) => {
+    // then gets the details for the recommondations that were retrived
       axios.post('/api/getRecipeInfo', {
         first: response.data.first,
         second: response.data.second,
@@ -93,8 +100,9 @@ export function getRecommondation(user) {
 // call to get popular items
 export function popular() {
   return (dispatch) => {
+  // first gets most popular recipes from recommondation engine
     axios.get(`${URL}popular`).then((response) => {
-      console.log(response);
+      // then gets the details for the recommondations that were retrived
       axios.post('/api/getRecipeInfo', {
         first: response.data[0],
         second: response.data[1],

@@ -19,6 +19,7 @@ class ProfilePage extends React.Component {
   }
 
   componentWillMount() {
+    // gets users favorite recipes before component mounts
     axios.post('/api/getFavs', { user: this.props.user.id })
     .then((response) => {
       this.setState({
@@ -27,10 +28,13 @@ class ProfilePage extends React.Component {
     }).catch((error) => {
       console.error(error);
     });
+    // gets recommondations for current user
     this.props.getRecommondation(this.props.user.id);
   }
 
   toggleFavs() {
+    // toggels how many of the users favorite recipes are show
+    // from just four or less to all of them
     if (this.state.showAll) {
       this.setState({
         showAll: false,
@@ -43,6 +47,7 @@ class ProfilePage extends React.Component {
   }
 
   renderFavs() {
+    // function that decides how many favorite recipes to show when user first goes to profile page
     if (this.state.favRecipes.length > 4 && this.state.showAll) {
       return (
         <ul>

@@ -15,11 +15,15 @@ class Login extends React.Component {
   componentDidMount() {
     ReactDOM.findDOMNode(this.refs.email).focus();
   }
+
   onLogin() {
     const email = this.state.email;
     const password = this.state.password;
+    // gets userInfo to save it in the store for use by other functions
     this.props.userInfo(email);
+    // gets popular items to display on profile page
     this.props.popular();
+    // logs user in
     this.props.loginUser(email, password);
     this.setState({
       email: '',
@@ -33,6 +37,7 @@ class Login extends React.Component {
     if (e.keyCode === 13) {
       this.onLogin(email, password);
       this.props.popular();
+    // gets userInfo to save it in the store for use by other functions
       this.props.userInfo(email, password);
     }
   }
