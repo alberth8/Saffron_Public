@@ -53,9 +53,9 @@ const mapStateToProps = (state) => ({
 });
 
 Navbar.propTypes = {
-  authenticated: PropTypes.func,
+  authenticated: PropTypes.function,
   signoutUser: PropTypes.func,
-  user: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default connect(mapStateToProps, actions)(Navbar);
