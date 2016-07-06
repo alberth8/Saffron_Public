@@ -94,11 +94,12 @@ export function getRecommondation(user) {
 export function popular() {
   return (dispatch) => {
     axios.get(`${URL}popular`).then((response) => {
+      console.log(response);
       axios.post('/api/getRecipeInfo', {
-        first: response.data.first,
-        second: response.data.second,
-        third: response.data.third,
-        fourth: response.data.fourth,
+        first: response.data[0],
+        second: response.data[1],
+        third: response.data[2],
+        fourth: response.data[3],
       }).then((popRecipes) => {
         dispatch({
           type: 'POPULAR',
