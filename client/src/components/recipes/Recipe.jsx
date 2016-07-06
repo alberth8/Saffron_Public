@@ -27,24 +27,22 @@ class Recipe extends React.Component {
   render() {
     return (
       <div className="col s1 m2 l4">
-        <li>
-          <div className="card small">
-            <div className="card-image">
-              <img alt="recipe" src={this.props.recipe.recipeImgUrl} />
-            </div>
-            <div className="card-content">
-              {this.props.recipe.recipeTitle}
-              {!this.state.faved ?
-                <img
-                  className="btn-heart btn-floating"
-                  onClick={(e) => { this.saveFav(e); }}
-                  alt="recipe"
-                  src="./oie_transparent.png"
-                />
-              : null}
-            </div>
+        <div className="card small hoverable">
+          <div className="card-image">
+            <img alt="recipe" src={this.props.recipe.recipeImgUrl} />
           </div>
-        </li>
+          <div className="card-content">
+            {this.props.recipe.recipeTitle}
+            {!this.state.faved ?
+              <img
+                className="btn-heart"
+                onClick={(e) => { this.saveFav(e); }}
+                alt="recipe"
+                src="./oie_transparent.png"
+              />
+            : null}
+          </div>
+        </div>
       </div>
     );
   }

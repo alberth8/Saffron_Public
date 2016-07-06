@@ -46,10 +46,10 @@ class IngredientsView extends Component {
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
     return (
-      <ul>
-        <h3>{selectOrSuggest === 'selected' ? 'Selected' : 'Suggested'}</h3>
+      <ul className="collection">
+        <h5>{selectOrSuggest === 'selected' ? 'Selected' : 'Suggested'}</h5>
         {ingredientsArray.map((ingredient, key) => (
-          <li>
+          <li className="chip">
             <div
               onClick={selectOrSuggest === 'selected' ?
               () => this.onRemoveIngredient(ingredient, key) :
@@ -70,15 +70,19 @@ class IngredientsView extends Component {
   }
   render() {
     return (
-      <div>
-        <label>Add Ingredients</label>
-        <input
-          onChange={(e) => { this.onIngredientChange(e); }}
-          onKeyDown={(e) => { this.onKeyPress(e); }}
-          value={this.state.ingredient}
-        />
-        {this.mapIngredients(this.props.selectedIngredients, 'selected')}
-        {this.mapIngredients(this.props.suggestedIngredients, 'suggested')}
+      <div className="container">
+        <div className="row">
+          <div className="input-field col s10 m10 l10">
+            <input
+              onChange={(e) => { this.onIngredientChange(e); }}
+              onKeyDown={(e) => { this.onKeyPress(e); }}
+              value={this.state.ingredient}
+              placeholder="Add Ingredients"
+            />
+            {this.mapIngredients(this.props.selectedIngredients, 'selected')}
+            {this.mapIngredients(this.props.suggestedIngredients, 'suggested')}
+          </div>
+        </div>
       </div>
     );
   }
