@@ -1,40 +1,26 @@
+/*
 .recipes-title {
   text-align: center;
-}
+}*/
 
+/*
 .recipes {
   list-style-type: none;
-}
+}*/
 
-.recipe-img-container {
-  position: relative;
-  width: 100%;
-  max-height: 260px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.recipe-img-container img {
-  width: 90%;
-  max-height: 100%;
-}
-
+/*
 .recipe-txt {
   color: white;
   position: absolute;
-  max-width: 85%;
-  text-align: left;
-  bottom: 0;
-  left: 0;
   z-index: 51;
-  background: rgb(0, 0, 0); /* fallback color */
   background: rgba(0, 0, 0, 0.7);
   padding: 5px;
 }
+*/
 
+/*
 .recipe-fave {
   color: #b32400;
-  position: absolute;
   font-size: 28px;
   border: 0;
   max-width: 85%;
@@ -44,14 +30,25 @@
     1px -1px 1px white,
     -1px 1px 1px white,
     1px 1px 1px white;
-  top: 0;
-  right: 47px;
   z-index: 51;
   background: rgba(0, 0, 0, 0.0);
   padding: 0px;
 }
+*/
 
-html, button, input, select, textarea,
-.pure-g [class *= "pure-u"] {
-  font-family: "Open Sans", sans-serif;
+img.btn-heart {
+  padding: 10;
+  width: 40px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
+
+img.btn-heart:active {
+  width:50px;
+}
+
+div.card.small{
+  max-height: 250px;
+}
+
