@@ -12,9 +12,10 @@ class SignUp extends React.Component {
     this.onSignup = this.onSignup.bind(this);
   }
 
-  onSignup() {
+  onSignup(e) {
     const email = this.state.email;
     const password = this.state.password;
+    e.preventDefault();
     // gets popular items to display on profile page
     this.props.popular();
     this.props.signupUser(email, password);
@@ -30,6 +31,7 @@ class SignUp extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
+      e.preventDefault();
       // gets popular items to display on profile page
       this.props.popular();
       // gets userInfo to save it in the store for use by other functions
@@ -80,7 +82,7 @@ class SignUp extends React.Component {
             </fieldset>
             <button
               className="btn waves-effect waves-light btn-login"
-              onClick={this.onSignup}
+              onClick={(e) => { this.onSignup(e); }}
             >
               SignUp
             </button>

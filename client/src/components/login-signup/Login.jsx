@@ -16,9 +16,10 @@ class Login extends React.Component {
     ReactDOM.findDOMNode(this.refs.email).focus();
   }
 
-  onLogin() {
+  onLogin(e) {
     const email = this.state.email;
     const password = this.state.password;
+    e.preventDefault();
     // gets userInfo to save it in the store for use by other functions
     this.props.userInfo(email);
     // gets popular items to display on profile page
@@ -35,7 +36,7 @@ class Login extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
-      this.onLogin(email, password);
+      this.onLogin(e, email, password);
       this.props.popular();
     // gets userInfo to save it in the store for use by other functions
       this.props.userInfo(email, password);
@@ -82,7 +83,7 @@ class Login extends React.Component {
             </fieldset>
             <button
               className="btn waves-effect waves-light btn-login"
-              onClick={this.onLogin}
+              onClick={(e) => { this.onLogin(e); }}
             >
               Login
             </button>
