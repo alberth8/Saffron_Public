@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import Recipe from './Recipe.jsx';
 
 const Recipes = ({ recipes }) => (
-  <div>
+  <div className="container">
     <h2 className="recipes-title">Recipes</h2>
-    <div className="pure-g">
-      <ul className="recipes">
-        {recipes.map((recipe, i) =>
-          <a href={recipe.recipeUrl} key={i} target="_blank">
-            <Recipe recipe={recipe} key={i} />
-          </a>
-        )}
-      </ul>
+    <div className="row">
+      {recipes.map((recipe, i) =>
+        <a href={recipe.recipeUrl} key={i} target="_blank">
+          <Recipe recipe={recipe} key={i} />
+        </a>
+      )}
     </div>
   </div>
 );
