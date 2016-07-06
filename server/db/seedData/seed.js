@@ -4,9 +4,27 @@ const RecipeModel = require('../../models/recipe.js');
 const RecipeCollection = require('../../collections/recipes.js');
 const IngRecCollection = require('../../collections/ingredients_recipes.js');
 const IngRecModel = require('../../models/ingredient_recipe.js');
-
 const async = require('async');
-const data = require('./seed.json');
+const axios = require('axios');
+
+/*
+Run this file in the command line using node ($ node server/db/seedData/seed.js)
+*/
+
+const instance = axios.create({
+  baseURL: 'http://104.236.244.110',
+  timeout: 1000,
+});
+
+const getData = (callback) => {
+  instance.get('/')
+    .then((response) => {
+      if (response.data) {
+        callback(response.data);
+      }
+    })
+    .catch((e) => (console.log(e)));
+};
 
 // takes an array of text ingredients, saves or finds them,
 // returns an array of ingredient ids
@@ -69,6 +87,7 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
           recipe_id,
         })
         .then((model) => {
+          console.log('saving new ingredient_recipe');
           cb(model);
         })
         .catch((e) => { console.log(e); });
@@ -80,11 +99,14 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
 
 module.exports = {
   seedDatabase: () => {
-    async.each(data, (recipe, cb) => {
-      findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
-        findOrSaveRecipe(recipe, (recipe_id) => {
-          saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
-            cb(null);
+    getData((data) => {
+      console.log(data.length);
+      async.each(data, (recipe, cb) => {
+        findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
+          findOrSaveRecipe(recipe, (recipe_id) => {
+            saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
+              cb(null);
+            });
           });
         });
       });

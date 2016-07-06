@@ -19,7 +19,7 @@ const ingredientsRecipes = {
     }
   },
 
-  suggestedIngredientsReducer: (state = [['flour', 3], ['butter', 2]], action) => {
+  suggestedIngredientsReducer: (state = [], action) => {
     switch (action.type) {
       case 'UPDATE_SUGGESTED_INGREDIENTS':
         return action.suggestedIngredients;

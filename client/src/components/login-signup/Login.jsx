@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index.js';
+import ReactDOM from 'react-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class Login extends React.Component {
     };
     this.onLogin = this.onLogin.bind(this);
   }
-
+  componentDidMount() {
+    ReactDOM.findDOMNode(this.refs.email).focus();
+  }
   onLogin() {
     const email = this.state.email;
     const password = this.state.password;
@@ -54,6 +57,7 @@ class Login extends React.Component {
               type="email"
               className="form-control"
               id="formGroupExampleInput"
+              ref="email"
               value={this.state.email}
               onChange={(e) => { this.onEmailChange(e); }}
             />

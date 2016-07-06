@@ -1,47 +1,61 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../../redux/actions/index.js';
+import * as actions from '../../redux/actions/index.js';
+import ReactDOM from 'react-dom';
+
+/*  This component collects user's ingredients through an input box
+    and by suggesting other ingredients that are often used in conjunction
+    Selected & suggested ingredients are persisted in store, so user can
+    traverse through other components.
+
+    After every selected ingredient add/deletion, the component sends
+    a post request to the server, which saves the user's search and
+    returns suggested ingredients
+*/
 
 class IngredientsView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredient: '',
+      ingredient: '', // used to collect user input
     };
   }
-  // when the user types in the input box, capture that text in e.target.value
-  onIngredientChange(e) {
+  componentDidMount() { // auto-select input box
+    ReactDOM.findDOMNode(this.refs.searchBox).focus();
+    this.onSubmitIngredients();
+  }
+  onIngredientChange(e) { // captures user's input after each keystroke
     this.setState({
       ingredient: e.target.value,
     });
   }
-  onKeyPress(e) {
+  onKeyPress(e) { // listen for & submit on return statement in user input
     if (e.keyCode === 13) {
       this.onAddIngredient(this.state.ingredient);
     }
   }
-  onAddIngredient(addedIngredient, key) {
-    // if key is defined, it means the user clicked on a suggested ingredient
-    // so remove it from state, and rerender the list
-    if (key !== undefined) {
-      let newSuggested = this.props.suggestedIngredients.slice();
-      newSuggested = newSuggested.splice(key, 1)[0][0];
-      this.props.updateSelectedIngredients(
-        [...this.props.selectedIngredients, newSuggested]);
-    } else {
-      this.props.updateSelectedIngredients([...this.props.selectedIngredients, addedIngredient]);
+  onAddIngredient(addedIngredient, key) { // add selected ingredients
+    if (this.props.selectedIngredients.indexOf(addedIngredient) < 0) {
+      if (key !== undefined) { // if key is defined, ingredient was a suggested ingredient
+        let newSuggested = this.props.suggestedIngredients.slice();
+        newSuggested = newSuggested.splice(key, 1)[0][0];
+        this.props.updateSelectedIngredients(
+          [...this.props.selectedIngredients, newSuggested],
+          () => (this.onSubmitIngredients));
+      } else { // if key undefined, the added ingredient is from input box
+        this.props.updateSelectedIngredients([...this.props.selectedIngredients, addedIngredient],
+          () => (this.onSubmitIngredients));
+      }
     }
-    // if key isn't defined, then just add the ingredient to state
-    this.setState({ ingredient: '' },
-      () => (this.onSubmitIngredients()));
+    this.setState({ ingredient: '' }, () => (this.onSubmitIngredients())); // reset input box to ''
   }
-  onRemoveIngredient(addedIngredient, key) {
+  onRemoveIngredient(addedIngredient, key) { // removes ingredient from user's selected ingredients
     const newState = this.props.selectedIngredients.slice();
     newState.splice(key, 1);
-    this.props.updateSelectedIngredients(newState);
-    this.onSubmitIngredients();
+    this.props.updateSelectedIngredients(newState, () => (this.onSubmitIngredients));
+    // get updated suggestions from database
   }
-  onSubmitIngredients() {
+  onSubmitIngredients() { // send ingredients to server
     this.props.sendIngredientsToServer(this.props.selectedIngredients, this.props.user.id);
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
@@ -73,6 +87,7 @@ class IngredientsView extends Component {
       <div>
         <label>Add Ingredients</label>
         <input
+          ref="searchBox"
           onChange={(e) => { this.onIngredientChange(e); }}
           onKeyDown={(e) => { this.onKeyPress(e); }}
           value={this.state.ingredient}
@@ -83,7 +98,6 @@ class IngredientsView extends Component {
     );
   }
 }
-// replace ['bread', 'cinnomen', 'beer']; with this.props.suggestedIngredients
 
 const mapStateToProps = (state) => ({
   suggestedIngredients: state.suggestedIngredients,
