@@ -1,3 +1,8 @@
+/*html {
+  background-image: url(./Ingredients.jpg);
+  background-size: cover;
+}*/
+
 img.btn-heart {
   padding: 10;
   width: 40px;
@@ -15,5 +20,9 @@ background-color: #b32400 !important;
 }
 
 .chip {
-  margin: 3px 3px 0 3px;
+  margin: 3px 2px 0 2px;
+}
+
+.btn-login {
+  margin-top: 8px;
 }
