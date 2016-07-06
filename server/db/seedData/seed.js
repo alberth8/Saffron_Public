@@ -7,6 +7,10 @@ const IngRecModel = require('../../models/ingredient_recipe.js');
 const async = require('async');
 const axios = require('axios');
 
+/*
+Run this file in the command line using node ($ node server/db/seedData/seed.js)
+*/
+
 const instance = axios.create({
   baseURL: 'http://104.236.244.110',
   timeout: 1000,
