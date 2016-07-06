@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import FavRecipes from './FavRecipes.jsx';
 import RecommendedRecipes from './RecommendedRecipes.jsx';
+import PopularRecipes from './PopularRecipes.jsx';
 import * as actions from '../../redux/actions/index.js';
 
 class ProfilePage extends React.Component {
@@ -11,7 +12,6 @@ class ProfilePage extends React.Component {
     this.state = {
       favRecipes: null,
       showAll: false,
-      changePass: false,
       newPass: '',
     };
     this.toggleFavs = this.toggleFavs.bind(this);
@@ -21,19 +21,16 @@ class ProfilePage extends React.Component {
   componentWillMount() {
     axios.post('/api/getFavs', { user: this.props.user.id })
     .then((response) => {
-      console.log(response.data);
       this.setState({
         favRecipes: response.data,
       });
-    }).catch((response) => {
-      console.log(response);
+    }).catch((error) => {
+      console.error(error);
     });
     this.props.getRecommondation(this.props.user.id);
-    this.props.popular();
   }
 
   toggleFavs() {
-    console.log(this.props.recom);
     if (this.state.showAll) {
       this.setState({
         showAll: false,
@@ -103,8 +100,8 @@ class ProfilePage extends React.Component {
         <div>
           <h3>Popular Recipes</h3>
           <ul>
-            {this.props.pop.map((recipe, index) =>
-              <RecommendedRecipes popRecipe={recipe} key={index} />
+            {this.props.pops.map((recipe, index) =>
+              <PopularRecipes popRecipe={recipe} key={index} />
             )}
           </ul>
         </div>
@@ -118,16 +115,15 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     recom: state.recom,
-    pop: state.pop,
+    pops: state.pops,
   };
 }
 
 ProfilePage.propTypes = {
   user: PropTypes.object,
   getRecommondation: PropTypes.func,
-  popular: PropTypes.func,
   recom: PropTypes.object,
-  pop: PropTypes.object,
+  pops: PropTypes.object,
 };
 
 

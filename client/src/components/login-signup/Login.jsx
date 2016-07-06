@@ -19,6 +19,7 @@ class Login extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     this.props.userInfo(email);
+    this.props.popular();
     this.props.loginUser(email, password);
     this.setState({
       email: '',
@@ -31,6 +32,7 @@ class Login extends React.Component {
     const password = this.state.password;
     if (e.keyCode === 13) {
       this.onLogin(email, password);
+      this.props.popular();
       this.props.userInfo(email, password);
     }
   }
@@ -92,6 +94,7 @@ Login.propTypes = {
   loginUser: PropTypes.func,
   userInfo: PropTypes.func,
   authErrorMessage: PropTypes.string,
+  popular: PropTypes.func,
 };
 
 export default connect(mapStateToProps, actions)(Login);
