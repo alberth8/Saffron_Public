@@ -53,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 
 Navbar.propTypes = {
-  authenticated: PropTypes.function,
+  authenticated: PropTypes.object,
   signoutUser: PropTypes.func,
   user: PropTypes.object,
 };

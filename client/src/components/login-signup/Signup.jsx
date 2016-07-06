@@ -12,9 +12,10 @@ class SignUp extends React.Component {
     this.onSignup = this.onSignup.bind(this);
   }
 
-  onSignup() {
+  onSignup(e) {
     const email = this.state.email;
     const password = this.state.password;
+    e.preventDefault();
     // gets popular items to display on profile page
     this.props.popular();
     this.props.signupUser(email, password);
@@ -76,7 +77,7 @@ class SignUp extends React.Component {
             />
           </fieldset>
         </form>
-        <button onClick={this.onSignup}>Signup</button>
+        <button onClick={(e) => { this.onSignup(e); }}>Signup</button>
         {this.props.authErrorMessage.error}
       </div>
     );
