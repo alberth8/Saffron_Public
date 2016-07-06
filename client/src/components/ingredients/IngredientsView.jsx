@@ -53,7 +53,6 @@ class IngredientsView extends Component {
     const newState = this.props.selectedIngredients.slice();
     newState.splice(key, 1);
     this.props.updateSelectedIngredients(newState, () => (this.onSubmitIngredients));
-    // get updated suggestions from database
   }
   onSubmitIngredients() { // send ingredients to server
     this.props.sendIngredientsToServer(this.props.selectedIngredients, this.props.user.id);

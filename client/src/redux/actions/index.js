@@ -152,11 +152,10 @@ export function sendIngredientsToServer(selectedIngredients, userID) {
         dispatch({
           type: 'UPDATE_RECIPES',
           recipes: response.data.recipes,
-        });
-        dispatch({
+        }, dispatch({
           type: 'UPDATE_SUGGESTED_INGREDIENTS',
           suggestedIngredients: response.data.suggestedIngredients,
-        });
+        }));
       })
       .catch((error) => {
         console.log('error in client ', error);
@@ -172,8 +171,6 @@ export function updateSelectedIngredients(selectedIngredients, callback) {
     }, callback());
   };
 }
-
-// sendIngredientsToServer(selectedIngredients);
 
 // Post recipe to db. Used in addRecipeForm
 export function addRecipe(addRecipeObj) {
