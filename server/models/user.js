@@ -9,7 +9,7 @@ const User = db.Model.extend({
 
   tableName: 'users',
 
-  initialize: function () {    
+  initialize: function () {
     this.on('creating', this.hashPassword);
   },
 

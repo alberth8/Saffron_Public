@@ -15,18 +15,26 @@ class SignUp extends React.Component {
   onSignup() {
     const email = this.state.email;
     const password = this.state.password;
+    // gets popular items to display on profile page
+    this.props.popular();
     this.props.signupUser(email, password);
     this.setState({
       email: '',
       password: '',
     });
+    // gets userInfo to save it in the store for use by other functions
+    this.props.userInfo(email, password);
   }
 
   onKeyPress(e) {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
-      this.signupUser.on(email, password);
+      // gets popular items to display on profile page
+      this.props.popular();
+      // gets userInfo to save it in the store for use by other functions
+      this.props.signupUser(email, password);
+      // gets userInfo to save it in the store for use by other functions
       this.props.userInfo(email, password);
     }
   }
@@ -84,6 +92,7 @@ SignUp.propTypes = {
   signupUser: PropTypes.func,
   userInfo: PropTypes.func,
   authErrorMessage: PropTypes.string,
+  popular: PropTypes.func,
 };
 
 

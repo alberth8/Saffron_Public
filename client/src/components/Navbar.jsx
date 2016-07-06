@@ -49,12 +49,13 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => ({
   authenticated: state.authenticated,
   user: state.user,
+  recom: state.recom,
 });
 
 Navbar.propTypes = {
-  authenticated: PropTypes.func,
+  authenticated: PropTypes.function,
   signoutUser: PropTypes.func,
-  user: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default connect(mapStateToProps, actions)(Navbar);
