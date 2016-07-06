@@ -29,9 +29,9 @@ module.exports = {
       recordsList.forEach((userRecord) => {
         if (userFavs[userRecord.attributes.user_id] === undefined) {
           userFavs[userRecord.attributes.user_id] = {};
-          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle; 
+          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle;
         } else {
-          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle; 
+          userFavs[userRecord.attributes.user_id][userRecord.attributes.recipe_id] = userRecord.attributes.recipeTitle;
         }
       });
       res.send({
