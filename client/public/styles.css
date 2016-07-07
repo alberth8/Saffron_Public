@@ -1,8 +1,3 @@
-/*html {
-  background-image: url(./Ingredients.jpg);
-  background-size: cover;
-}*/
-
 img.btn-heart {
   padding: 10;
   width: 40px;
@@ -11,18 +6,38 @@ img.btn-heart {
   right: 15px;
 }
 
-img.btn-heart:active {
-  width:50px;
+.navbar {
+  background-color: #b32400 !important;
 }
 
-.navbar {
-background-color: #b32400 !important;
+.nav {
+  margin-right: 20px;
 }
 
 .chip {
-  margin: 3px 2px 0 2px;
+  margin: 3px 3px 0 3px;
+  color: white;
+  background-color: #26a69a;
 }
 
 .btn-login {
   margin-top: 8px;
+}
+
+.container {
+  width: 80% !important;
+}
+
+@font-face {
+  font-family: Lobster;
+  src: url(./Lobster_1.3.otf);
+}
+
+.brand-logo {
+  font-family: 'Lobster', cursive;
+  margin-left: 20px;
+}
+
+.space {
+  margin: 20px 0 30px 0;
 }

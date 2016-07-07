@@ -61,26 +61,22 @@ class Login extends React.Component {
         <h2>Login</h2>
         <div className="row">
           <form className="col s10 m8 l6">
-            <fieldset>
-              <input
-                type="email"
-                placeholder="email"
-                className="input-field"
-                ref="email"
-                value={this.state.email}
-                onChange={(e) => { this.onEmailChange(e); }}
-              />
-            </fieldset>
-            <fieldset>
-              <input
-                type="password"
-                placeholder="password"
-                className="input-field"
-                value={this.state.password}
-                onChange={(e) => { this.onPasswordChange(e); }}
-                onKeyDown={(e) => { this.onKeyPress(e); }}
-              />
-            </fieldset>
+            <input
+              type="email"
+              placeholder="email"
+              className="input-field"
+              ref="email"
+              value={this.state.email}
+              onChange={(e) => { this.onEmailChange(e); }}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              className="input-field"
+              value={this.state.password}
+              onChange={(e) => { this.onPasswordChange(e); }}
+              onKeyDown={(e) => { this.onKeyPress(e); }}
+            />
             <button
               className="btn waves-effect waves-light btn-login"
               onClick={(e) => { this.onLogin(e); }}

@@ -13,7 +13,8 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-light bg-faded">
-        <ul className="nav navbar-nav">
+        <a href="#" className="brand-logo">Saffron</a>
+        <ul className="nav navbar-nav right">
           <li className="nav-item">
             <Link to="/">Home</Link>
           </li>
