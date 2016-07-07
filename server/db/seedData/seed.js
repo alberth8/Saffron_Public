@@ -100,12 +100,12 @@ const saveToRecipeIngredients = (recipe_id, ingredientIdArray, callback) => {
 module.exports = {
   seedDatabase: () => {
     getData((data) => {
-      console.log(data.length);
       async.each(data, (recipe, cb) => {
         findOrSaveIngredient(recipe.ingredients, (ingredientIdArray) => {
           findOrSaveRecipe(recipe, (recipe_id) => {
             saveToRecipeIngredients(recipe_id, ingredientIdArray, () => {
               cb(null);
+              // res.status(200).send();
             });
           });
         });
