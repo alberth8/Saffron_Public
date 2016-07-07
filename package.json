@@ -16,7 +16,8 @@
     ]
   },
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "test": "mocha tests/**/*.spec.js"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
@@ -48,7 +49,6 @@
     "knex": "^0.11.7",
     "lodash": "^4.13.1",
     "lodash.assign": "^4.0.9",
-    "material-ui": "^0.15.1",
     "minimatch": "^3.0.2",
     "mocha": "^2.5.3",
     "mysql": "^2.11.1",

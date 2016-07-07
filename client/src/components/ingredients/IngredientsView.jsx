@@ -43,7 +43,8 @@ class IngredientsView extends Component {
           [...this.props.selectedIngredients, newSuggested],
           () => (this.onSubmitIngredients));
       } else { // if key undefined, the added ingredient is from input box
-        this.props.updateSelectedIngredients([...this.props.selectedIngredients, addedIngredient],
+        this.props.updateSelectedIngredients(
+          [...this.props.selectedIngredients, addedIngredient],
           () => (this.onSubmitIngredients));
       }
     }
@@ -52,8 +53,8 @@ class IngredientsView extends Component {
   onRemoveIngredient(addedIngredient, key) { // removes ingredient from user's selected ingredients
     const newState = this.props.selectedIngredients.slice();
     newState.splice(key, 1);
-    this.props.updateSelectedIngredients(newState, () => (this.onSubmitIngredients));
-    // get updated suggestions from database
+    this.props.updateSelectedIngredients(newState, () => (this.onSubmitIngredients()));
+    this.onSubmitIngredients();
   }
   onSubmitIngredients() { // send ingredients to server
     this.props.sendIngredientsToServer(this.props.selectedIngredients, this.props.user.id);
@@ -69,7 +70,7 @@ class IngredientsView extends Component {
               () => this.onRemoveIngredient(ingredient, key) :
               () => this.onAddIngredient(ingredient[0], key)
               }
-              key={key}
+              key={`${key}${selectOrSuggest}`}
               value={selectOrSuggest === 'selected' ? ingredient :
                 ingredient[0]
               }
