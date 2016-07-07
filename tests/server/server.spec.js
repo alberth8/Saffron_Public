@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
+const should = require('chai').should;
 const axios = require('axios');
-const url = 'http://localhost:8888';
+// TODO: need environment variables
+const url = 'http://localhost:8889';
 
 describe('Saffron API', () => {
   describe('api/updateIngredients endpoint', () => {
@@ -14,7 +16,7 @@ describe('Saffron API', () => {
       });
 
     it('responds to POSTs with recipes and suggested ingredients', (done) => {
-      axios.post('http://localhost:8888/api/updateIngredients', {
+      axios.post('http://localhost:8889/api/updateIngredients', {
         selectedIngredients: ['sugar', 'cream'],
         userID: 1,
       }).then((response) => {
@@ -26,16 +28,25 @@ describe('Saffron API', () => {
       });
   });
 
-  // describe('api/addRecipe endpoint', () => {
-  //   it('returns status 200', (done) => {
-  //     axios.post(`${url}/api/addRecipe`, {})
-  //       .then((response) => {
-  //         expect(response.status).to.equal(200);
-  //         done(); // done() is a callback to deal with async
-  //       })
-  //       .catch((e) => console.error(e));
-  //     });
-  // });
+  describe('api/addRecipe endpoint', () => {
+    it('should return turns status 200 and data should have stored properly', (done) => {
+      axios.post(`${url}/api/addRecipe`, {
+        recipeTitle: 'Pasta with Corn, Pea Tendrils, Prosciutto, and Summer Savory',
+        recipeUrl: 'https://food52.com/recipes/59048-pasta-with-corn-pea-tendrils-prosciutto-and-summer-savory',
+        recipeImgUrl: 'https://images.food52.com/n5lW5qDZ1SRqR94BrbkIgoh53jI=/753x502/97c68049-'
+                        + '113f-49b2-a085-d79958e0004d--2016-0705'
+                        + '_pasta-with-pancetta-guanciale-bacon-and-vegetables'
+                        + '_james-ransom-276.jpg',
+        recipeIngredients: 'pasta, butter, olive oil, prosciutto, scallions, pea tendrils, ' +
+                             'basil, parmigiano reggiano, salt, pepper',
+      })
+        .then((response) => {
+          expect(response.status).to.equal(200);
+          done(); // done() is a callback to deal with async
+        })
+        .catch((e) => console.error(e));
+    });
+  });
 
   // describe('api/getFav endpoint', () => {
   //   it('returns status 200', (done) => {

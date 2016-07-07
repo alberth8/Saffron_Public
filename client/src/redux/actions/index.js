@@ -177,7 +177,8 @@ export function addRecipe(addRecipeObj) {
   console.log('addRecipeObj:', addRecipeObj);
   return () => {
     axios.post('/api/addrecipe', addRecipeObj).then((response) => {
-      console.log('THEN > RESPONSE', response);
+      console.log('helooooo');
+      console.log(response.status);
     }).catch((error) => {
       console.log('ERROR:', error);
     });
