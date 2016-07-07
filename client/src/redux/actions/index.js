@@ -121,20 +121,6 @@ export function popular() {
     });
   };
 }
-// export function saveFav() {
-//   return (dispatch) => {
-//     axios.post('/api/saveFav', {})
-//     .then((response) => {
-//       dispatch({
-//         type: 'FAVED',
-//       });
-//     }).catch((respone) => {
-//       dispatch({
-//         type: 'FAVED_ERROR',
-//       });
-//     });
-//   };
-// }
 
 export function updateSuggestedIngredients(suggestedIngredients) {
   return (dispatch) => {

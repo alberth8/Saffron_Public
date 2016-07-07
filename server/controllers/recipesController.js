@@ -8,12 +8,14 @@ const async = require('async');
 // Note: filtering (re-sorting) should be done with redux store
 module.exports = {
   saveFav: function (req, res) {
-    const userID = req.body.user;
-    const recipeUrl = req.body.url;
-    Recipe.where('recipeUrl', recipeUrl).fetch().then((rescipe) => {
+    const userId = req.body.user;
+    const title = req.body.rescipe;
+    const resipeId = req.body.recipeId;
+    Recipe.where('recipeTitle', title).fetch().then((rescipe) => {
       const favedRescipe = {
         rescipe_id: rescipe.attributes.id,
-        user_id: userID,
+        user_id: userId,
+        recipeTitle: resipeId,
       };
       new RecipesUsers(favedRescipe).save();
       res.status(200).send();
