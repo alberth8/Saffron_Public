@@ -2,12 +2,15 @@ import React, { PropTypes } from 'react';
 
 
 const FavRecipe = (props) => (
-  <div>
-    <li>
-      <div>
-        <h3>{props.favRecipe.recipeTitle}</h3>
+  <div className="col s1 m2 l4">
+    <div className="card small hoverable">
+      <div className="card-image">
+        <img alt="recipe" src={props.favRecipe.recipeImgUrl} />
       </div>
-    </li>
+      <div className="card-content">
+        {props.favRecipe.recipeTitle}
+      </div>
+    </div>
   </div>
 );
 

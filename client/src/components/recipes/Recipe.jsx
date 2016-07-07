@@ -11,16 +11,18 @@ class Recipe extends React.Component {
   }
 
   saveFav(e) {
+    console.log(this.props.recipe);
     e.preventDefault();
     axios.post('/api/saveFav', {
-      url: this.props.recipeUrl,
+      recipe: this.props.recipe.recipeTitle,
       user: this.props.user.id,
+      recipeId: this.props.recipe.id,
     }).then(() => {
       this.setState({
         faved: true,
       });
-    }).catch((response) => {
-      console.log(response);
+    }).catch((error) => {
+      console.error(error);
     });
   }
 
