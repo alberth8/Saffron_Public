@@ -61,7 +61,7 @@ class IngredientsView extends Component {
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
     return (
-      <ul className="collection">
+      <ul className="spacer">
         <h5>{selectOrSuggest === 'selected' ? 'Selected' : 'Suggested'}</h5>
         {ingredientsArray.map((ingredient, key) => (
           <li className="chip">
