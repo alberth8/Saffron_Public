@@ -174,11 +174,10 @@ export function updateSelectedIngredients(selectedIngredients, callback) {
 
 // Post recipe to db. Used in addRecipeForm
 export function addRecipe(addRecipeObj) {
-  console.log('addRecipeObj:', addRecipeObj);
   return () => {
-    axios.post('/api/addrecipe', addRecipeObj).then((response) => {
-      console.log('THEN > RESPONSE', response);
-    }).catch((error) => {
+    axios.post('/api/addrecipe', addRecipeObj).then((response) =>
+      response
+    ).catch((error) => {
       console.log('ERROR:', error);
     });
   };
