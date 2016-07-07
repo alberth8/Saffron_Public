@@ -45,9 +45,9 @@ module.exports = {
       req.body.third,
       req.body.fourth,
     ];
-    let results = [];
-    async.each(recipes, (rescipe, cb) => {
-      Recipe.where('recipeTitle', rescipe).fetch().then((recipeObj) => {
+    const results = [];
+    async.each(recipes, (recipe, cb) => {
+      Recipe.where('recipeTitle', recipe).fetch().then((recipeObj) => {
         if (recipeObj) {
           results.push(recipeObj.attributes);
         }
@@ -55,6 +55,4 @@ module.exports = {
       });
     }, () => { res.status(200).send(results); });
   },
-
-
 };

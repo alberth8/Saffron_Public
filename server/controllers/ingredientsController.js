@@ -4,6 +4,7 @@ const IngredientsCollection = require('../collections/ingredients.js');
 const IngredientUserCollection = require('../collections/ingredients_users.js');
 const IngredientsRecipesCollection = require('../collections/ingredients_recipes.js');
 const RecipesCollection = require('../collections/recipes.js');
+const RecipeModel = require('../models/recipe.js');
 const db = require('../db/schema.js');
 
 const _ = require('lodash');
@@ -186,15 +187,27 @@ const getSuggestedIngredients = (recipeIdArray, ingredientIDArray, callback) => 
 // recipes table.  Return data to callback
 const getRecipeData = (recipeIds, callback) => {
   const storage = [];
-  RecipesCollection.query((q) => {
-    q.whereIn('id', recipeIds);
-  }).fetch()
-  .then((recipes) => {
-    for (let i = 0; i < recipes.models.length; i++) {
-      storage.push(recipes.models[i].attributes);
-    }
-    callback(storage);
-  });
+  if (recipeIds.length === 0) {
+    RecipeModel.fetchAll()
+      .then((recipes) => {
+        for (let i = 0; i < 12; i++) {
+          storage.push(recipes.models[i].attributes);
+        }
+        callback(storage);
+      })
+      .catch((e) => (console.log(e)));
+  } else {
+    RecipesCollection.query((q) => {
+      q.whereIn('id', recipeIds);
+    }).fetch()
+    .then((recipes) => {
+      for (let i = 0; i < recipes.models.length; i++) {
+        storage.push(recipes.models[i].attributes);
+      }
+      callback(storage);
+    })
+    .catch((e) => (console.log(e)));
+  }
 };
 
 module.exports = {

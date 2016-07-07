@@ -71,7 +71,6 @@ describe('Saffron API', () => {
   // });
 
   // describe('api/fetchData endpoint', () => {
-  //   const url = 'http://localhost:8888';
   //   it('returns status 200', (done) => {
   //     axios.post(`${url}/api/fetchData`, {})
   //       .then((response) => {
