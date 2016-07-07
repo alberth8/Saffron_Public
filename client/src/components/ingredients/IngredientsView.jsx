@@ -85,6 +85,7 @@ class IngredientsView extends Component {
   render() {
     return (
       <div className="container">
+        <h2>Ingredients</h2>
         <div className="row">
           <div className="input-field col s10 m10 l10">
             <input

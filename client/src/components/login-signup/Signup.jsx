@@ -12,9 +12,10 @@ class SignUp extends React.Component {
     this.onSignup = this.onSignup.bind(this);
   }
 
-  onSignup() {
+  onSignup(e) {
     const email = this.state.email;
     const password = this.state.password;
+    e.preventDefault();
     // gets popular items to display on profile page
     this.props.popular();
     this.props.signupUser(email, password);
@@ -30,6 +31,7 @@ class SignUp extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
     if (e.keyCode === 13) {
+      e.preventDefault();
       // gets popular items to display on profile page
       this.props.popular();
       // gets userInfo to save it in the store for use by other functions
@@ -54,30 +56,39 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
-        <form>
-          <fieldset className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control" id="formGroupExampleInput"
-              value={this.state.email}
-              onChange={(e) => { this.onEmailChange(e); }}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Password</label>
-            <input
-              type="text"
-              className="form-control" id="formGroupExampleInput2"
-              value={this.state.password}
-              onChange={(e) => { this.onPasswordChange(e); }}
-              onKeyDown={(e) => { this.onKeyPress(e); }}
-            />
-          </fieldset>
-        </form>
-        <button onClick={this.onSignup}>Signup</button>
-        {this.props.authErrorMessage.error}
+      <div className="container">
+        <h2>Sign Up</h2>
+        <div className="row">
+          <form className="col s10 m8 l6">
+            <fieldset>
+              <input
+                type="email"
+                placeholder="email"
+                className="input-field"
+                ref="email"
+                value={this.state.email}
+                onChange={(e) => { this.onEmailChange(e); }}
+              />
+            </fieldset>
+            <fieldset>
+              <input
+                type="password"
+                placeholder="password"
+                className="input-field"
+                value={this.state.password}
+                onChange={(e) => { this.onPasswordChange(e); }}
+                onKeyDown={(e) => { this.onKeyPress(e); }}
+              />
+            </fieldset>
+            <button
+              className="btn waves-effect waves-light btn-login"
+              onClick={(e) => { this.onSignup(e); }}
+            >
+              SignUp
+            </button>
+          </form>
+          {this.props.authErrorMessage}
+        </div>
       </div>
     );
   }
