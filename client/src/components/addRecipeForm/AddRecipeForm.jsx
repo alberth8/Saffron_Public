@@ -22,9 +22,10 @@ class AddRecipeForm extends React.Component {
     this.setState(change);
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
     console.log(this.state.recipeTitle);
     console.log(this.state);
+    e.preventDefault();
     this.props.addRecipe(this.state);
     this.setState({
       recipeTitle: '',
@@ -36,41 +37,53 @@ class AddRecipeForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form>
-          Title:
-          <input
-            onChange={(e) => this.handleChange('recipeTitle', e)}
+      <div className="container">
+        <h2>Add Recipe</h2>
+        <div className="row">
+          <form className="col s10 m10 l10">
+            <input
+              className="input-field"
+              placeholder="Recipe Title"
+              onChange={(e) => this.handleChange('recipeTitle', e)}
+                // this.handleChange.bind(this, 'recipeTitle')
+              value={this.state.recipeTitle}
+              type="text"
+            /><br />
+            <input
+              className="input-field"
+              placeholder="Recipe URL"
+              onChange={(e) => this.handleChange('recipeUrl', e)}
               // this.handleChange.bind(this, 'recipeTitle')
-            value={this.state.recipeTitle}
-            type="text"
-          /><br />
-          URL:
-          <input
-            onChange={(e) => this.handleChange('recipeUrl', e)}
-            // this.handleChange.bind(this, 'recipeTitle')
-            // onChange={this.handleChange.bind(this, 'recipeUrl')}
-            value={this.state.recipeUrl}
-            type="text"
-          /><br />
-          Image URL:
-          <input
-            onChange={(e) => this.handleChange('recipeImgUrl', e)}
-            // this.handleChange.bind(this, 'recipeImgUrl')
-            // onChange={this.handleChange.bind(this, 'recipeImgUrl')}
-            value={this.state.recipeImgUrl}
-            type="text"
-          /><br />
-          Ingredients:
-          <input
-            onChange={(e) => this.handleChange('recipeIngredients', e)}
-            // this.handleChange.bind(this, 'recipeIngredients')
-            // onChange={this.handleChange.bind(this, 'recipeIngredients')}
-            value={this.state.recipeIngredients}
-            type="text"
-          /><br />
-        </form>
-        <button onClick={() => this.handleSubmit()} type="submit">Submit</button>
+              // onChange={this.handleChange.bind(this, 'recipeUrl')}
+              value={this.state.recipeUrl}
+              type="text"
+            /><br />
+            <input
+              className="input-field"
+              placeholder="Recipe Image URL"
+              onChange={(e) => this.handleChange('recipeImgUrl', e)}
+              // this.handleChange.bind(this, 'recipeImgUrl')
+              // onChange={this.handleChange.bind(this, 'recipeImgUrl')}
+              value={this.state.recipeImgUrl}
+              type="text"
+            /><br />
+            <input
+              className="input-field"
+              placeholder="Ingredients"
+              onChange={(e) => this.handleChange('recipeIngredients', e)}
+              // this.handleChange.bind(this, 'recipeIngredients')
+              // onChange={this.handleChange.bind(this, 'recipeIngredients')}
+              value={this.state.recipeIngredients}
+              type="text"
+            /><br />
+            <button
+              className="btn waves-effect waves-light btn-login"
+              onClick={(e) => this.handleSubmit(e)} type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

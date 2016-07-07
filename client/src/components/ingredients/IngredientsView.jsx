@@ -87,8 +87,9 @@ class IngredientsView extends Component {
       <div className="container">
         <h2>Ingredients</h2>
         <div className="row">
-          <div className="input-field col s10 m10 l10">
+          <div className="col s10 m10 l10">
             <input
+              className="input-field"
               ref="searchBox"
               onChange={(e) => { this.onIngredientChange(e); }}
               onKeyDown={(e) => { this.onKeyPress(e); }}
