@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const should = require('chai').should;
 const axios = require('axios');
 // TODO: need environment variables
-const url = 'http://localhost:8889';
+const url = 'http://localhost:8888';
 
 describe('Saffron API', () => {
   describe('api/updateIngredients endpoint', () => {
@@ -16,7 +16,7 @@ describe('Saffron API', () => {
       });
 
     it('responds to POSTs with recipes and suggested ingredients', (done) => {
-      axios.post('http://localhost:8889/api/updateIngredients', {
+      axios.post(`${url}/api/updateIngredients`, {
         selectedIngredients: ['sugar', 'cream'],
         userID: 1,
       }).then((response) => {
