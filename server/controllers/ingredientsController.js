@@ -24,7 +24,6 @@ const findOrAddIngredient = (ingredientArray, callback) => {
   async.each(ingredientArray, (ing, cb) => {
     IngredientModel.where({ ingredient: ing }).fetch()
     .then((foundModel) => {
-      console.log(foundModel.attributes);
       if (foundModel) {  // if ingredient found, push into array
         console.log('Ingredient found, extracting id...');
         ingredientIdArray.push(foundModel.attributes.id);
@@ -206,7 +205,8 @@ const getRecipeData = (recipeIds, callback) => {
         storage.push(recipes.models[i].attributes);
       }
       callback(storage);
-    });
+    })
+    .catch((e) => (console.log(e)));
   }
 };
 

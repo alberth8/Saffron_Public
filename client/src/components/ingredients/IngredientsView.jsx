@@ -31,7 +31,9 @@ class IngredientsView extends Component {
   }
   onKeyPress(e) { // listen for & submit on return statement in user input
     if (e.keyCode === 13) {
-      this.onAddIngredient(this.state.ingredient);
+      let ing = this.state.ingredient;
+      ing = ing.replace(/[^a-zA-Z ]/g, '');
+      this.onAddIngredient(ing);
     }
   }
   onAddIngredient(addedIngredient, key) { // add selected ingredients
