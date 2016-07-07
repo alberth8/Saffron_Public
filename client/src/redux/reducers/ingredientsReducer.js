@@ -9,7 +9,7 @@ const ingredientsRecipes = {
     }
   },
 
-  selectedIngredientsReducer: (state = ['eggs', 'sugar'], action) => {
+  selectedIngredientsReducer: (state = [], action) => {
     switch (action.type) {
       case 'UPDATE_SELECTED_INGREDIENTS':
         return action.selectedIngredients;
