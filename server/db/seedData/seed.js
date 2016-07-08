@@ -12,7 +12,7 @@ Run this file in the command line using node ($ node server/db/seedData/seed.js)
 */
 
 const instance = axios.create({
-  baseURL: 'http://104.236.244.110',
+  baseURL: 'http://45.55.230.70/',
   timeout: 1000,
 });
 
