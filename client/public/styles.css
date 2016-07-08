@@ -20,6 +20,10 @@ img.btn-heart {
   background-color: #26a69a;
 }
 
+.chip:hover {
+  cursor: pointer;
+}
+
 .container {
   width: 80% !important;
 }
@@ -54,8 +58,25 @@ img.btn-heart {
   opacity: 0.8;
 }
 
-.card-panel {
+form.card-panel {
   height:300px;
   position: absolute;
   top: 20%;
+}
+
+.splash-panel {
+  position: absolute;
+  height: 400px;
+  width: 375px;
+  top: 30%;
+  right: 11%;
+}
+
+.btn-splash {
+  width: 250px;
+}
+
+.button-splash-container {
+  position: relative;
+  top: 40px;
 }
