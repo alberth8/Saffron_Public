@@ -6,7 +6,7 @@
 
   - __Product Owner__: Albert Han
   - __Scrum Master__: Shane Hubbell
-  - __Development Team Members__: Daniel Rabinovich, Aezed Raza, Albert Han, Shane Hubbell
+  - __Full Stack Development Team Members__: Daniel Rabinovich, Aezed Raza, Albert Han, Shane Hubbell
  
 ## Table of Contents
 
@@ -26,11 +26,16 @@
 
 > We track collective user behavior and use machine learning algorithms to predict which recipes you're likely to love.  We hope you enjoy using the application, and welcome contributors to this project.
 
+### System Architecture
+
+See [system_arch.png](system_arch.png)
+
 ## Requirements
 
 - Node 0.10.X
 - MySql 5.6.X
 - Docker
+- Python 2.7.X
 
 ## Development
 
