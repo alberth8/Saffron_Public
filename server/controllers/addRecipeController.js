@@ -1,13 +1,23 @@
-// Note to team: try to do these relationally. If not,
-// make use of the req object to obtain userID
 const Ingredient = require('../models/ingredient.js');
 const Recipe = require('../models/recipe.js');
 const Ingredients = require('../collections/ingredients.js');
 const Recipes = require('../collections/recipes.js'); // more conveinet to create w/ colleciton
 const Ingredients_Recipes = require('../collections/ingredients_recipes.js');
 const Recipes_Users = require('../collections/recipes_users.js');
-// const User = require('../models/user.js');
 
+
+// To avoid shadowing, renamed ingredientId, recipeId, res
+const createIngRec = (iId, rId, r) => {
+  Ingredients_Recipes.create({
+    ingredient_id: iId,
+    recipe_id: rId,
+  }).then((ingredient_recipe) => {
+    console.log(ingredient_recipe);
+    r.status(200).end();
+  }).catch((error) => {
+    console.log(error);
+  });
+};
 
 module.exports = {
   addRecipe: (req, res) => {
@@ -38,6 +48,7 @@ module.exports = {
           Recipes_Users.create({
             user_id: userId,
             recipe_id: foundRecipeId,
+            recipeTitle: newRecipeTitle,
           }).then(() => {
             res.status(200).end();
           });
@@ -53,6 +64,7 @@ module.exports = {
             Recipes_Users.create({
               user_id: userId,
               recipe_id: recipeId,
+              recipeTitle: newRecipeTitle,
             });
 
             return recipeId;
@@ -64,19 +76,12 @@ module.exports = {
               // Check if ingredient exists
               Ingredient.where({ ingredient: ing }).fetch()
                 .then((foundModel) => {
-                  if (foundModel) {  // If so, extract the id, so that can save to join table below
+                  if (foundModel) {  // If so, extract the id, so that can save to join table
                     console.log('Model found. Extracting id...');
                     ingredientId = foundModel.attributes.id;
-                    // TODO: Clean up by adding helper function for inserting in to join table
-                    Ingredients_Recipes.create({
-                      ingredient_id: ingredientId,
-                      recipe_id: recId,
-                    }).then((ingredient_recipe) => {
-                      console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
-                      res.status(200).end();
-                    }).catch((error) => {
-                      console.log(error);
-                    });
+
+                    // create entry in join table ingredients_recipes
+                    createIngRec(ingredientId, recId, res);
                   } else { // Otherwise, we need to add the ingredient to our table of ingredients
                     console.log('Ingredient does not exist. Creating ingredient...');
                     Ingredients.create({
@@ -85,16 +90,9 @@ module.exports = {
                     .then((ingredientModel) => { // similarly, update join table w/ recipeId
                       console.log('>>>>>> RECIPEID:', recipeId, 'OR IS IT....', recId);
                       ingredientId = ingredientModel.attributes.id;
-                      // TODO: Clean up by adding helper function for inserting in to join table
-                      Ingredients_Recipes.create({
-                        ingredient_id: ingredientId,
-                        recipe_id: recipeId,
-                      }).then((ingredient_recipe) => {
-                        console.log('SENDING INGREDIENT_RECIPE:', ingredient_recipe);
-                        res.status(200).end();
-                      }).catch((error) => {
-                        console.log(error);
-                      });
+
+                      // create entry in join table ingredients_recipes
+                      createIngRec(ingredientId, recId, res);
                     })
                     .catch((err) => {
                       console.log(err);
