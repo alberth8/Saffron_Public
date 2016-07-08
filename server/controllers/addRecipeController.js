@@ -29,18 +29,14 @@ module.exports = {
     let recipeId;
     let ingredientId;
 
-    // split `ingredients` in to array, then for each element, trim
+    // Split `ingredients` in to array, then for each element, trim
     const ingredients = ingredientsList.split(',');
     const ingredientsArr = ingredients.map((ingredient) => ingredient.trim());
 
-    // check if recipe already exists
-    // console.log(Recipes.query('where', 'recipeUrl', '=', 'u4'));
-
-    // check if recipe already exists
+    // Check if recipe already exists
     Recipe.where({ recipeUrl: newRecipeUrl }).fetch()
       .then((foundRecipe) => {
-        console.log(foundRecipe);
-        // if so, then take it's id
+        // If so, then take it's id
         if (foundRecipe) {
           const foundRecipeId = foundRecipe.attributes.id;
 
@@ -52,7 +48,7 @@ module.exports = {
           }).then(() => {
             res.status(200).end();
           });
-        } else { // if doesn't exist, then we need to create it
+        } else { // If doesn't exist, then we need to create it
           Recipes.create({ // will return the model that was just created
             recipeTitle: newRecipeTitle,
             recipeUrl: newRecipeUrl,
@@ -69,29 +65,25 @@ module.exports = {
 
             return recipeId;
           }).then((recId) => {
-            console.log('>>>> Just in case, can you see the recId?:', recId);
-
             // Iterate through ingredients to [create new ingredient and] add to join tables
             ingredientsArr.forEach((ing) => {
               // Check if ingredient exists
               Ingredient.where({ ingredient: ing }).fetch()
                 .then((foundModel) => {
                   if (foundModel) {  // If so, extract the id, so that can save to join table
-                    console.log('Model found. Extracting id...');
                     ingredientId = foundModel.attributes.id;
 
-                    // create entry in join table ingredients_recipes
+                    // Create entry in join table ingredients_recipes
                     createIngRec(ingredientId, recId, res);
                   } else { // Otherwise, we need to add the ingredient to our table of ingredients
                     console.log('Ingredient does not exist. Creating ingredient...');
                     Ingredients.create({
                       ingredient: ing,
-                    }) // returns newly created model (see following)
+                    }) // Returns newly created model (see following)
                     .then((ingredientModel) => { // similarly, update join table w/ recipeId
-                      console.log('>>>>>> RECIPEID:', recipeId, 'OR IS IT....', recId);
                       ingredientId = ingredientModel.attributes.id;
 
-                      // create entry in join table ingredients_recipes
+                      // Create entry in join table ingredients_recipes
                       createIngRec(ingredientId, recId, res);
                     })
                     .catch((err) => {
