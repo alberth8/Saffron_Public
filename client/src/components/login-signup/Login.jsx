@@ -57,34 +57,37 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h2>Login</h2>
-        <div className="row">
-          <form className="col s10 m8 l6">
-            <input
-              type="email"
-              placeholder="email"
-              className="input-field"
-              ref="email"
-              value={this.state.email}
-              onChange={(e) => { this.onEmailChange(e); }}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              className="input-field"
-              value={this.state.password}
-              onChange={(e) => { this.onPasswordChange(e); }}
-              onKeyDown={(e) => { this.onKeyPress(e); }}
-            />
-            <button
-              className="btn waves-effect waves-light btn-login"
-              onClick={(e) => { this.onLogin(e); }}
-            >
-              Login
-            </button>
-          </form>
-          {this.props.authErrorMessage}
+      <div>
+        <div className="container-login"></div>
+        <div className="container center-align">
+          <div className="row">
+            <form className="card-panel col s8 m6 l4 login">
+              <h2>Login</h2>
+              <input
+                type="email"
+                placeholder="email"
+                className="input-field"
+                ref="email"
+                value={this.state.email}
+                onChange={(e) => { this.onEmailChange(e); }}
+              />
+              <input
+                type="password"
+                placeholder="password"
+                className="input-field"
+                value={this.state.password}
+                onChange={(e) => { this.onPasswordChange(e); }}
+                onKeyDown={(e) => { this.onKeyPress(e); }}
+              />
+              <button
+                className="btn waves-effect waves-light btn-login"
+                onClick={(e) => { this.onLogin(e); }}
+              >
+                Login
+              </button>
+            </form>
+            {this.props.authErrorMessage}
+          </div>
         </div>
       </div>
     );
