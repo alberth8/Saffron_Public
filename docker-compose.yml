@@ -1,13 +1,21 @@
-FROM node
-
-RUN mkdir -p /src
-WORKDIR /src
-
-COPY package.json /src
-RUN npm install
-
-COPY . /src
-
-EXPOSE 8080
-
-CMD ["npm", "start"]
+version: "2.0"
+services:
+  app: 
+    image: node
+    build:
+      context: ./dir
+      dockerfile: dockerfile
+    command: webpack -w 
+    ports:
+      - "8888:8888"
+    networks:
+      - nodeapp-network
+  mysqldb:
+    image: mysql:latest
+    user: root
+    password: password
+    networks:
+      - nodeapp-network
+networks:
+  nodeapp-network
+    driver: bridge
