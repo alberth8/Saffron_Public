@@ -51,7 +51,8 @@ class ProfilePage extends React.Component {
     if (this.state.favRecipes.length > 3 && this.state.showAll) {
       return (
         <div className="container">
-          <h2 className="recipes-title">Favorites</h2>
+          <h2>Profile</h2>
+          <h3 className="recipes-title">Favorites</h3>
           <div className="row">
             {this.state.favRecipes.map((recipe, index) =>
               <a href={recipe.recipeUrl} key={index} target="_blank">
@@ -66,7 +67,8 @@ class ProfilePage extends React.Component {
     if (this.state.favRecipes.length >= 3 && !this.state.showAll) {
       return (
         <div className="container">
-          <h2 className="recipes-title">Favorites</h2>
+          <h2>Profile</h2>
+          <h3 className="recipes-title">Favorites</h3>
           <div className="row">
             <a href={this.state.favRecipes[0].recipeUrl} target="_blank">
               <FavRecipes favRecipe={this.state.favRecipes[0]} />
@@ -85,7 +87,8 @@ class ProfilePage extends React.Component {
     if (this.state.favRecipes.length < 3) {
       return (
         <div className="container">
-          <h2 className="recipes-title">Favorites</h2>
+          <h2>Profile</h2>
+          <h3 className="recipes-title">Favorites</h3>
           <div className="row">
             {this.state.favRecipes.map((recipe, index) =>
               <a href={recipe.recipeUrl} key={index} target="_blank">
@@ -106,12 +109,12 @@ class ProfilePage extends React.Component {
           this.renderFavs()
           : null}
         {!this.state.showAll ?
-          <button onClick={this.toggleFavs}>Show all</button>
-          : <button onClick={this.toggleFavs}>Close</button>
+          <button className="btn btn-profile" onClick={this.toggleFavs}>Show all</button>
+          : <button className="btn btn-profile" onClick={this.toggleFavs}>Close</button>
         }
         {Object.keys(this.props.recom).length > 0 ?
           <div className="container">
-            <h2 className="recipes-title">Recipes you might like</h2>
+            <h3 className="recipes-title">Recipes you might like</h3>
             <div className="row">
               {this.props.recom.map((recipe, index) =>
                 <a href={recipe.recipeUrl} key={index} target="_blank">
@@ -122,7 +125,7 @@ class ProfilePage extends React.Component {
           </div>
         : null}
         <div className="container">
-          <h2 className="recipes-title">Popular recipes</h2>
+          <h3 className="recipes-title">Popular recipes</h3>
           <div className="row">
             {this.props.pops.map((recipe, index) =>
               <a href={recipe.recipeUrl} key={index} target="_blank">
