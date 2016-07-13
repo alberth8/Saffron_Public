@@ -131,9 +131,9 @@ export function updateSuggestedIngredients(suggestedIngredients) {
   };
 }
 
-export function sendIngredientsToServer(selectedIngredients, userID) {
+export function sendIngredientsToServer(selectedIngredients, userID, feelingLucky) {
   return (dispatch) => {
-    axios.post('/api/updateIngredients', { selectedIngredients, userID })
+    axios.post('/api/updateIngredients', { selectedIngredients, userID, feelingLucky })
       .then((response) => {
         dispatch({
           type: 'UPDATE_RECIPES',
@@ -165,6 +165,15 @@ export function addRecipe(addRecipeObj) {
       response
     ).catch((error) => {
       console.log('ERROR:', error);
+    });
+  };
+}
+
+export function updateFeelingLucky(feelingLucky) {
+  return (dispatch) => {
+    dispatch({
+      type: 'UPDATE_FEELING_LUCKY',
+      feelingLucky,
     });
   };
 }

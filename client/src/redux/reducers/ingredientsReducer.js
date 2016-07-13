@@ -28,6 +28,16 @@ const ingredientsRecipes = {
         return state;
     }
   },
+
+  updateFeelingLucky: (state = false, action) => {
+    switch (action.type) {
+      case 'UPDATE_FEELING_LUCKY':
+        return action.feelingLucky;
+
+      default:
+        return state;
+    }
+  },
 };
 
 export default ingredientsRecipes;

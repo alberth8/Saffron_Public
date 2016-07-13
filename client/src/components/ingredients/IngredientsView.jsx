@@ -59,7 +59,11 @@ class IngredientsView extends Component {
     this.onSubmitIngredients();
   }
   onSubmitIngredients() { // send ingredients to server
-    this.props.sendIngredientsToServer(this.props.selectedIngredients, this.props.user.id);
+    this.props.sendIngredientsToServer(
+      this.props.selectedIngredients,
+      this.props.user.id,
+      this.props.feelingLucky
+    );
   }
   mapIngredients(ingredientsArray, selectOrSuggest) {
     return (
@@ -91,6 +95,19 @@ class IngredientsView extends Component {
         <h2>Ingredients</h2>
         <div className="row">
           <div className="col s10 m10 l10">
+            <div className="switch">
+              <label>
+                Default
+                <input
+                  type="checkbox"
+                  onChange={() => {
+                    this.props.updateFeelingLucky(!this.props.feelingLucky);
+                  }}
+                />
+                <span className="lever"></span>
+                I'm feeling lucky
+              </label>
+            </div>
             <input
               className="input-field"
               ref="searchBox"
@@ -112,15 +129,19 @@ const mapStateToProps = (state) => ({
   suggestedIngredients: state.suggestedIngredients,
   selectedIngredients: state.selectedIngredients,
   user: state.user,
+  feelingLucky: state.feelingLucky,
 });
 
 IngredientsView.propTypes = {
+  searchType: PropTypes.string,
+  feelingLucky: PropTypes.boolean,
   user: PropTypes.object,
   sendIngredientsToServer: PropTypes.func,
   updateSuggestedIngredients: PropTypes.func,
   updateSelectedIngredients: PropTypes.func,
   suggestedIngredients: PropTypes.array,
   selectedIngredients: PropTypes.array,
+  updateFeelingLucky: PropTypes.func,
 };
 
 export default connect(mapStateToProps, actions)(IngredientsView);
