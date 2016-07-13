@@ -49,7 +49,7 @@ img.btn-heart {
 
 .container-login {
   width: 120%;
-  height: 714px;
+  height: 1100px;
   background-image: url(./Ingredients.jpg);
   background-size: cover;
   background-position: center;
@@ -80,3 +80,10 @@ form.card-panel {
   position: relative;
   top: 40px;
 }
+
+.btn-profile {
+  position: absolute;
+  right:50%;
+  margin-bottom: 20px;
+}
+
