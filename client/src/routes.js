@@ -8,11 +8,13 @@ import AddRecipeForm from './components/addRecipeForm/AddRecipeForm.jsx';
 import ProfilePage from './components/userprofile/ProfilePage.jsx';
 import requireAuth from './components/RequireAuth.jsx';
 import IngredientsView from './components/ingredients/IngredientsView.jsx';
+import IngredientsRecipes from './components/ingredient-recipes/ingredientRecipesView.jsx';
 import splash from './components/splash.jsx';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={splash} />
+    <Route path="app" component={IngredientsRecipes} />
     <Route path="login" component={Login} />
     <Route path="signup" component={Signup} />
     <Route path="profile" component={requireAuth(ProfilePage)} />

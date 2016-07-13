@@ -16,6 +16,9 @@ class Navbar extends React.Component {
         <Link to="/ingredients" className="brand-logo">Saffron</Link>
         <ul className="nav navbar-nav right">
           <li className="nav-item">
+            <Link to="/app">Ingredients & Recipes</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/ingredients">Ingredients</Link>
           </li>
           <li className="nav-item">

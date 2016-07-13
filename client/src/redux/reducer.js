@@ -15,6 +15,7 @@ export default combineReducers({
   user: userInfoReducer,
   suggestedIngredients: ingredientsRecipes.suggestedIngredientsReducer,
   selectedIngredients: ingredientsRecipes.selectedIngredientsReducer,
+  feelingLucky: ingredientsRecipes.updateFeelingLucky,
   recipes: ingredientsRecipes.recipeReducer,
   authenticated: authReducer,
   authErrorMessage: authErrorReducer,
