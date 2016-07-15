@@ -20,7 +20,7 @@ class Recipes extends Component {
   render() {
     return (
       <div className="container">
-        <h2 className="recipes-title">Recipes</h2>
+        <h2>Recipes</h2>
         <div className="row">
           {this.props.recipes.map((recipe, i) =>
             <a href={recipe.recipeUrl} key={i} target="_blank">
