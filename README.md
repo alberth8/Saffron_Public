@@ -26,9 +26,9 @@
 
 > We track collective user behavior and use machine learning algorithms to predict which recipes you're likely to love.  We hope you enjoy using the application, and welcome contributors to this project.
 
-### System Architecture
+## System Architecture
 
-See [system_arch.png](system_arch.png)
+![System Architecture](https://github.com/AquaticPidgeon/Saffron/blob/master/sysArch2.png)
 
 ## Requirements
 
