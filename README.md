@@ -12,6 +12,7 @@
 
 1. [Usage](#usage)
 1. [System Architecture](#system-architecture)
+1. [Preview](#preview)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -30,6 +31,13 @@
 ## System Architecture
 
 ![System Architecture](https://github.com/AquaticPidgeon/Saffron/blob/master/sysArch2.png)
+
+## Preview
+
+![Landing page:](https://github.com/AquaticPidgeon/Saffron/blob/master/landingPage.png?raw=true)
+
+![Ingredeints & Recipes page:](https://github.com/AquaticPidgeon/Saffron/blob/master/SPA.png?raw=true) 
+
 
 ## Requirements
 
