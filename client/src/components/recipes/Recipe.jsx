@@ -27,7 +27,7 @@ class Recipe extends React.Component {
 
   render() {
     return (
-      <div className="col s1 m2 l3">
+      <div className="col s6">
         <div className="card small hoverable">
           <div className="card-image">
             <img alt="recipe" src={this.props.recipe.recipeImgUrl} />

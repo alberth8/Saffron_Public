@@ -82,7 +82,7 @@ class IngredientsView extends Component {
               }
             >
             {selectOrSuggest === 'selected' ? ingredient :
-            `${ingredient[0]} (${ingredient[1]} matching recipes)`}
+            `${ingredient[0]} (${ingredient[1]} recipes)`}
             </div>
           </li>
         ))}
@@ -91,10 +91,10 @@ class IngredientsView extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container fixed">
         <h2>Ingredients</h2>
         <div className="row">
-          <div className="col s10 m10 l10">
+          <div className="col s3 m3 l3">
             <div className="switch">
               <label>
                 Default

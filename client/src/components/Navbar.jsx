@@ -12,37 +12,33 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light bg-faded">
-        <Link to="/ingredients" className="brand-logo">Saffron</Link>
-        <ul className="nav navbar-nav right">
-          <li className="nav-item">
-            <Link to="/app">Ingredients & Recipes</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/ingredients">Ingredients</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="recipes">Recipes</Link>
-          </li>
-           {this.props.authenticated ?
-             <li className="nav-item">
-               <Link to="profile">Profile</Link>
-             </li> : null}
-          {this.props.authenticated ?
+      <div className="navbar-fixed">
+        <nav className="navbar navbar-light bg-faded">
+          <Link to="/app" className="brand-logo">Saffron</Link>
+          <ul className="nav navbar-nav right">
             <li className="nav-item">
-              <Link to="addrecipe">Add Recipe</Link>
-            </li> : null}
-          <li className="nav-item">
+              <Link to="/app">Ingredients & Recipes</Link>
+            </li>
+             {this.props.authenticated ?
+               <li className="nav-item">
+                 <Link to="profile">Profile</Link>
+               </li> : null}
             {this.props.authenticated ?
-              <Link to="/" onClick={this.onLogout} >Logout</Link>
-              : <Link to="login">Login</Link>}
-          </li>
-            {!this.props.authenticated ?
               <li className="nav-item">
-                <Link to="signup">Signup</Link>
+                <Link to="addrecipe">Add Recipe</Link>
               </li> : null}
-        </ul>
-      </nav>
+            <li className="nav-item">
+              {this.props.authenticated ?
+                <Link to="/" onClick={this.onLogout} >Logout</Link>
+                : <Link to="login">Login</Link>}
+            </li>
+              {!this.props.authenticated ?
+                <li className="nav-item">
+                  <Link to="signup">Signup</Link>
+                </li> : null}
+          </ul>
+        </nav>
+      </div>
     );
   }
 }

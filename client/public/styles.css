@@ -15,9 +15,10 @@ img.btn-heart {
 }
 
 .chip {
-  margin: 3px 3px 0 3px;
-  color: white;
   background-color: #26a69a;
+  color: white;
+  font-size: 12px;
+  margin: 3px 3px 0 3px;
 }
 
 .chip:hover {
@@ -25,7 +26,7 @@ img.btn-heart {
 }
 
 .container {
-  width: 80% !important;
+  width: 95% !important;
 }
 
 @font-face {
@@ -87,3 +88,6 @@ form.card-panel {
   margin-bottom: 20px;
 }
 
+.fixed {
+  position: fixed;
+}
