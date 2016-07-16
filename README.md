@@ -71,7 +71,7 @@
    $ webpack -w
    ```
 
-6. Navigate to http:/127.0.0.1:888 in a browser to access the client app. 
+6. Navigate to http://127.0.0.1:8888 in a browser to access the client app. 
 
 ### Installing Dependencies
 
