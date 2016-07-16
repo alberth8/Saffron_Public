@@ -34,9 +34,11 @@
 
 ## Preview
 
-![Landing page:](https://github.com/AquaticPidgeon/Saffron/blob/master/landingPage.png?raw=true)
+Landing page:
+![Landing page](https://github.com/AquaticPidgeon/Saffron/blob/master/landingPage.png?raw=true)
 
-![Ingredeints & Recipes page:](https://github.com/AquaticPidgeon/Saffron/blob/master/SPA.png?raw=true) 
+Ingredients & Recipes page:
+![IngredeintsRecipe](https://github.com/AquaticPidgeon/Saffron/blob/master/SPA.png?raw=true) 
 
 
 ## Requirements
