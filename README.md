@@ -2,23 +2,27 @@
 
 > Creative cuisine for your tired routine!  Saffron helps cooks find new and interesting combinations of ingredients to spice up their dinner routines.  Pick a few ingredients you already have, and we'll suggest the best next ingredients to use!
 
+
 ## Team
 
   - __Product Owner__: Albert Han
   - __Scrum Master__: Shane Hubbell
   - __Full Stack Development Team Members__: Daniel Rabinovich, Aezed Raza, Albert Han, Shane Hubbell
  
+
 ## Table of Contents
 
 1. [Usage](#usage)
 1. [System Architecture](#system-architecture)
 1. [Preview](#preview)
-1. [Requirements](#requirements)
+1. [Technologies](#technologies)
+1. [Microservices](#microservices)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
 1. [Team](#team)
 1. [Contributing](#contributing)
 1. [License](#license)
+
 
 ## Usage
 
@@ -28,9 +32,11 @@
 
 > We track collective user behavior and use machine learning algorithms to predict which recipes you're likely to love.  We hope you enjoy using the application, and welcome contributors to this project.
 
+
 ## System Architecture
 
 ![System Architecture](https://github.com/AquaticPidgeon/Saffron/blob/master/sysArch2.png)
+
 
 ## Preview
 
@@ -41,12 +47,29 @@ Ingredients & Recipes page:
 ![IngredeintsRecipe](https://github.com/AquaticPidgeon/Saffron/blob/master/SPA.png?raw=true) 
 
 
-## Requirements
+## Technologies
 
-- Node 0.10.X
-- MySql 5.6.X
-- Docker
-- Python 2.7.X
+**Front end**
+- React Redux
+- Materialize, CSS
+- Webpack
+
+**Back end**
+- Node
+- Express
+- Bookshelf/Knex
+- MySQL
+- Passport
+
+**Testing**
+- Mocha
+- Chai
+- 
+
+## Microservices
+
+- [Web scraper](https://github.com/AquaticPidgeon/recipe-scraper) built by Aezed
+- [Ingredients pairing service](https://github.com/alberth8/PairingService) built by alberth8
 
 ## Development
 
