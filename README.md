@@ -64,7 +64,7 @@ Ingredients & Recipes page:
 **Testing**
 - Mocha
 - Chai
-- 
+
 
 ## Microservices
 
