@@ -68,7 +68,7 @@ Ingredients & Recipes page:
 
 ## Microservices
 
-- [Web scraper](https://github.com/AquaticPidgeon/recipe-scraper) built by Aezed
+- [Web scraper](https://github.com/AquaticPidgeon/recipe-scraper) built by aezed
 - [Ingredients pairing service](https://github.com/alberth8/PairingService) built by alberth8
 
 ## Development
