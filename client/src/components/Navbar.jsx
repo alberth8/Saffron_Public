@@ -9,7 +9,7 @@ class Navbar extends React.Component {
   onLogout() {
     this.props.signoutUser();
   }
-
+  
   render() {
     return (
       <div className="navbar-fixed">
