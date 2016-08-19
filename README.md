@@ -35,16 +35,16 @@
 
 ## System Architecture
 
-![System Architecture](https://github.com/AquaticPidgeon/Saffron/blob/master/sysArch2.png)
+![System Architecture](https://github.com/alberth8/Saffron_Public/blob/master/sysArch2.png)
 
 
 ## Preview
 
 Landing page:
-![Landing page](https://github.com/AquaticPidgeon/Saffron/blob/master/landingPage.png?raw=true)
+![Landing page](https://github.com/alberth8/Saffron_Public/blob/master/landingPage.png)
 
 Ingredients & Recipes page:
-![IngredeintsRecipe](https://github.com/AquaticPidgeon/Saffron/blob/master/SPA.png?raw=true) 
+![IngredeintsRecipe](https://github.com/alberth8/Saffron_Public/blob/master/SPA.png)
 
 
 ## Technologies
